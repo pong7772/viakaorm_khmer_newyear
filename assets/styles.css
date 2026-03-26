@@ -1,0 +1,709 @@
+* { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  height: 100vh;
+  overflow: hidden;
+  background: url("./images/bg-game.jpg") center/cover no-repeat #d8a34a;
+  font-family: "Noto Sans Khmer", sans-serif;
+  color: #fff;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeSpeed;
+}
+
+.bg-blur {
+  position: fixed;
+  inset: 0;
+  background:
+    linear-gradient(160deg, rgba(255, 232, 164, 0.35) 0%, rgba(255, 156, 66, 0.18) 60%, rgba(183, 36, 32, 0.14) 100%);
+  backdrop-filter: blur(1.5px);
+}
+
+.texture-overlay {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  background:
+    radial-gradient(circle at 8% 18%, rgba(255, 220, 110, 0.34), transparent 34%),
+    radial-gradient(circle at 92% 10%, rgba(255, 110, 72, 0.28), transparent 32%),
+    radial-gradient(circle at 50% 95%, rgba(230, 184, 70, 0.26), transparent 44%),
+    repeating-linear-gradient(
+      120deg,
+      rgba(255, 242, 206, 0.06) 0 8px,
+      rgba(255, 209, 130, 0.04) 8px 16px
+    );
+  z-index: 3;
+}
+
+.confetti {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 35;
+  contain: strict;
+}
+
+.banner {
+  width: 340px;
+  text-align: center;
+  position: fixed;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 25;
+  background: linear-gradient(180deg, rgba(197, 36, 31, 0.94), rgba(143, 24, 24, 0.92));
+  border-bottom-left-radius: 10px;
+  border-bottom-right-radius: 10px;
+  box-shadow: 0 14px 32px rgba(75, 12, 11, 0.38);
+  border: 1px solid rgba(255, 226, 157, 0.45);
+}
+
+.banner h3 {
+  margin: 0;
+  padding: 10px 14px;
+  font-family: "Fasthand", cursive;
+  font-size: 30px;
+  color: #ffe8b6;
+  text-shadow: 0 2px 10px rgba(0, 0, 0, 0.45);
+}
+
+.control-group {
+  position: fixed;
+  top: 14px;
+  right: 14px;
+  z-index: 30;
+  display: flex;
+  gap: 8px;
+}
+
+.history-box {
+  position: fixed;
+  top: 62px;
+  right: 14px;
+  width: 300px;
+  max-width: 42vw;
+  z-index: 28;
+  background: rgba(86, 14, 12, 0.72);
+  border: 1px solid rgba(255, 216, 140, 0.48);
+  border-radius: 12px;
+  padding: 8px 10px;
+  backdrop-filter: blur(4px);
+}
+
+.history-box h4 {
+  margin: 0 0 6px;
+  color: #ffe6b0;
+  font-family: "Kdam Thmor Pro", sans-serif;
+  font-size: 12px;
+}
+
+.history-list {
+  min-height: 86px;
+  opacity: 0.55;
+  transition: opacity 420ms ease;
+}
+
+.history-list.fade-in {
+  opacity: 1;
+}
+
+.history-item {
+  font-size: 11px;
+  line-height: 1.5;
+  color: #fff2cf;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.btn {
+  background: linear-gradient(180deg, #d24b2c 0%, #aa2f25 100%);
+  padding: 10px 18px;
+  color: #ffefc8;
+  border-radius: 10px;
+  border: 2px solid rgba(255, 215, 140, 0.6);
+  font-family: "Kdam Thmor Pro", sans-serif;
+  cursor: pointer;
+  transition: transform 180ms ease, filter 220ms ease, box-shadow 220ms ease;
+  box-shadow: 0 8px 18px rgba(0, 0, 0, 0.22);
+}
+
+.btn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.btn:not(:disabled):hover {
+  filter: brightness(1.08);
+  transform: translateY(-1px);
+}
+
+.btn-small { padding: 7px 12px; font-size: 12px; }
+.btn-draw { margin-top: 16px; }
+.btn-danger { background: #9f2a2a; border-color: #b45; }
+
+#lucky-draw {
+  position: fixed;
+  top: 70px;
+  left: 50%;
+  transform: translateX(-50%);
+  text-align: center;
+  z-index: 20;
+  width: min(92vw, 700px);
+}
+
+.title {
+  font-family: "Kdam Thmor Pro", sans-serif;
+  font-size: 20px;
+  margin-bottom: 8px;
+  color: #ffe8be;
+  text-shadow: 0 3px 12px rgba(0, 0, 0, 0.55);
+}
+
+.slot__outer {
+  width: 420px;
+  max-width: 92vw;
+  height: 125px;
+  margin: 0 auto;
+  border-radius: 12px;
+  padding: 6px;
+  background: linear-gradient(180deg, #ffe6aa 0%, #f0c878 100%);
+  box-shadow: 0 18px 42px rgba(79, 21, 8, 0.4);
+  position: relative;
+  z-index: 12;
+  contain: layout paint style;
+}
+
+.slot__inner {
+  height: 100%;
+  border-radius: 10px;
+  background: linear-gradient(180deg, #1b1b1b 0%, #101010 100%);
+  padding: 8px;
+  overflow: hidden;
+  position: relative;
+}
+
+.slot__shadow {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 45px;
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.06) 0%, rgba(0, 0, 0, 0.4) 100%);
+}
+
+.reel {
+  transition: transform 0.28s cubic-bezier(0.22, 1, 0.36, 1);
+  will-change: transform;
+  transform: translateZ(0);
+  backface-visibility: hidden;
+}
+
+.reel > div {
+  height: 96px;
+  line-height: 96px;
+  font-size: 34px;
+  font-weight: 700;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  color: #fef5d6;
+  text-shadow: 0 2px 12px rgba(255, 189, 71, 0.25);
+}
+
+.now-playing,
+.pool-count {
+  margin: 8px 0 0;
+  font-family: "Kdam Thmor Pro", sans-serif;
+  font-size: 13px;
+}
+
+.kaorm-block {
+  position: fixed;
+  width: 100%;
+  height: 540px;
+  top: calc(48vh - 10px);
+  z-index: 10;
+  background: linear-gradient(180deg, rgba(255, 236, 187, 0.1), rgba(124, 24, 20, 0.16));
+  border-top: 1px solid rgba(255, 228, 161, 0.42);
+  border-bottom: 1px solid rgba(255, 208, 126, 0.32);
+}
+
+.break-stage-label {
+  position: absolute;
+  left: 20px;
+  top: 14px;
+  z-index: 13;
+  font-family: "Kdam Thmor Pro", sans-serif;
+  font-size: 14px;
+  padding: 6px 12px;
+  border-radius: 999px;
+  background: rgba(122, 22, 20, 0.72);
+  border: 1px solid rgba(255, 216, 136, 0.52);
+  color: #ffe7b1;
+}
+
+.drag-hint {
+  position: absolute;
+  left: 20px;
+  top: 46px;
+  z-index: 13;
+  margin: 0;
+  font-size: 12px;
+  color: #fff0cf;
+  background: rgba(101, 20, 17, 0.52);
+  padding: 5px 10px;
+  border-radius: 8px;
+  border: 1px solid rgba(255, 220, 150, 0.38);
+}
+
+.kaorm-string {
+  width: 100%;
+  height: 10px;
+  background-color: rgba(55, 55, 42, 1);
+  position: absolute;
+  top: 22px;
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.34);
+}
+
+.kaorm-container {
+  width: min(980px, 96vw);
+  position: absolute;
+  top: 90.5px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 14px;
+  padding: 0 18px;
+}
+
+.kaorm {
+  width: 108px;
+  height: 108px;
+  border: none;
+  padding: 0;
+  margin: 0;
+  appearance: none;
+  -webkit-appearance: none;
+  background-color: transparent;
+  position: relative;
+  cursor: pointer;
+  transform-origin: center top;
+  transition: transform 320ms cubic-bezier(0.22, 1, 0.36, 1), opacity 220ms ease;
+  animation: swing 2.8s ease-in-out infinite;
+  filter: drop-shadow(0 8px 12px rgba(0, 0, 0, 0.35));
+  will-change: transform, opacity;
+  flex: 0 0 auto;
+  background: url("./images/pot.png") center/contain no-repeat;
+  transform: translateZ(0);
+  backface-visibility: hidden;
+}
+
+.kaorm:nth-child(2) { animation-delay: 0.2s; }
+.kaorm:nth-child(3) { animation-delay: 0.4s; }
+.kaorm:nth-child(4) { animation-delay: 0.6s; }
+.kaorm:nth-child(5) { animation-delay: 0.8s; }
+
+.kaorm::before {
+  content: "";
+  position: absolute;
+  top: -190px;
+  left: 50%;
+  width: 5px;
+  height: 170px;
+  transform: translateX(-50%);
+  background: rgba(55, 55, 42, 1);
+}
+
+.khmer-boy {
+  position: absolute;
+  left: 50%;
+  bottom: 8px;
+  width: 112px;
+  height: 168px;
+  z-index: 12;
+  transform-origin: bottom center;
+  animation: boyIdle 1.8s ease-in-out infinite;
+  cursor: grab;
+  user-select: none;
+  touch-action: none;
+  transition: left 90ms linear;
+  will-change: left, transform;
+  transform: translateZ(0);
+  backface-visibility: hidden;
+}
+
+.boy-staff-image {
+  position: absolute;
+  top: 10px;
+  left: 34px;
+  width: 42px;
+  height: 42px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 2px solid rgba(255, 222, 155, 0.9);
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.28);
+  z-index: 2;
+}
+
+.khmer-boy.dragging {
+  cursor: grabbing;
+  transition: none;
+}
+
+.boy-head {
+  position: absolute;
+  top: 0;
+  left: 31px;
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  background: #f0ba8d;
+  border: 3px solid #be845d;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.28);
+  opacity: 0.25;
+}
+
+.boy-head::before {
+  content: "";
+  position: absolute;
+  inset: -4px 0 25px 0;
+  border-radius: 50% 50% 40% 40%;
+  background: #1c1a1a;
+  opacity: 0.5;
+}
+
+.boy-body {
+  position: absolute;
+  top: 44px;
+  left: 20px;
+  width: 66px;
+  height: 68px;
+  border-radius: 20px 20px 14px 14px;
+  background: linear-gradient(180deg, #f8d872, #d5a421);
+  border: 2px solid #8c6b17;
+}
+
+.boy-arm {
+  position: absolute;
+  top: 58px;
+  width: 12px;
+  height: 42px;
+  border-radius: 10px;
+  background: #ebb389;
+  border: 2px solid #ca8f67;
+  transform-origin: top center;
+}
+
+.boy-arm-left {
+  left: 9px;
+  transform: rotate(32deg);
+}
+
+.boy-arm-right {
+  left: 89px;
+  transform: rotate(-36deg);
+}
+
+.stick {
+  position: absolute;
+  top: 44px;
+  width: 7px;
+  height: 78px;
+  border-radius: 6px;
+  background: linear-gradient(180deg, #f0cf93, #b17a39);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.28);
+}
+
+.stick-left {
+  left: 2px;
+  transform: rotate(24deg);
+}
+
+.stick-right {
+  left: 103px;
+  transform: rotate(-28deg);
+}
+
+.boy-leg {
+  position: absolute;
+  top: 108px;
+  width: 14px;
+  height: 48px;
+  border-radius: 8px;
+  background: #2f2f39;
+}
+
+.boy-leg-left { left: 37px; }
+.boy-leg-right { left: 60px; }
+
+.boy-name {
+  position: absolute;
+  left: 50%;
+  bottom: -18px;
+  transform: translateX(-50%);
+  font-family: "Kdam Thmor Pro", sans-serif;
+  font-size: 11px;
+  color: #ffe9b7;
+  background: rgba(106, 18, 17, 0.78);
+  border: 1px solid rgba(255, 224, 147, 0.5);
+  border-radius: 999px;
+  padding: 2px 8px;
+  white-space: nowrap;
+}
+
+.khmer-boy.strike .boy-arm-left {
+  animation: swingLeft 420ms ease-out;
+}
+
+.khmer-boy.strike .boy-arm-right {
+  animation: swingRight 420ms ease-out;
+}
+
+.khmer-boy.strike .stick-left {
+  animation: stickLeft 420ms ease-out;
+}
+
+.khmer-boy.strike .stick-right {
+  animation: stickRight 420ms ease-out;
+}
+
+.drop-kaorm {
+  animation: none;
+  transform: translateY(320px) rotate(14deg) scale(0.9);
+  opacity: 0;
+  pointer-events: none;
+}
+
+@keyframes swing {
+  0%, 100% { transform: translate3d(0, 0, 0) rotate(-1.8deg); }
+  50% { transform: translate3d(0, 0, 0) rotate(1.8deg); }
+}
+
+@keyframes boyIdle {
+  0%, 100% { transform: translate3d(0, 0, 0); }
+  50% { transform: translate3d(0, -2px, 0); }
+}
+
+@keyframes swingLeft {
+  0% { transform: rotate(32deg); }
+  50% { transform: rotate(74deg); }
+  100% { transform: rotate(32deg); }
+}
+
+@keyframes swingRight {
+  0% { transform: rotate(-36deg); }
+  50% { transform: rotate(-78deg); }
+  100% { transform: rotate(-36deg); }
+}
+
+@keyframes stickLeft {
+  0% { transform: rotate(24deg); }
+  50% { transform: rotate(58deg) translateY(6px); }
+  100% { transform: rotate(24deg); }
+}
+
+@keyframes stickRight {
+  0% { transform: rotate(-28deg); }
+  50% { transform: rotate(-64deg) translateY(6px); }
+  100% { transform: rotate(-28deg); }
+}
+
+.sunburst {
+  display: none;
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: 11;
+}
+
+.sunburst.show { display: block; }
+
+.sun-core {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: 70vmin;
+  height: 70vmin;
+  transform: translate(-50%, -50%);
+  border-radius: 50%;
+  background: repeating-conic-gradient(
+    rgba(255, 209, 82, 0.5) 0deg 10deg,
+    rgba(255, 88, 88, 0.5) 10deg 20deg
+  );
+  animation: rotateSun 8s linear infinite;
+  box-shadow: 0 0 60px rgba(255, 210, 92, 0.35);
+}
+
+@keyframes rotateSun {
+  from { transform: translate(-50%, -50%) rotate(0deg); }
+  to { transform: translate(-50%, -50%) rotate(360deg); }
+}
+
+.overlay {
+  opacity: 0;
+  pointer-events: none;
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.82);
+  z-index: 40;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 20px;
+  transition: 0.3s ease;
+}
+
+.overlay.show {
+  opacity: 1;
+  pointer-events: all;
+}
+
+.overlay-card {
+  width: min(560px, 96vw);
+  max-height: 92vh;
+  overflow: auto;
+  background: linear-gradient(160deg, #181818 0%, #121212 60%, #1b1712 100%);
+  border: 1px solid #3a3a3a;
+  border-radius: 14px;
+  padding: 18px;
+  box-shadow: 0 24px 60px rgba(0, 0, 0, 0.45);
+}
+
+.winner-card {
+  border: 1px solid rgba(255, 221, 152, 0.45);
+  background:
+    radial-gradient(circle at 12% 16%, rgba(255, 211, 119, 0.16), transparent 35%),
+    radial-gradient(circle at 88% 12%, rgba(214, 52, 39, 0.16), transparent 34%),
+    linear-gradient(160deg, #30140f 0%, #18110f 58%, #2b1812 100%);
+  animation: winnerPop 420ms cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.winner-card h2 {
+  margin-top: 0;
+  color: #ffe4af;
+  text-align: center;
+  font-family: "Kdam Thmor Pro", sans-serif;
+  letter-spacing: 0.3px;
+}
+
+.winner-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 14px;
+}
+
+.winner-person,
+.winner-gift {
+  text-align: center;
+  border-radius: 12px;
+  padding: 10px;
+  background: rgba(255, 245, 220, 0.06);
+  border: 1px solid rgba(255, 220, 148, 0.26);
+}
+
+#winnerStaffImage,
+#winnerGiftImage {
+  width: 140px;
+  height: 140px;
+  object-fit: cover;
+  border-radius: 14px;
+  border: 2px solid rgba(255, 220, 153, 0.7);
+  box-shadow: 0 8px 22px rgba(0, 0, 0, 0.35);
+  display: none;
+}
+
+#winnerGiftImage {
+  object-fit: contain;
+}
+
+.winner-person p,
+.winner-gift p {
+  margin: 8px 0 4px;
+  color: #ffdca8;
+  font-size: 12px;
+}
+
+.winner-person strong,
+.winner-gift strong {
+  color: #fff5d8;
+  font-size: 15px;
+}
+
+@keyframes winnerPop {
+  from { transform: scale(0.94) translateY(10px); opacity: 0; }
+  to { transform: scale(1) translateY(0); opacity: 1; }
+}
+
+textarea {
+  width: 100%;
+  border-radius: 8px;
+  border: 1px solid #444;
+  background: #1d1d1d;
+  color: #fff;
+  padding: 10px;
+  margin-bottom: 10px;
+  font-family: "Noto Sans Khmer", sans-serif;
+}
+
+.settings-actions {
+  display: flex;
+  gap: 8px;
+}
+
+.hint {
+  font-size: 12px;
+  color: #c8c8c8;
+}
+
+@media (max-width: 800px) {
+  .kaorm {
+    width: 82px;
+    height: 82px;
+  }
+  .kaorm-container {
+    top: 158px;
+    padding: 0 6px;
+    gap: 6px;
+  }
+  .reel > div {
+    font-size: 24px;
+  }
+  .khmer-boy {
+    width: 92px;
+    height: 146px;
+    bottom: 6px;
+  }
+  .boy-staff-image {
+    left: 28px;
+    width: 36px;
+    height: 36px;
+  }
+  .boy-name {
+    font-size: 10px;
+    bottom: -16px;
+  }
+  .history-box {
+    width: 250px;
+    top: 56px;
+  }
+  .winner-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .kaorm,
+  .khmer-boy,
+  .sun-core {
+    animation: none !important;
+  }
+  .reel,
+  .btn,
+  .kaorm,
+  .khmer-boy {
+    transition: none !important;
+  }
+}

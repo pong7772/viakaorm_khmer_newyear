@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="km">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>មហាវិទ្យាល័យអប់រំចូលឆ្នាំថ្មី (FoED NewYears)</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Fasthand&family=Kdam+Thmor+Pro&family=Noto+Sans+Khmer:wght@400;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="./assets/styles.css" />
+</head>
+<body>
+  <div class="bg-blur"></div>
+  <div class="texture-overlay"></div>
+  <canvas id="confetti-canvas" class="confetti"></canvas>
+
+  <div class="banner">
+    <h3>មហាវិទ្យាល័យអប់រំចូលឆ្នាំថ្មី</h3>
+  </div>
+
+  <div class="control-group">
+    <button id="settingsBtn" class="btn btn-small">កំណត់ទិន្នន័យ</button>
+    <button id="startBtn" class="btn btn-small">ចាប់ផ្ដើម</button>
+    <button id="musicToggleBtn" class="btn btn-small">តន្ត្រី: បើក</button>
+  </div>
+  <aside class="history-box" id="historyBox">
+    <h4>ប្រវត្តិអ្នកឈ្នះ</h4>
+    <div id="historyList" class="history-list"></div>
+  </aside>
+
+  <section id="lucky-draw">
+    <div class="title">FoED NewYears Lucky Draw</div>
+    <div class="slot">
+      <div class="slot__outer">
+        <div class="slot__inner">
+          <div class="slot__shadow"></div>
+          <div id="staffReel" class="reel">
+            <div>រង់ចាំចាប់ឈ្មោះ...</div>
+          </div>
+        </div>
+      </div>
+      <div id="sunburst" class="sunburst"><div class="sun-core"></div></div>
+    </div>
+    <button id="drawStaffBtn" class="btn btn-draw">ចាប់ឈ្មោះបុគ្គលិក</button>
+    <p class="now-playing">អ្នកកំពុងលេង: <span id="currentStaff">មិនទាន់មាន</span></p>
+    <p class="pool-count">បុគ្គលិកនៅសល់: <span id="staffCount">0</span> | រង្វាន់នៅសល់: <span id="giftCount">0</span></p>
+  </section>
+
+  <div class="kaorm-block">
+    <div class="break-stage-label">ទីលានវៃក្អម</div>
+    <p id="dragHint" class="drag-hint">អូសក្មេងប្រុសទៅក្រោមក្អម ហើយចុចក្អមនោះដើម្បីវៃ</p>
+    <div id="khmerBoy" class="khmer-boy" aria-hidden="true">
+      <img id="boyStaffImage" class="boy-staff-image" src="./assets/images/twitter.png" alt="staff avatar" />
+      <div class="boy-head"></div>
+      <div class="boy-body"></div>
+      <div class="boy-arm boy-arm-left"></div>
+      <div class="boy-arm boy-arm-right"></div>
+      <div class="stick stick-left"></div>
+      <div class="stick stick-right"></div>
+      <div class="boy-leg boy-leg-left"></div>
+      <div class="boy-leg boy-leg-right"></div>
+      <div class="boy-name" id="boyName">សុខ សូត្រ</div>
+    </div>
+    <div class="kaorm-string"></div>
+    <div class="kaorm-container" id="potsContainer">
+      <button class="kaorm pot" data-pot="1" aria-label="kaorm 1"></button>
+      <button class="kaorm pot" data-pot="2" aria-label="kaorm 2"></button>
+      <button class="kaorm pot" data-pot="3" aria-label="kaorm 3"></button>
+      <button class="kaorm pot" data-pot="4" aria-label="kaorm 4"></button>
+      <button class="kaorm pot" data-pot="5" aria-label="kaorm 5"></button>
+    </div>
+  </div>
+
+  <div id="resultOverlay" class="overlay">
+    <div class="overlay-card winner-card">
+      <h2>អបអរសាទរ អ្នកឈ្នះរង្វាន់</h2>
+      <div class="winner-grid">
+        <div class="winner-person">
+          <img id="winnerStaffImage" alt="winner staff image" />
+          <p>បុគ្គលិកឈ្នះ</p>
+          <strong id="winnerStaff">-</strong>
+        </div>
+        <div class="winner-gift">
+          <img id="winnerGiftImage" alt="gift image" />
+          <p>រង្វាន់ដែលទទួលបាន</p>
+          <strong id="winnerGift">-</strong>
+        </div>
+      </div>
+      <p id="resultMessage">រង់ចាំលទ្ធផល...</p>
+      <button id="nextRoundBtn" class="btn">ជុំបន្ទាប់</button>
+    </div>
+  </div>
+
+  <div id="settingsOverlay" class="overlay">
+    <div class="overlay-card settings-card">
+      <h2>កំណត់បញ្ជី</h2>
+      <label for="staffInput">បញ្ជីបុគ្គលិក JSON (ឈ្មោះ + រូបភាព)</label>
+      <textarea id="staffInput" rows="8"></textarea>
+      <label for="giftInput">បញ្ជីរង្វាន់ JSON</label>
+      <textarea id="giftInput" rows="8"></textarea>
+      <p class="hint">Staff: [{"name":"...","image":"..."}] | Gift: [{"name":"...","type":"expensive|medium|cheap","image":"...","quantity":2}]</p>
+      <p id="configMessage"></p>
+      <div class="settings-actions">
+        <button id="saveDataBtn" class="btn">រក្សាទុក</button>
+        <button id="closeSettingsBtn" class="btn btn-danger">បិទ</button>
+      </div>
+    </div>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.9.3/dist/confetti.browser.min.js"></script>
+  <audio id="bgMusic" src="./assets/audio/ToyToy.mp3" loop preload="auto"></audio>
+  <script src="./assets/app.js"></script>
+</body>
+</html>
