@@ -100,7 +100,7 @@ body {
 .history-list {
   min-height: 86px;
   opacity: 0.55;
-  transition: opacity 420ms ease;
+  transition: opacity 220ms ease;
 }
 
 .history-list.fade-in {
@@ -124,7 +124,7 @@ body {
   border: 2px solid rgba(255, 215, 140, 0.6);
   font-family: "Kdam Thmor Pro", sans-serif;
   cursor: pointer;
-  transition: transform 180ms ease, filter 220ms ease, box-shadow 220ms ease;
+  transition: transform 120ms ease, filter 120ms ease, box-shadow 120ms ease;
   box-shadow: 0 8px 18px rgba(0, 0, 0, 0.22);
 }
 
@@ -193,7 +193,7 @@ body {
 }
 
 .reel {
-  transition: transform 0.28s cubic-bezier(0.22, 1, 0.36, 1);
+  transition: transform 0.16s linear;
   will-change: transform;
   transform: translateZ(0);
   backface-visibility: hidden;
@@ -227,6 +227,10 @@ body {
   background: linear-gradient(180deg, rgba(255, 236, 187, 0.1), rgba(124, 24, 20, 0.16));
   border-top: 1px solid rgba(255, 228, 161, 0.42);
   border-bottom: 1px solid rgba(255, 208, 126, 0.32);
+}
+
+.kaorm-block.hit-flash {
+  animation: stageFlash 260ms ease-out;
 }
 
 .break-stage-label {
@@ -279,6 +283,145 @@ body {
   padding: 0 18px;
 }
 
+.pot-gift-on-pot {
+  position: absolute;
+  left: 50%;
+  top: 48%;
+  transform: translate(-50%, -50%);
+  width: 84px;
+  min-height: 84px;
+  border-radius: 10px;
+  border: 1px solid rgba(255, 220, 156, 0.68);
+  background: rgba(75, 21, 16, 0.74);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  gap: 2px;
+  box-shadow: 0 8px 18px rgba(0, 0, 0, 0.35);
+  z-index: 2;
+  padding: 4px;
+}
+
+.pot-gift-on-pot.winning {
+  width: 108px;
+  min-height: 114px;
+  background: rgba(168, 31, 27, 0.82);
+  border-color: rgba(255, 228, 152, 0.92);
+  box-shadow: 0 10px 24px rgba(255, 210, 121, 0.42);
+  transform: translate(-50%, -52%) scale(1.06);
+  z-index: 3;
+}
+
+.pot-gift-on-pot img {
+  width: 40px;
+  height: 40px;
+  object-fit: contain;
+}
+
+.pot-gift-on-pot.winning img {
+  width: 56px;
+  height: 56px;
+}
+
+.pot-gift-name {
+  font-size: 9px;
+  line-height: 1.2;
+  text-align: center;
+  color: #ffeecb;
+  max-width: 76px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.pot-gift-on-pot.winning .pot-gift-name {
+  font-size: 10px;
+  max-width: 96px;
+  color: #fff4d0;
+}
+
+.pot-gift-win-badge {
+  margin-top: 2px;
+  font-size: 8px;
+  text-align: center;
+  color: #fff7df;
+  background: rgba(177, 30, 26, 0.88);
+  border: 1px solid rgba(255, 226, 152, 0.6);
+  border-radius: 999px;
+  padding: 1px 6px;
+  white-space: nowrap;
+  max-width: 78px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.kaorm.preview-active {
+  filter: drop-shadow(0 0 12px rgba(255, 227, 131, 0.9));
+}
+
+.kaorm.preview-picked {
+  transform: scale(1.08);
+}
+
+.preview-next-btn {
+  position: absolute;
+  right: 14px;
+  bottom: 8px;
+  z-index: 14;
+  display: none;
+  min-width: 184px;
+  text-align: center;
+}
+
+.preview-next-btn.show {
+  display: inline-block;
+}
+
+.win-fly-popup {
+  position: fixed;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%) scale(0.92);
+  width: 220px;
+  min-height: 220px;
+  border-radius: 16px;
+  border: 2px solid rgba(255, 228, 152, 0.88);
+  background: rgba(119, 24, 20, 0.92);
+  box-shadow: 0 18px 38px rgba(0, 0, 0, 0.45);
+  display: none;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  gap: 8px;
+  z-index: 42;
+  pointer-events: none;
+  will-change: transform, left, top, opacity;
+  transform: translateZ(0);
+  backface-visibility: hidden;
+}
+
+.win-fly-popup.show {
+  display: flex;
+}
+
+.win-fly-popup img {
+  width: 128px;
+  height: 128px;
+  object-fit: contain;
+}
+
+.win-fly-name {
+  font-family: "Kdam Thmor Pro", sans-serif;
+  font-size: 14px;
+  color: #fff5d8;
+  max-width: 188px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  text-align: center;
+}
+
 .kaorm {
   width: 108px;
   height: 108px;
@@ -291,8 +434,8 @@ body {
   position: relative;
   cursor: pointer;
   transform-origin: center top;
-  transition: transform 320ms cubic-bezier(0.22, 1, 0.36, 1), opacity 220ms ease;
-  animation: swing 2.8s ease-in-out infinite;
+  transition: transform 140ms linear, opacity 160ms linear;
+  animation: none;
   filter: drop-shadow(0 8px 12px rgba(0, 0, 0, 0.35));
   will-change: transform, opacity;
   flex: 0 0 auto;
@@ -301,10 +444,22 @@ body {
   backface-visibility: hidden;
 }
 
-.kaorm:nth-child(2) { animation-delay: 0.2s; }
-.kaorm:nth-child(3) { animation-delay: 0.4s; }
-.kaorm:nth-child(4) { animation-delay: 0.6s; }
-.kaorm:nth-child(5) { animation-delay: 0.8s; }
+.kaorm:disabled {
+  cursor: default;
+}
+
+.kaorm.pot-focus {
+  filter: drop-shadow(0 0 10px rgba(255, 223, 118, 0.85)) drop-shadow(0 8px 12px rgba(0, 0, 0, 0.35));
+  transform: scale(1.03);
+}
+
+.kaorm.pot-jiggle {
+  animation: potJiggle 220ms ease-out;
+}
+
+.kaorm.pot-impact {
+  animation: potImpact 260ms ease-out;
+}
 
 .kaorm::before {
   content: "";
@@ -325,7 +480,7 @@ body {
   height: 168px;
   z-index: 12;
   transform-origin: bottom center;
-  animation: boyIdle 1.8s ease-in-out infinite;
+  animation: boyIdle 3.5s ease-in-out infinite;
   cursor: grab;
   user-select: none;
   touch-action: none;
@@ -455,19 +610,19 @@ body {
 }
 
 .khmer-boy.strike .boy-arm-left {
-  animation: swingLeft 420ms ease-out;
+  animation: swingLeft 260ms ease-out;
 }
 
 .khmer-boy.strike .boy-arm-right {
-  animation: swingRight 420ms ease-out;
+  animation: swingRight 260ms ease-out;
 }
 
 .khmer-boy.strike .stick-left {
-  animation: stickLeft 420ms ease-out;
+  animation: stickLeft 260ms ease-out;
 }
 
 .khmer-boy.strike .stick-right {
-  animation: stickRight 420ms ease-out;
+  animation: stickRight 260ms ease-out;
 }
 
 .drop-kaorm {
@@ -477,9 +632,24 @@ body {
   pointer-events: none;
 }
 
-@keyframes swing {
-  0%, 100% { transform: translate3d(0, 0, 0) rotate(-1.8deg); }
-  50% { transform: translate3d(0, 0, 0) rotate(1.8deg); }
+@keyframes potJiggle {
+  0% { transform: rotate(0deg) scale(1.01); }
+  25% { transform: rotate(-4deg) scale(1.02); }
+  50% { transform: rotate(3deg) scale(1.02); }
+  75% { transform: rotate(-2deg) scale(1.01); }
+  100% { transform: rotate(0deg) scale(1); }
+}
+
+@keyframes potImpact {
+  0% { transform: scale(1); }
+  30% { transform: scale(1.08); }
+  100% { transform: scale(1); }
+}
+
+@keyframes stageFlash {
+  0% { box-shadow: inset 0 0 0 rgba(255, 226, 145, 0); }
+  40% { box-shadow: inset 0 0 110px rgba(255, 226, 145, 0.22); }
+  100% { box-shadow: inset 0 0 0 rgba(255, 226, 145, 0); }
 }
 
 @keyframes boyIdle {
@@ -533,7 +703,7 @@ body {
     rgba(255, 209, 82, 0.5) 0deg 10deg,
     rgba(255, 88, 88, 0.5) 10deg 20deg
   );
-  animation: rotateSun 8s linear infinite;
+  animation: rotateSun 14s linear infinite;
   box-shadow: 0 0 60px rgba(255, 210, 92, 0.35);
 }
 
@@ -553,7 +723,7 @@ body {
   justify-content: center;
   align-items: center;
   padding: 20px;
-  transition: 0.3s ease;
+  transition: 0.16s linear;
 }
 
 .overlay.show {
@@ -578,7 +748,7 @@ body {
     radial-gradient(circle at 12% 16%, rgba(255, 211, 119, 0.16), transparent 35%),
     radial-gradient(circle at 88% 12%, rgba(214, 52, 39, 0.16), transparent 34%),
     linear-gradient(160deg, #30140f 0%, #18110f 58%, #2b1812 100%);
-  animation: winnerPop 420ms cubic-bezier(0.22, 1, 0.36, 1);
+  animation: winnerPop 220ms linear;
 }
 
 .winner-card h2 {
@@ -667,6 +837,25 @@ textarea {
     top: 158px;
     padding: 0 6px;
     gap: 6px;
+  }
+  .pot-gift-on-pot {
+    width: 66px;
+    min-height: 66px;
+  }
+  .pot-gift-on-pot.winning {
+    width: 84px;
+    min-height: 92px;
+  }
+  .pot-gift-on-pot img {
+    width: 32px;
+    height: 32px;
+  }
+  .pot-gift-on-pot.winning img {
+    width: 44px;
+    height: 44px;
+  }
+  .pot-gift-name {
+    font-size: 8px;
   }
   .reel > div {
     font-size: 24px;

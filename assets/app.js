@@ -1,15 +1,35 @@
 const defaultStaff = [
   { name: "លោក សុខ វណ្ណា", image: "./assets/images/twitter.png" },
   { name: "កញ្ញា ចាន់ ដាវី", image: "./assets/images/twitter.png" },
-  { name: "លោក ជា ដារ៉ា", image: "./assets/images/twitter.png" }
+  { name: "លោក ជា ដារ៉ា", image: "./assets/images/twitter.png" },
+  { name: "កញ្ញា លឹម ស្រីនាង", image: "./assets/images/twitter.png" },
+  { name: "លោក គង់ វិសាល", image: "./assets/images/twitter.png" },
+  { name: "កញ្ញា ពេជ្រ រស្មី", image: "./assets/images/twitter.png" },
+  { name: "លោក សេង រ៉ាវុធ", image: "./assets/images/twitter.png" },
+  { name: "កញ្ញា ឈឹម ដាលីន", image: "./assets/images/twitter.png" }
 ];
 const defaultGifts = [
   { name: "ទឹក Freshy ១កំប៉ុង", type: "cheap", image: "../../vaikaorm/images/gift/freshy.png", quantity: 2 },
   { name: "ត្រីខ ១កំប៉ុង", type: "medium", image: "../../vaikaorm/images/gift/canfish.png", quantity: 2 },
-  { name: "Amazon ១កែវ", type: "expensive", image: "../../vaikaorm/images/gift/amazon.png", quantity: 1 }
+  { name: "Amazon ១កែវ", type: "expensive", image: "../../vaikaorm/images/gift/amazon.png", quantity: 1 },
+  { name: "Coca ១កំប៉ុង", type: "cheap", image: "../../vaikaorm/images/gift/coca.png", quantity: 5 },
+  { name: "ក្រមា ១", type: "medium", image: "../../vaikaorm/images/gift/kroma.png", quantity: 3 },
+  { name: "Tiger ១កំប៉ុង", type: "expensive", image: "../../vaikaorm/images/gift/tigerBeer.png", quantity: 2 }
 ];
+const defaultWinHistory = [
+  { staff: "លោក សុខ វណ្ណា", gift: "Coca ១កំប៉ុង (cheap)" },
+  { staff: "កញ្ញា ចាន់ ដាវី", gift: "ក្រមា ១ (medium)" },
+  { staff: "លោក ជា ដារ៉ា", gift: "Amazon ១កែវ (expensive)" },
+  { staff: "លោក គង់ វិសាល", gift: "ទឹក Freshy ១កំប៉ុង (cheap)" },
+  { staff: "កញ្ញា ពេជ្រ រស្មី", gift: "Tiger ១កំប៉ុង (expensive)" }
+];
+const STORAGE_KEYS = {
+  staff: "foed_staff_pool",
+  gifts: "foed_gifts_pool",
+  history: "foed_win_history"
+};
 
-const state = { staffPool: [], giftsPool: [], currentStaff: null, canPlayPot: false, spinning: false, winHistory: [], historyCursor: 0, historyTicker: null };
+const state = { staffPool: [], giftsPool: [], currentStaff: null, canPlayPot: false, spinning: false, winHistory: [], historyCursor: 0, historyTicker: null, potAssignments: [], winningPotElement: null };
 
 const $ = (id) => document.getElementById(id);
 const staffInput = $("staffInput");
@@ -27,6 +47,10 @@ const historyList = $("historyList");
 const staffReel = $("staffReel");
 const currentStaff = $("currentStaff");
 const potsContainer = $("potsContainer");
+const previewNextBtn = $("previewNextBtn");
+const winFlyPopup = $("winFlyPopup");
+const winFlyImage = $("winFlyImage");
+const winFlyName = $("winFlyName");
 const pots = Array.from(document.querySelectorAll(".pot"));
 const winnerStaff = $("winnerStaff");
 const winnerStaffImage = $("winnerStaffImage");
@@ -169,6 +193,113 @@ function findClosestPot() {
   }
   return nearest;
 }
+function assignGiftsToPots() {
+  const tempPool = state.giftsPool.map((gift, index) => ({ ...gift, index }));
+  const picks = [];
+  for (let i = 0; i < pots.length; i += 1) {
+    const totalQty = tempPool.reduce((sum, gift) => sum + gift.quantity, 0);
+    if (!totalQty) {
+      picks.push(null);
+      continue;
+    }
+    let cursor = randomInt(totalQty);
+    let picked = null;
+    for (let j = 0; j < tempPool.length; j += 1) {
+      cursor -= tempPool[j].quantity;
+      if (cursor < 0) {
+        picked = tempPool[j];
+        tempPool[j].quantity -= 1;
+        break;
+      }
+    }
+    picks.push(picked ? {
+      index: picked.index,
+      name: picked.name,
+      type: picked.type,
+      image: picked.image
+    } : null);
+  }
+  state.potAssignments = picks;
+}
+function clearPotGiftPreviewOnPots() {
+  pots.forEach((pot) => {
+    pot.classList.remove("preview-active");
+    pot.classList.remove("preview-picked");
+    const old = pot.querySelector(".pot-gift-on-pot");
+    if (old) old.remove();
+  });
+}
+function renderPotGiftPreviewOnPots(activePotIndex = -1, winnerName = "") {
+  clearPotGiftPreviewOnPots();
+  for (let i = 0; i < pots.length; i += 1) {
+    const gift = state.potAssignments[i];
+    if (!gift) continue;
+    const wrap = document.createElement("div");
+    wrap.className = "pot-gift-on-pot";
+    const img = document.createElement("img");
+    img.src = gift.image || "./assets/images/twitter.png";
+    img.alt = gift.name;
+    wrap.appendChild(img);
+    const label = document.createElement("div");
+    label.className = "pot-gift-name";
+    label.textContent = gift.name;
+    wrap.appendChild(label);
+    if (i === activePotIndex) {
+      wrap.classList.add("winning");
+      const winBadge = document.createElement("div");
+      winBadge.className = "pot-gift-win-badge";
+      winBadge.textContent = `អបអរសាទរ ${winnerName || "អ្នកឈ្នះ"}`;
+      wrap.appendChild(winBadge);
+    }
+    pots[i].appendChild(wrap);
+    pots[i].classList.add("preview-active");
+    if (i === activePotIndex) {
+      pots[i].classList.add("preview-picked");
+    }
+  }
+}
+function placeNextButtonUnderWinningPot() {
+  if (!previewNextBtn || !kaormBlock || !state.winningPotElement) return;
+  const blockRect = kaormBlock.getBoundingClientRect();
+  const potRect = state.winningPotElement.getBoundingClientRect();
+  const centerX = (potRect.left - blockRect.left) + (potRect.width / 2);
+  previewNextBtn.style.left = `${Math.max(8, centerX - 92)}px`;
+  previewNextBtn.style.right = "auto";
+  previewNextBtn.style.bottom = "10px";
+}
+async function animateWinPopupToPot(giftInfo, targetPot) {
+  if (!winFlyPopup || !winFlyImage || !winFlyName || !targetPot) return;
+  winFlyImage.src = giftInfo.gift.image || "./assets/images/twitter.png";
+  winFlyName.textContent = giftInfo.gift.name;
+  winFlyPopup.classList.add("show");
+  winFlyPopup.style.left = "50%";
+  winFlyPopup.style.top = "50%";
+  winFlyPopup.style.transform = "translate3d(-50%, -50%, 0) scale(0.92)";
+
+  const appearAnim = winFlyPopup.animate(
+    [
+      { transform: "translate3d(-50%, -50%, 0) scale(0.92)", opacity: 0.85 },
+      { transform: "translate3d(-50%, -50%, 0) scale(1.03)", opacity: 1 }
+    ],
+    { duration: 220, easing: "ease-out", fill: "forwards" }
+  );
+  await appearAnim.finished;
+  await new Promise((resolve) => window.setTimeout(resolve, 3000));
+
+  const potRect = targetPot.getBoundingClientRect();
+  const destLeft = potRect.left + (potRect.width / 2);
+  const destTop = potRect.top + (potRect.height / 2);
+  const flyAnim = winFlyPopup.animate(
+    [
+      { left: "50%", top: "50%", transform: "translate3d(-50%, -50%, 0) scale(1.03)", opacity: 1 },
+      { left: `${destLeft}px`, top: `${destTop}px`, transform: "translate3d(-50%, -50%, 0) scale(0.42)", opacity: 0.2 }
+    ],
+    { duration: 460, easing: "cubic-bezier(0.2, 0.8, 0.2, 1)", fill: "forwards" }
+  );
+  await flyAnim.finished;
+  flyAnim.cancel();
+  winFlyPopup.classList.remove("show");
+}
 function snapBoyToPot(pot) {
   if (!khmerBoy || !kaormBlock || !pot) return;
   const blockRect = kaormBlock.getBoundingClientRect();
@@ -179,44 +310,6 @@ function snapBoyToPot(pot) {
 function isBoyAlignedWithPot(pot) {
   const gap = Math.abs(getBoyCenterX() - getPotCenterX(pot));
   return gap <= BOY_HIT_TOLERANCE;
-}
-function setupBoyDrag() {
-  if (!khmerBoy || !kaormBlock) return;
-
-  khmerBoy.addEventListener("pointerdown", (event) => {
-    dragState.active = true;
-    dragState.pointerId = event.pointerId;
-    const boyRect = khmerBoy.getBoundingClientRect();
-    dragState.grabOffsetX = event.clientX - boyRect.left;
-    khmerBoy.classList.add("dragging");
-    khmerBoy.setPointerCapture(event.pointerId);
-    setDragHint("អូសក្មេងប្រុសទៅក្រោមក្អមដែលអ្នកចង់វៃ");
-  });
-
-  khmerBoy.addEventListener("pointermove", (event) => {
-    if (!dragState.active || event.pointerId !== dragState.pointerId || !kaormBlock) return;
-    const blockRect = kaormBlock.getBoundingClientRect();
-    queueBoyLeft(event.clientX - blockRect.left - dragState.grabOffsetX);
-  });
-
-  const onPointerRelease = (event) => {
-    if (!dragState.active || event.pointerId !== dragState.pointerId) return;
-    dragState.active = false;
-    dragState.pointerId = null;
-    if (dragState.rafId) {
-      window.cancelAnimationFrame(dragState.rafId);
-      dragState.rafId = 0;
-    }
-    khmerBoy.classList.remove("dragging");
-    const nearestPot = findClosestPot();
-    if (nearestPot) {
-      snapBoyToPot(nearestPot);
-    }
-    setDragHint("ចុចក្អមដែលនៅលើក្បាលក្មេងប្រុស ដើម្បីវៃយករង្វាន់");
-  };
-
-  khmerBoy.addEventListener("pointerup", onPointerRelease);
-  khmerBoy.addEventListener("pointercancel", onPointerRelease);
 }
 function positionBoyToFirstPot() {
   if (!pots.length) return;
@@ -286,23 +379,28 @@ function startHistoryTicker() {
     if (!state.winHistory.length) return;
     state.historyCursor = (state.historyCursor + 5) % state.winHistory.length;
     renderHistoryPage();
-  }, 4000);
+  }, 5000);
 }
 
 function persistPools() {
-  localStorage.setItem("foed_staff_pool", JSON.stringify(state.staffPool));
-  localStorage.setItem("foed_gifts_pool", JSON.stringify(state.giftsPool));
+  localStorage.setItem(STORAGE_KEYS.staff, JSON.stringify(state.staffPool));
+  localStorage.setItem(STORAGE_KEYS.gifts, JSON.stringify(state.giftsPool));
+}
+function persistHistory() {
+  localStorage.setItem(STORAGE_KEYS.history, JSON.stringify(state.winHistory));
 }
 
 function loadData() {
-  const savedStaff = localStorage.getItem("foed_staff_pool");
-  const savedGifts = localStorage.getItem("foed_gifts_pool");
-  const savedHistory = localStorage.getItem("foed_win_history");
+  const savedStaff = localStorage.getItem(STORAGE_KEYS.staff);
+  const savedGifts = localStorage.getItem(STORAGE_KEYS.gifts);
+  const savedHistory = localStorage.getItem(STORAGE_KEYS.history);
   state.staffPool = savedStaff ? JSON.parse(savedStaff) : [...defaultStaff];
   state.giftsPool = savedGifts ? JSON.parse(savedGifts) : [...defaultGifts];
-  state.winHistory = savedHistory ? JSON.parse(savedHistory) : [];
+  state.winHistory = savedHistory ? JSON.parse(savedHistory) : [...defaultWinHistory];
   state.staffPool = normalizeStaff(state.staffPool);
   state.giftsPool = normalizeGifts(state.giftsPool);
+  // Ensure dummy history is persisted on first run and always synced in localStorage.
+  persistHistory();
   staffInput.value = JSON.stringify(state.staffPool, null, 2);
   giftInput.value = JSON.stringify(state.giftsPool, null, 2);
   updateCounts();
@@ -335,6 +433,9 @@ function saveData() {
 function resetPots() {
   pots.forEach((pot) => {
     pot.classList.remove("drop-kaorm");
+    pot.classList.remove("pot-focus");
+    pot.classList.remove("pot-jiggle");
+    pot.classList.remove("pot-impact");
     pot.disabled = !state.canPlayPot;
   });
 }
@@ -384,8 +485,8 @@ async function spinStaffReel() {
       { transform: `translateY(-${travelY}px)`, filter: "blur(0px)" }
     ],
     {
-      duration: reelNames.length * 85,
-      easing: "cubic-bezier(0.2, 0.8, 0.15, 1)",
+      duration: reelNames.length * 62,
+      easing: "linear",
       iterations: 1,
       fill: "forwards"
     }
@@ -398,6 +499,8 @@ async function spinStaffReel() {
   updateBoyProfile(state.currentStaff);
   spinSfx.pause();
   spinSfx.currentTime = 0;
+  assignGiftsToPots();
+  clearPotGiftPreviewOnPots();
   enablePots(true);
   state.spinning = false;
 }
@@ -416,9 +519,9 @@ function pickGift() {
 function celebrate() {
   sunburst.classList.add("show");
   playSfx(congratsSfx);
-  window.setTimeout(speakKhmerCongrats, 800);
+  window.setTimeout(speakKhmerCongrats, 520);
   if (!confettiFx) return;
-  confettiFx({ particleCount: 70, spread: 82, origin: { y: 0.65 } });
+  confettiFx({ particleCount: 24, spread: 65, origin: { y: 0.65 } });
 }
 
 function completeRound(giftInfo) {
@@ -432,20 +535,7 @@ function completeRound(giftInfo) {
   updateCounts();
 
   winnerStaff.textContent = state.currentStaff?.name || "-";
-  if (state.currentStaff?.image) {
-    winnerStaffImage.src = state.currentStaff.image;
-    winnerStaffImage.style.display = "inline-block";
-  } else {
-    winnerStaffImage.src = "./assets/images/twitter.png";
-    winnerStaffImage.style.display = "inline-block";
-  }
   winnerGift.textContent = `${giftInfo.gift.name} (${giftInfo.gift.type})`;
-  if (giftInfo.gift.image) {
-    winnerGiftImage.src = giftInfo.gift.image;
-    winnerGiftImage.style.display = "block";
-  } else {
-    winnerGiftImage.style.display = "none";
-  }
   resultMessage.textContent = "អបអរសាទរ! បានទទួលរង្វាន់";
   state.winHistory.unshift({
     staff: state.currentStaff?.name || "-",
@@ -453,38 +543,66 @@ function completeRound(giftInfo) {
   });
   state.winHistory = state.winHistory.slice(0, 120);
   state.historyCursor = 0;
-  localStorage.setItem("foed_win_history", JSON.stringify(state.winHistory));
+  persistHistory();
   renderHistoryPage();
   celebrate();
-  openOverlay(resultOverlay);
+  setDragHint(`អបអរសាទរ ${state.currentStaff?.name || ""}! រង្វាន់: ${giftInfo.gift.name}`);
+  if (previewNextBtn) {
+    previewNextBtn.textContent = "ចាប់ផ្តើមជុំបន្ទាប់";
+    previewNextBtn.classList.add("show");
+    placeNextButtonUnderWinningPot();
+  }
 }
 
 function onPotClick(target) {
   if (!state.currentStaff || !state.canPlayPot) return;
-  if (!isBoyAlignedWithPot(target)) {
-    playSfx(clickSfx);
-    playSfx(brokeheartSfx);
-    setDragHint("សូមអូសក្មេងប្រុសអោយចំក្រោមក្អមនេះសិន");
-    return;
-  }
-
   snapBoyToPot(target);
+  target.classList.add("pot-focus");
+  target.classList.add("pot-jiggle");
+  if (kaormBlock) {
+    kaormBlock.classList.remove("hit-flash");
+    void kaormBlock.offsetWidth;
+    kaormBlock.classList.add("hit-flash");
+  }
+  pots.forEach((pot) => {
+    if (pot !== target) {
+      pot.classList.remove("pot-jiggle");
+      void pot.offsetWidth;
+      pot.classList.add("pot-jiggle");
+    }
+  });
+  const potIndex = Number(target.dataset.pot || "0") - 1;
+  const assignedGift = state.potAssignments[potIndex];
+  state.winningPotElement = target;
+  renderPotGiftPreviewOnPots(potIndex, state.currentStaff?.name || "");
   if (khmerBoy) {
     khmerBoy.classList.remove("strike");
     void khmerBoy.offsetWidth;
     khmerBoy.classList.add("strike");
   }
-  target.classList.add("drop-kaorm");
+  target.classList.remove("pot-jiggle");
+  target.classList.add("pot-impact");
   playSfx(breakSfx);
   enablePots(false);
-  const giftInfo = pickGift();
-  if (!giftInfo) {
+  if (!assignedGift) {
     playSfx(brokeheartSfx);
     resultMessage.textContent = "រង្វាន់អស់ហើយ";
     openOverlay(resultOverlay);
     return;
   }
-  setTimeout(() => completeRound(giftInfo), 450);
+  const giftInfo = {
+    index: assignedGift.index,
+    gift: {
+      name: assignedGift.name,
+      type: assignedGift.type,
+      image: assignedGift.image
+    }
+  };
+  window.setTimeout(async () => {
+    await animateWinPopupToPot(giftInfo, target);
+    renderPotGiftPreviewOnPots(potIndex, state.currentStaff?.name || "");
+    completeRound(giftInfo);
+  }, 120);
 }
 
 function prepareNextRound() {
@@ -497,8 +615,18 @@ function prepareNextRound() {
   drawStaffBtn.disabled = false;
   enablePots(false);
   resetPots();
+  state.potAssignments = [];
+  state.winningPotElement = null;
+  if (previewNextBtn) {
+    previewNextBtn.classList.remove("show");
+    previewNextBtn.textContent = "បន្ទាប់";
+    previewNextBtn.style.left = "";
+    previewNextBtn.style.right = "14px";
+    previewNextBtn.style.bottom = "8px";
+  }
+  clearPotGiftPreviewOnPots();
   positionBoyToFirstPot();
-  setDragHint("អូសក្មេងប្រុសទៅក្រោមក្អម ហើយចុចក្អមនោះដើម្បីវៃ");
+  setDragHint("ចុចក្អមណាមួយ ដើម្បីឲក្មេងប្រុសវៃដោយស្វ័យប្រវត្តិ");
   if (!state.staffPool.length || !state.giftsPool.length) {
     drawStaffBtn.disabled = true;
     resultMessage.textContent = "ហ្គេមបញ្ចប់: មិនមានបុគ្គលិក ឬ រង្វាន់នៅសល់";
@@ -526,6 +654,12 @@ nextRoundBtn.addEventListener("click", () => {
   playSfx(clickSfx);
   prepareNextRound();
 });
+if (previewNextBtn) {
+  previewNextBtn.addEventListener("click", () => {
+    playSfx(clickSfx);
+    prepareNextRound();
+  });
+}
 musicToggleBtn.addEventListener("click", () => {
   musicEnabled = !musicEnabled;
   if (musicEnabled) {
@@ -544,6 +678,5 @@ loadData();
 openOverlay(settingsOverlay);
 prepareNextRound();
 updateMusicBtn();
-setupBoyDrag();
 window.addEventListener("resize", positionBoyToFirstPot);
 window.addEventListener("click", startBackgroundMusic, { once: true });
