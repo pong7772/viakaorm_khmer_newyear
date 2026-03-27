@@ -68,6 +68,8 @@ const boyName = $("boyName");
 const boyStaffImage = $("boyStaffImage");
 const kaormBlock = document.querySelector(".kaorm-block");
 const dragHint = $("dragHint");
+const gameSteps = $("gameSteps");
+const potGuideBubble = $("potGuideBubble");
 
 const confettiFx = window.confetti ? window.confetti.create(confettiCanvas, { resize: true, useWorker: true }) : null;
 const clickSfx = new Audio("./audio/button-click.mp3");
@@ -153,6 +155,22 @@ function updateMusicBtn() {
 function setDragHint(text) {
   if (!dragHint) return;
   dragHint.textContent = text;
+}
+function setActiveStep(step) {
+  if (!gameSteps) return;
+  const chips = Array.from(gameSteps.querySelectorAll(".game-step"));
+  chips.forEach((chip) => {
+    const current = Number(chip.getAttribute("data-step") || "0");
+    chip.classList.toggle("active", current === step);
+  });
+}
+function setPotBreakPrompt(active) {
+  if (potGuideBubble) {
+    potGuideBubble.classList.toggle("show", active);
+  }
+  pots.forEach((pot) => {
+    pot.classList.toggle("pot-attention", active && !pot.disabled);
+  });
 }
 function clamp(value, min, max) {
   return Math.min(max, Math.max(min, value));
@@ -271,33 +289,36 @@ async function animateWinPopupToPot(giftInfo, targetPot) {
   if (!winFlyPopup || !winFlyImage || !winFlyName || !targetPot) return;
   winFlyImage.src = giftInfo.gift.image || "./assets/images/twitter.png";
   winFlyName.textContent = giftInfo.gift.name;
+  winFlyPopup.classList.add("surprise");
   winFlyPopup.classList.add("show");
-  winFlyPopup.style.left = "50%";
-  winFlyPopup.style.top = "50%";
-  winFlyPopup.style.transform = "translate3d(-50%, -50%, 0) scale(0.92)";
-
-  const appearAnim = winFlyPopup.animate(
-    [
-      { transform: "translate3d(-50%, -50%, 0) scale(0.92)", opacity: 0.85 },
-      { transform: "translate3d(-50%, -50%, 0) scale(1.03)", opacity: 1 }
-    ],
-    { duration: 220, easing: "ease-out", fill: "forwards" }
-  );
-  await appearAnim.finished;
-  await new Promise((resolve) => window.setTimeout(resolve, 3000));
-
   const potRect = targetPot.getBoundingClientRect();
-  const destLeft = potRect.left + (potRect.width / 2);
-  const destTop = potRect.top + (potRect.height / 2);
-  const flyAnim = winFlyPopup.animate(
+  const sourceLeft = potRect.left + (potRect.width / 2);
+  const sourceTop = potRect.top + (potRect.height / 2);
+  winFlyPopup.style.left = `${sourceLeft}px`;
+  winFlyPopup.style.top = `${sourceTop}px`;
+  winFlyPopup.style.transform = "translate3d(-50%, -50%, 0) scale(0.2)";
+
+  const boomReveal = winFlyPopup.animate(
     [
-      { left: "50%", top: "50%", transform: "translate3d(-50%, -50%, 0) scale(1.03)", opacity: 1 },
-      { left: `${destLeft}px`, top: `${destTop}px`, transform: "translate3d(-50%, -50%, 0) scale(0.42)", opacity: 0.2 }
+      { left: `${sourceLeft}px`, top: `${sourceTop}px`, transform: "translate3d(-50%, -50%, 0) scale(0.2)", opacity: 0.3 },
+      { left: `${sourceLeft}px`, top: `${sourceTop}px`, transform: "translate3d(-50%, -50%, 0) scale(1.18)", opacity: 1 },
+      { left: `${sourceLeft}px`, top: `${sourceTop}px`, transform: "translate3d(-50%, -50%, 0) scale(0.95)", opacity: 1 }
     ],
-    { duration: 460, easing: "cubic-bezier(0.2, 0.8, 0.2, 1)", fill: "forwards" }
+    { duration: 420, easing: "cubic-bezier(0.18, 0.86, 0.25, 1)", fill: "forwards" }
   );
-  await flyAnim.finished;
-  flyAnim.cancel();
+  await boomReveal.finished;
+
+  const centerReveal = winFlyPopup.animate(
+    [
+      { left: `${sourceLeft}px`, top: `${sourceTop}px`, transform: "translate3d(-50%, -50%, 0) scale(0.95)", opacity: 1 },
+      { left: "50%", top: "50%", transform: "translate3d(-50%, -50%, 0) scale(1.05)", opacity: 1 }
+    ],
+    { duration: 360, easing: "cubic-bezier(0.2, 0.8, 0.2, 1)", fill: "forwards" }
+  );
+  await centerReveal.finished;
+  await new Promise((resolve) => window.setTimeout(resolve, 1200));
+
+  winFlyPopup.classList.remove("surprise");
   winFlyPopup.classList.remove("show");
 }
 function snapBoyToPot(pot) {
@@ -436,13 +457,19 @@ function resetPots() {
     pot.classList.remove("pot-focus");
     pot.classList.remove("pot-jiggle");
     pot.classList.remove("pot-impact");
+    pot.classList.remove("pot-attention");
     pot.disabled = !state.canPlayPot;
   });
 }
 
 function enablePots(enabled) {
   state.canPlayPot = enabled;
-  pots.forEach((pot) => { pot.disabled = !enabled; });
+  pots.forEach((pot) => {
+    pot.disabled = !enabled;
+    if (!enabled) {
+      pot.classList.remove("pot-attention");
+    }
+  });
 }
 
 async function spinStaffReel() {
@@ -451,6 +478,8 @@ async function spinStaffReel() {
   if (!state.giftsPool.length) { configMessage.textContent = "គ្មានរង្វាន់នៅសល់"; openOverlay(settingsOverlay); return; }
 
   state.spinning = true;
+  setActiveStep(2);
+  setPotBreakPrompt(false);
   drawStaffBtn.disabled = true;
   enablePots(false);
   closeOverlay(resultOverlay);
@@ -502,6 +531,9 @@ async function spinStaffReel() {
   assignGiftsToPots();
   clearPotGiftPreviewOnPots();
   enablePots(true);
+  setActiveStep(3);
+  setDragHint(`ឈ្មោះចេញហើយ: ${state.currentStaff.name}។ សូមចុចក្អមមួយ ដើម្បីវាយ`);
+  setPotBreakPrompt(true);
   state.spinning = false;
 }
 
@@ -535,7 +567,11 @@ function completeRound(giftInfo) {
   updateCounts();
 
   winnerStaff.textContent = state.currentStaff?.name || "-";
+  winnerStaffImage.src = state.currentStaff?.image || "./assets/images/twitter.png";
+  winnerStaffImage.style.display = "block";
   winnerGift.textContent = `${giftInfo.gift.name} (${giftInfo.gift.type})`;
+  winnerGiftImage.src = giftInfo.gift.image || "./assets/images/twitter.png";
+  winnerGiftImage.style.display = "block";
   resultMessage.textContent = "អបអរសាទរ! បានទទួលរង្វាន់";
   state.winHistory.unshift({
     staff: state.currentStaff?.name || "-",
@@ -546,6 +582,7 @@ function completeRound(giftInfo) {
   persistHistory();
   renderHistoryPage();
   celebrate();
+  openOverlay(resultOverlay);
   setDragHint(`អបអរសាទរ ${state.currentStaff?.name || ""}! រង្វាន់: ${giftInfo.gift.name}`);
   if (previewNextBtn) {
     previewNextBtn.textContent = "ចាប់ផ្តើមជុំបន្ទាប់";
@@ -556,6 +593,7 @@ function completeRound(giftInfo) {
 
 function onPotClick(target) {
   if (!state.currentStaff || !state.canPlayPot) return;
+  setPotBreakPrompt(false);
   snapBoyToPot(target);
   target.classList.add("pot-focus");
   target.classList.add("pot-jiggle");
@@ -581,6 +619,9 @@ function onPotClick(target) {
     khmerBoy.classList.add("strike");
   }
   target.classList.remove("pot-jiggle");
+  target.classList.remove("pot-boom");
+  void target.offsetWidth;
+  target.classList.add("pot-boom");
   target.classList.add("pot-impact");
   playSfx(breakSfx);
   enablePots(false);
@@ -626,6 +667,8 @@ function prepareNextRound() {
   }
   clearPotGiftPreviewOnPots();
   positionBoyToFirstPot();
+  setActiveStep(2);
+  setPotBreakPrompt(false);
   setDragHint("ចុចក្អមណាមួយ ដើម្បីឲក្មេងប្រុសវៃដោយស្វ័យប្រវត្តិ");
   if (!state.staffPool.length || !state.giftsPool.length) {
     drawStaffBtn.disabled = true;
@@ -677,6 +720,7 @@ potsContainer.addEventListener("click", (event) => {
 loadData();
 openOverlay(settingsOverlay);
 prepareNextRound();
+setActiveStep(1);
 updateMusicBtn();
 window.addEventListener("resize", positionBoyToFirstPot);
 window.addEventListener("click", startBackgroundMusic, { once: true });

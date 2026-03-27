@@ -12,6 +12,12 @@
 <body>
   <div class="bg-blur"></div>
   <div class="texture-overlay"></div>
+  <div class="khmer-motif motif-top"></div>
+  <div class="khmer-motif motif-bottom"></div>
+  <div class="khmer-corner corner-tl" aria-hidden="true">❖</div>
+  <div class="khmer-corner corner-tr" aria-hidden="true">❖</div>
+  <div class="khmer-corner corner-bl" aria-hidden="true">❖</div>
+  <div class="khmer-corner corner-br" aria-hidden="true">❖</div>
   <canvas id="confetti-canvas" class="confetti"></canvas>
 
   <div class="banner">
@@ -30,6 +36,12 @@
 
   <section id="lucky-draw">
     <div class="title">FoED NewYears Lucky Draw</div>
+    <div class="khmer-subtitle">ពិធីចាប់រង្វាន់សំណាងបុណ្យចូលឆ្នាំខ្មែរ</div>
+    <div id="gameSteps" class="game-steps" aria-label="game steps">
+      <div class="game-step active" data-step="1">១) ចាប់ផ្តើម</div>
+      <div class="game-step" data-step="2">២) ចាប់ឈ្មោះបុគ្គលិក</div>
+      <div class="game-step" data-step="3">៣) ជ្រើសក្អមដើម្បីវាយ</div>
+    </div>
     <div class="slot">
       <div class="slot__outer">
         <div class="slot__inner">
@@ -49,6 +61,9 @@
   <div class="kaorm-block">
     <div class="break-stage-label">ទីលានវាយក្អម</div>
     <p id="dragHint" class="drag-hint">ចុចក្អមណាមួយ ដើម្បីឲក្មេងប្រុសវៃដោយស្វ័យប្រវត្តិ</p>
+    <div id="potGuideBubble" class="pot-guide-bubble" aria-live="polite">
+      សូមចុចក្អមមួយ ដើម្បីវាយយករង្វាន់
+    </div>
     <div id="khmerBoy" class="khmer-boy" aria-hidden="true">
       <img id="boyStaffImage" class="boy-staff-image" src="./assets/images/twitter.png" alt="staff avatar" />
       <div class="boy-head"></div>
@@ -61,6 +76,7 @@
       <div class="boy-leg boy-leg-right"></div>
       <div class="boy-name" id="boyName">សុខ សូត្រ</div>
     </div>
+    <div class="boy-ground" aria-hidden="true"></div>
     <div class="kaorm-string"></div>
     <div class="kaorm-container" id="potsContainer">
       <button class="kaorm pot" data-pot="1" aria-label="kaorm 1"></button>
