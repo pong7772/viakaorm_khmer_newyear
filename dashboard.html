@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="km">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>ផ្ទាំងគ្រប់គ្រង — FoED New Years</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Kdam+Thmor+Pro&family=Noto+Sans+Khmer:wght@400;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="./assets/dashboard.css" />
+</head>
+<body class="dash-body">
+  <div class="dash-wrap">
+    <header class="dash-header">
+      <h1>ផ្ទាំងគ្រប់គ្រងទិន្នន័យ និងរូបភាព</h1>
+      <div class="dash-actions">
+        <span id="dashStatus" class="dash-status">…</span>
+        <a class="dash-btn secondary" href="./index.html">ត្រឡប់ទៅល្បែង</a>
+      </div>
+    </header>
+
+    <div class="dash-card" style="margin-bottom:16px">
+      <h2 style="margin-top:0">រក្សាទុកចេញ / នាំចូល (ឯកសារ JSON)</h2>
+      <p class="dash-hint" style="margin-top:0">
+        កម្មវិធីរុករកមិនអាចសរសេរទៅថតគម្រោងដោយផ្ទាល់។ ចុចទាញចេញ រួយរក្សាទុកឯកសារ <code style="color:#ffd78a">foed-lucky-data.json</code> ក្នុងថត <code style="color:#ffd78a">data/</code> នៅក្នុងគម្រោងអ្នក (ឬ Chrome អាចរើសទីតាំងរក្សាទុក)។
+      </p>
+      <div class="dash-btn-row" style="margin-top:0">
+        <button type="button" class="dash-btn" id="exportFileBtn">ទាញចេញទៅឯកសារ</button>
+        <input type="file" id="importFileInput" accept="application/json,.json" style="position:absolute;width:0;height:0;opacity:0" aria-label="នាំចូល JSON" />
+        <label for="importFileInput" class="dash-btn secondary" style="cursor:pointer;display:inline-flex;align-items:center;justify-content:center">នាំចូលពីឯកសារ</label>
+      </div>
+      <p id="exportMsg" class="dash-msg" aria-live="polite"></p>
+    </div>
+
+    <nav class="dash-tabs" role="tablist">
+      <button type="button" class="dash-tab active" data-panel="staff" role="tab" aria-selected="true">បុគ្គលិក</button>
+      <button type="button" class="dash-tab" data-panel="gifts" role="tab" aria-selected="false">រង្វាន់</button>
+      <button type="button" class="dash-tab" data-panel="history" role="tab" aria-selected="false">ប្រវត្តិឈ្នះ</button>
+    </nav>
+
+    <section id="panel-staff" class="dash-panel active" role="tabpanel">
+      <div class="dash-card">
+        <h2 id="staffFormTitle">បន្ថែមបុគ្គលិក</h2>
+        <div class="dash-form-grid">
+          <div class="dash-field">
+            <label for="staffName">ឈ្មោះ</label>
+            <input type="text" id="staffName" autocomplete="off" />
+          </div>
+          <div class="dash-field">
+            <label for="staffImageUrl">រូបភាព (URL — ប្រសិនបើមិនផ្ទុកឡើង)</label>
+            <input type="text" id="staffImageUrl" placeholder="https://... ឬ ./assets/..." autocomplete="off" />
+          </div>
+          <div class="dash-field">
+            <label for="staffImageFile">ផ្ទុករូបឡើង (ជាជម្រើសចំពោះ URL)</label>
+            <input type="file" id="staffImageFile" accept="image/*" />
+          </div>
+          <div class="dash-field">
+            <label>មើលជាមុន</label>
+            <img id="staffPreview" class="dash-preview" alt="" hidden />
+          </div>
+        </div>
+        <div class="dash-btn-row">
+          <button type="button" class="dash-btn" id="staffSaveBtn">រក្សាទុក</button>
+          <button type="button" class="dash-btn secondary" id="staffCancelBtn" hidden>បោះបង់កែ</button>
+        </div>
+        <p id="staffMsg" class="dash-msg" aria-live="polite"></p>
+        <p class="dash-hint">រូបភាពផ្ទុកឡើងត្រូវបានរក្សាទុកក្នុង JSON (base64) ក្នុងកម្មវិធីរុករអ — ឯកសារធំអាចយឺត។ អាចប្រើ URL ឬ ផ្លូវ <code style="color:#ffd78a">./assets/...</code> ជំនួស។</p>
+      </div>
+      <div class="dash-card">
+        <h2>បញ្ជីបុគ្គលិក</h2>
+        <div class="dash-table-wrap">
+          <table class="dash-table">
+            <thead>
+              <tr>
+                <th>រូប</th>
+                <th>ឈ្មោះ</th>
+                <th></th>
+              </tr>
+            </thead>
+            <tbody id="staffTableBody"></tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+
+    <section id="panel-gifts" class="dash-panel" role="tabpanel">
+      <div class="dash-card">
+        <h2 id="giftFormTitle">បន្ថែមរង្វាន់</h2>
+        <div class="dash-form-grid cols-2">
+          <div class="dash-field">
+            <label for="giftName">ឈ្មោះរង្វាន់</label>
+            <input type="text" id="giftName" autocomplete="off" />
+          </div>
+          <div class="dash-field">
+            <label for="giftType">ប្រភេទ</label>
+            <select id="giftType">
+              <option value="cheap">cheap</option>
+              <option value="medium" selected>medium</option>
+              <option value="expensive">expensive</option>
+            </select>
+          </div>
+          <div class="dash-field">
+            <label for="giftQty">ចំនួន</label>
+            <input type="number" id="giftQty" min="0" step="1" value="1" />
+          </div>
+          <div class="dash-field">
+            <label for="giftPrice">តម្លៃ (ជាជម្រើស)</label>
+            <input type="number" id="giftPrice" min="0" step="0.01" placeholder="0" />
+          </div>
+          <div class="dash-field" style="grid-column: 1 / -1">
+            <label for="giftImageUrl">រូបភាព (URL)</label>
+            <input type="text" id="giftImageUrl" placeholder="https://... ឬ ./assets/..." autocomplete="off" />
+          </div>
+          <div class="dash-field" style="grid-column: 1 / -1">
+            <label for="giftImageFile">ផ្ទុករូបឡើង</label>
+            <input type="file" id="giftImageFile" accept="image/*" />
+          </div>
+          <div class="dash-field">
+            <label>មើលជាមុន</label>
+            <img id="giftPreview" class="dash-preview" alt="" hidden />
+          </div>
+        </div>
+        <div class="dash-btn-row">
+          <button type="button" class="dash-btn" id="giftSaveBtn">រក្សាទុក</button>
+          <button type="button" class="dash-btn secondary" id="giftCancelBtn" hidden>បោះបង់កែ</button>
+        </div>
+        <p id="giftMsg" class="dash-msg" aria-live="polite"></p>
+      </div>
+      <div class="dash-card">
+        <h2>បញ្ជីរង្វាន់</h2>
+        <div class="dash-table-wrap">
+          <table class="dash-table">
+            <thead>
+              <tr>
+                <th>រូប</th>
+                <th>ឈ្មោះ</th>
+                <th>ប្រភេទ</th>
+                <th>ចំនួន</th>
+                <th>តម្លៃ</th>
+                <th></th>
+              </tr>
+            </thead>
+            <tbody id="giftTableBody"></tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+
+    <section id="panel-history" class="dash-panel" role="tabpanel">
+      <div class="dash-card">
+        <h2>ប្រវត្តិអ្នកឈ្នះ (អាចមើលតែប៉ុណ្ណោះ)</h2>
+        <div class="dash-btn-row" style="margin-top:0">
+          <button type="button" class="dash-btn secondary" id="historyRefreshBtn">ផ្ទុកម្ដងទៀត</button>
+        </div>
+        <p id="historyMsg" class="dash-msg" aria-live="polite"></p>
+        <div class="dash-table-wrap" style="margin-top:12px">
+          <table class="dash-table">
+            <thead>
+              <tr>
+                <th>ពេល</th>
+                <th>បុគ្គលិក</th>
+                <th>រង្វាន់</th>
+              </tr>
+            </thead>
+            <tbody id="historyTableBody"></tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+  </div>
+
+  <script src="./assets/offline-storage.js"></script>
+  <script src="./assets/dashboard.js"></script>
+</body>
+</html>

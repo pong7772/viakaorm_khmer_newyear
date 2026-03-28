@@ -21,10 +21,11 @@
   <canvas id="confetti-canvas" class="confetti"></canvas>
 
   <div class="banner">
-    <h3>មហាវិទ្យាល័យអប់រំចូលឆ្នាំថ្មី</h3>
+    <h3>សង្គ្រាន្ត<br/> មហាវិទ្យាល័យអប់រំ</h3>
   </div>
 
   <div class="control-group">
+    <a href="./dashboard.html" class="btn btn-small" style="text-decoration:none;display:inline-flex;align-items:center;justify-content:center">ផ្ទាំងគ្រប់គ្រង</a>
     <button id="settingsBtn" class="btn btn-small">កំណត់ទិន្នន័យ</button>
     <button id="startBtn" class="btn btn-small">ចាប់ផ្ដើម</button>
     <button id="musicToggleBtn" class="btn btn-small">តន្ត្រី: បើក</button>
@@ -34,59 +35,128 @@
     <div id="historyList" class="history-list"></div>
   </aside>
 
+  <div id="gameGuideDock" class="game-guide-dock">
+    <div id="gameSteps" class="game-steps" aria-label="ជំពូកលេង" role="group" style="--guide-progress: 0">
+      <div class="game-steps-row">
+        <div class="game-step active" data-step="1" aria-current="step">
+          <span class="game-step-dot" aria-hidden="true"></span>
+          <span class="game-step-label">១) ចាប់ផ្តើម</span>
+        </div>
+        <span class="game-step-join" aria-hidden="true"></span>
+        <div class="game-step" data-step="2">
+          <span class="game-step-dot" aria-hidden="true"></span>
+          <span class="game-step-label">២) ចាប់ឈ្មោះបុគ្គលិក</span>
+        </div>
+        <span class="game-step-join" aria-hidden="true"></span>
+        <div class="game-step" data-step="3">
+          <span class="game-step-dot" aria-hidden="true"></span>
+          <span class="game-step-label">៣) ជ្រើសក្អមដើម្បីវាយ</span>
+        </div>
+      </div>
+      <div class="game-steps-track" aria-hidden="true">
+        <div class="game-steps-fill"></div>
+      </div>
+      <p class="game-step-hint" id="gameStepHint" aria-live="polite">
+        ចុច <strong>ចាប់ផ្ដើម</strong> ខាងលើ រួចចុច <strong>ចាប់ឈ្មោះបុគ្គលិក</strong> ដើម្បីចាប់ឈ្មោះ។
+      </p>
+    </div>
+  </div>
+
+  <div id="guideSpotSpin" class="guide-target-ring" hidden aria-hidden="true"></div>
+  <div id="guideSpotPots" class="guide-target-ring" hidden aria-hidden="true"></div>
+
   <section id="lucky-draw">
     <div class="title">FoED NewYears Lucky Draw</div>
     <div class="khmer-subtitle">ពិធីចាប់រង្វាន់សំណាងបុណ្យចូលឆ្នាំខ្មែរ</div>
-    <div id="gameSteps" class="game-steps" aria-label="game steps">
-      <div class="game-step active" data-step="1">១) ចាប់ផ្តើម</div>
-      <div class="game-step" data-step="2">២) ចាប់ឈ្មោះបុគ្គលិក</div>
-      <div class="game-step" data-step="3">៣) ជ្រើសក្អមដើម្បីវាយ</div>
-    </div>
-    <div class="slot">
-      <div class="slot__outer">
-        <div class="slot__inner">
-          <div class="slot__shadow"></div>
-          <div id="staffReel" class="reel">
-            <div>រង់ចាំចាប់ឈ្មោះ...</div>
+    <div id="spinGuideTarget" class="spin-guide-target">
+      <div class="slot">
+        <div class="slot__outer">
+          <div class="slot__inner">
+            <div class="slot__shadow"></div>
+            <div id="staffReel" class="reel">
+              <div>រង់ចាំចាប់ឈ្មោះ...</div>
+            </div>
           </div>
         </div>
+        <div id="sunburst" class="sunburst"><div class="sun-core"></div></div>
       </div>
-      <div id="sunburst" class="sunburst"><div class="sun-core"></div></div>
+      <button id="drawStaffBtn" class="btn btn-draw">ចាប់ឈ្មោះបុគ្គលិក</button>
     </div>
-    <button id="drawStaffBtn" class="btn btn-draw">ចាប់ឈ្មោះបុគ្គលិក</button>
     <p class="now-playing">អ្នកកំពុងលេង: <span id="currentStaff">មិនទាន់មាន</span></p>
     <p class="pool-count">បុគ្គលិកនៅសល់: <span id="staffCount">0</span> | រង្វាន់នៅសល់: <span id="giftCount">0</span></p>
-  </section>
 
-  <div class="kaorm-block">
-    <div class="break-stage-label">ទីលានវាយក្អម</div>
-    <p id="dragHint" class="drag-hint">ចុចក្អមណាមួយ ដើម្បីឲក្មេងប្រុសវៃដោយស្វ័យប្រវត្តិ</p>
-    <div id="potGuideBubble" class="pot-guide-bubble" aria-live="polite">
-      សូមចុចក្អមមួយ ដើម្បីវាយយករង្វាន់
+    <div class="kaorm-block">
+      <div class="break-stage-label">ទីលានវាយក្អម</div>
+      <p id="dragHint" class="drag-hint">រង់ចាំឲ្យក្មេងប្រុសដើរក្រោមក្អម រួចចុចក្អមនោះពេលឈរត្រូវ។</p>
+      <div id="potGuideBubble" class="pot-guide-bubble" aria-live="polite">
+        រង់ចាំឲ្យក្មេងប្រុសនៅក្រោមក្អម រួចចុចក្អមដើម្បីវាយ
+      </div>
+      <div class="pot-rack">
+        <div class="pot-cable-string" aria-hidden="true">
+          <svg class="pot-cable-svg" viewBox="0 0 1000 36" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
+            <defs>
+              <linearGradient id="potRopeGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+                <stop offset="0%" style="stop-color: #3d2810" />
+                <stop offset="35%" style="stop-color: #7a5a28" />
+                <stop offset="70%" style="stop-color: #5c4020" />
+                <stop offset="100%" style="stop-color: #2a1c08" />
+              </linearGradient>
+            </defs>
+            <path
+              class="pot-cable-shadow"
+              d="M 14 28 Q 500 5 986 28"
+              fill="none"
+              stroke="rgba(0,0,0,0.35)"
+              stroke-width="9"
+              stroke-linecap="round"
+            />
+            <path
+              class="pot-cable-rope"
+              d="M 14 27 Q 500 4 986 27"
+              fill="none"
+              stroke="url(#potRopeGrad)"
+              stroke-width="6"
+              stroke-linecap="round"
+            />
+          </svg>
+        </div>
+        <div class="kaorm-container" id="potsContainer">
+        <button type="button" class="kaorm pot" data-pot="1" aria-label="ក្អម ១">
+          <span class="pot-number" aria-hidden="true">១</span>
+        </button>
+        <button type="button" class="kaorm pot" data-pot="2" aria-label="ក្អម ២">
+          <span class="pot-number" aria-hidden="true">២</span>
+        </button>
+        <button type="button" class="kaorm pot" data-pot="3" aria-label="ក្អម ៣">
+          <span class="pot-number" aria-hidden="true">៣</span>
+        </button>
+        <button type="button" class="kaorm pot" data-pot="4" aria-label="ក្អម ៤">
+          <span class="pot-number" aria-hidden="true">៤</span>
+        </button>
+        <button type="button" class="kaorm pot" data-pot="5" aria-label="ក្អម ៥">
+          <span class="pot-number" aria-hidden="true">៥</span>
+        </button>
+        </div>
+      </div>
+      <div class="boy-stage" id="boyStage">
+        <div class="boy-ground" aria-hidden="true"></div>
+        <div id="khmerBoy" class="khmer-boy" aria-hidden="true">
+          <img
+            class="khmer-boy-sprite"
+            src="./assets/images/khmer-boy-character.png"
+            alt=""
+            width="220"
+            height="308"
+            decoding="async"
+          />
+          <span class="boy-break-stick" aria-hidden="true"></span>
+          <img id="boyStaffImage" class="boy-staff-badge" src="./assets/images/twitter.png" alt="staff avatar" />
+          <div class="boy-name" id="boyName">សុខ សូត្រ</div>
+        </div>
+      </div>
+      <button id="previewNextBtn" class="btn btn-small preview-next-btn">បន្ទាប់</button>
     </div>
-    <div id="khmerBoy" class="khmer-boy" aria-hidden="true">
-      <img id="boyStaffImage" class="boy-staff-image" src="./assets/images/twitter.png" alt="staff avatar" />
-      <div class="boy-head"></div>
-      <div class="boy-body"></div>
-      <div class="boy-arm boy-arm-left"></div>
-      <div class="boy-arm boy-arm-right"></div>
-      <div class="stick stick-left"></div>
-      <div class="stick stick-right"></div>
-      <div class="boy-leg boy-leg-left"></div>
-      <div class="boy-leg boy-leg-right"></div>
-      <div class="boy-name" id="boyName">សុខ សូត្រ</div>
-    </div>
-    <div class="boy-ground" aria-hidden="true"></div>
-    <div class="kaorm-string"></div>
-    <div class="kaorm-container" id="potsContainer">
-      <button class="kaorm pot" data-pot="1" aria-label="kaorm 1"></button>
-      <button class="kaorm pot" data-pot="2" aria-label="kaorm 2"></button>
-      <button class="kaorm pot" data-pot="3" aria-label="kaorm 3"></button>
-      <button class="kaorm pot" data-pot="4" aria-label="kaorm 4"></button>
-      <button class="kaorm pot" data-pot="5" aria-label="kaorm 5"></button>
-    </div>
-    <button id="previewNextBtn" class="btn btn-small preview-next-btn">បន្ទាប់</button>
-  </div>
+  </section>
   <div id="winFlyPopup" class="win-fly-popup">
     <img id="winFlyImage" alt="winning gift preview" />
     <div id="winFlyName" class="win-fly-name">រង្វាន់</div>
@@ -119,9 +189,12 @@
       <textarea id="staffInput" rows="8"></textarea>
       <label for="giftInput">បញ្ជីរង្វាន់ JSON</label>
       <textarea id="giftInput" rows="8"></textarea>
-      <p class="hint">Staff: [{"name":"...","image":"..."}] | Gift: [{"name":"...","type":"expensive|medium|cheap","image":"...","quantity":2}]</p>
+      <p class="hint">រត់ក្រៅបណ្ដាញ — ទិន្នន័យរក្សាទុកនៅក្នុងកម្មវិធីរុករក (localStorage)។ Staff / Gift JSON ខាងលើ។ ផ្ទាំងគ្រប់គ្រង៖ <a href="./dashboard.html" style="color:#ffe4a8">dashboard</a> — ទាញចេញ/នាំចូលឯកសារ រួចរក្សាទុកក្នុងថត <code style="color:#ffe4a8">data/</code> បាន។</p>
       <p id="configMessage"></p>
       <div class="settings-actions">
+        <button type="button" id="resetFullDataBtn" class="btn btn-reset-full">
+          ស្ដារពេញ ចាប់ផ្តើមឡើងវិញ
+        </button>
         <button id="saveDataBtn" class="btn">រក្សាទុក</button>
         <button id="closeSettingsBtn" class="btn btn-danger">បិទ</button>
       </div>
@@ -129,6 +202,7 @@
   </div>
 
   <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.9.3/dist/confetti.browser.min.js"></script>
+  <script src="./assets/offline-storage.js"></script>
   <audio id="bgMusic" src="./assets/audio/ToyToy.mp3" loop preload="auto"></audio>
   <script src="./assets/app.js"></script>
 </body>

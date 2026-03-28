@@ -1,0 +1,293 @@
+* {
+  box-sizing: border-box;
+}
+
+body.dash-body {
+  margin: 0;
+  min-height: 100vh;
+  font-family: "Noto Sans Khmer", "Kdam Thmor Pro", sans-serif;
+  color: #fff8e8;
+  background:
+    linear-gradient(165deg, rgba(88, 15, 13, 0.97) 0%, rgba(124, 28, 22, 0.94) 45%, rgba(42, 10, 8, 0.98) 100%),
+    url("./images/bg-game.jpg") center/cover no-repeat #4a120f;
+  -webkit-font-smoothing: antialiased;
+}
+
+.dash-wrap {
+  max-width: 960px;
+  margin: 0 auto;
+  padding: 24px 18px 48px;
+}
+
+.dash-header {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  margin-bottom: 20px;
+  padding-bottom: 16px;
+  border-bottom: 1px solid rgba(255, 222, 148, 0.35);
+}
+
+.dash-header h1 {
+  margin: 0;
+  font-size: 1.25rem;
+  font-weight: 700;
+  text-shadow: 0 1px 8px rgba(0, 0, 0, 0.35);
+}
+
+.dash-header .dash-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  align-items: center;
+}
+
+.dash-status {
+  font-size: 0.85rem;
+  padding: 6px 12px;
+  border-radius: 8px;
+  background: rgba(0, 0, 0, 0.22);
+  border: 1px solid rgba(255, 214, 140, 0.25);
+}
+
+.dash-status.ok {
+  border-color: rgba(120, 200, 140, 0.5);
+  color: #c8f0c8;
+}
+
+.dash-status.err {
+  border-color: rgba(255, 120, 100, 0.55);
+  color: #ffc8be;
+}
+
+.dash-tabs {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-bottom: 20px;
+}
+
+.dash-tab {
+  font-family: inherit;
+  font-size: 0.95rem;
+  padding: 10px 16px;
+  border: 1px solid rgba(255, 206, 120, 0.4);
+  border-radius: 10px;
+  background: rgba(0, 0, 0, 0.2);
+  color: #ffe8c4;
+  cursor: pointer;
+}
+
+.dash-tab:hover {
+  background: rgba(255, 200, 100, 0.12);
+}
+
+.dash-tab.active {
+  background:
+    linear-gradient(180deg, rgba(205, 36, 31, 0.95), rgba(124, 21, 21, 0.92));
+  border-color: rgba(255, 222, 148, 0.55);
+  color: #fff;
+}
+
+.dash-panel {
+  display: none;
+}
+
+.dash-panel.active {
+  display: block;
+}
+
+.dash-card {
+  background: rgba(0, 0, 0, 0.28);
+  border: 1px solid rgba(255, 214, 140, 0.22);
+  border-radius: 14px;
+  padding: 18px;
+  margin-bottom: 20px;
+}
+
+.dash-card h2 {
+  margin: 0 0 14px;
+  font-size: 1.05rem;
+  color: #ffe4a8;
+}
+
+.dash-form-grid {
+  display: grid;
+  gap: 12px;
+}
+
+@media (min-width: 560px) {
+  .dash-form-grid.cols-2 {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+.dash-field label {
+  display: block;
+  font-size: 0.82rem;
+  margin-bottom: 4px;
+  color: rgba(255, 236, 200, 0.88);
+}
+
+.dash-field input[type="text"],
+.dash-field input[type="number"],
+.dash-field input[type="url"],
+.dash-field select,
+.dash-field textarea {
+  width: 100%;
+  padding: 10px 12px;
+  border-radius: 8px;
+  border: 1px solid rgba(255, 200, 120, 0.35);
+  background: rgba(20, 8, 6, 0.65);
+  color: #fff8e8;
+  font-family: inherit;
+  font-size: 0.95rem;
+}
+
+.dash-field input[type="file"] {
+  width: 100%;
+  font-size: 0.85rem;
+  color: rgba(255, 230, 200, 0.9);
+}
+
+.dash-field textarea {
+  min-height: 64px;
+  resize: vertical;
+}
+
+.dash-preview {
+  width: 72px;
+  height: 72px;
+  object-fit: cover;
+  border-radius: 8px;
+  border: 1px solid rgba(255, 214, 140, 0.35);
+  background: rgba(0, 0, 0, 0.3);
+  vertical-align: middle;
+}
+
+.dash-btn-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-top: 14px;
+}
+
+a.dash-btn {
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.dash-btn {
+  font-family: inherit;
+  font-size: 0.95rem;
+  padding: 10px 18px;
+  border-radius: 10px;
+  border: 1px solid rgba(255, 214, 140, 0.45);
+  cursor: pointer;
+  background:
+    linear-gradient(180deg, rgba(205, 36, 31, 0.95), rgba(124, 21, 21, 0.9));
+  color: #fff;
+}
+
+.dash-btn:hover {
+  filter: brightness(1.06);
+}
+
+.dash-btn.secondary {
+  background: rgba(0, 0, 0, 0.35);
+  color: #ffe8c8;
+}
+
+.dash-btn.danger {
+  background: linear-gradient(180deg, rgba(90, 22, 18, 0.95), rgba(50, 12, 10, 0.92));
+  border-color: rgba(255, 140, 120, 0.4);
+}
+
+.dash-table-wrap {
+  overflow-x: auto;
+  border-radius: 10px;
+  border: 1px solid rgba(255, 214, 140, 0.2);
+}
+
+.dash-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.88rem;
+}
+
+.dash-table th,
+.dash-table td {
+  padding: 10px 12px;
+  text-align: left;
+  border-bottom: 1px solid rgba(255, 214, 140, 0.12);
+}
+
+.dash-table th {
+  background: rgba(0, 0, 0, 0.35);
+  color: #ffe4a8;
+  font-weight: 600;
+}
+
+.dash-table tr:hover td {
+  background: rgba(255, 200, 100, 0.06);
+}
+
+.dash-table .cell-actions {
+  white-space: nowrap;
+}
+
+.dash-table .cell-actions button {
+  font-family: inherit;
+  font-size: 0.8rem;
+  margin-right: 6px;
+  padding: 6px 10px;
+  border-radius: 6px;
+  border: 1px solid rgba(255, 214, 140, 0.35);
+  background: rgba(0, 0, 0, 0.35);
+  color: #ffe8c8;
+  cursor: pointer;
+}
+
+.dash-table .cell-actions button:hover {
+  background: rgba(255, 200, 100, 0.15);
+}
+
+.dash-msg {
+  margin-top: 12px;
+  padding: 10px 12px;
+  border-radius: 8px;
+  font-size: 0.88rem;
+  background: rgba(0, 0, 0, 0.35);
+  border: 1px solid rgba(255, 214, 140, 0.2);
+  min-height: 1.2em;
+}
+
+.dash-msg.error {
+  border-color: rgba(255, 120, 100, 0.5);
+  color: #ffc8be;
+}
+
+.dash-msg.success {
+  border-color: rgba(120, 200, 140, 0.45);
+  color: #c8f0c8;
+}
+
+.dash-hint {
+  font-size: 0.8rem;
+  color: rgba(255, 220, 180, 0.65);
+  margin-top: 8px;
+  line-height: 1.45;
+}
+
+.dash-link {
+  color: #ffd78a;
+  text-decoration: underline;
+}
+
+.dash-link:hover {
+  color: #fff;
+}
