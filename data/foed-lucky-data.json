@@ -3,337 +3,337 @@
   "staff": [
     {
       "name": "កញ្ញា",
-      "image": "/Users/pn/Documents/khmer_new_year_game/viakaorm_khmer_newyear/assets/images/photos/កញ្ញា.png",
+      "image": "./assets/images/photos/កញ្ញា.png",
       "id": "7a84006b-c447-444d-88c5-8565456c0a8a"
     },
     {
       "name": " សឿន កិច្ចឡេង",
-      "image": "/Users/pn/Documents/khmer_new_year_game/viakaorm_khmer_newyear/assets/images/photos/កិច្ចឡេង.png",
+      "image": "./assets/images/photos/កិច្ចឡេង.png",
       "id": "d5584229-7521-4243-b88f-10e0791ef813"
     },
     {
       "name": "ចាន់ដា",
-      "image": "/Users/pn/Documents/khmer_new_year_game/viakaorm_khmer_newyear/assets/images/photos/ចាន់ដា.png",
+      "image": "./assets/images/photos/ចាន់ដា.png",
       "id": "8abb8fef-33b4-4e4c-9b86-eda503fd095b"
     },
     {
       "name": "សឹម ជះ",
-      "image": "/Users/pn/Documents/khmer_new_year_game/viakaorm_khmer_newyear/assets/images/photos/ជះ.png",
+      "image": "./assets/images/photos/ជះ.png",
       "id": "1ac2e018-3a23-4553-b901-14b543318ae5"
     },
     {
       "name": "ដាណេ",
-      "image": "/Users/pn/Documents/khmer_new_year_game/viakaorm_khmer_newyear/assets/images/photos/ដាណេ.png",
+      "image": "./assets/images/photos/ដាណេ.png",
       "id": "b43e2f70-4971-450b-b19d-2cb3c487a5c9"
     },
     {
       "name": "ដារ៉ូ",
-      "image": "/Users/pn/Documents/khmer_new_year_game/viakaorm_khmer_newyear/assets/images/photos/ដារ៉ូ.png",
+      "image": "./assets/images/photos/ដារ៉ូ.png",
       "id": "08775473-1a6f-47b6-818f-57daa59f3faf"
     },
     {
       "name": "ឌន សំណាង",
-      "image": "/Users/pn/Documents/khmer_new_year_game/viakaorm_khmer_newyear/assets/images/photos/ឌន សំណាង.png",
+      "image": "./assets/images/photos/ឌន សំណាង.png",
       "id": "f9e54150-42c7-4691-8eee-4c1e401b279e"
     },
     {
       "name": "ណាំឈាវ",
-      "image": "/Users/pn/Documents/khmer_new_year_game/viakaorm_khmer_newyear/assets/images/photos/ណាំឈាវ.png",
+      "image": "./assets/images/photos/ណាំឈាវ.png",
       "id": "885acaac-7ee3-4b54-a88f-43622ba9949f"
     },
     {
       "name": "ណារ៉េត",
-      "image": "/Users/pn/Documents/khmer_new_year_game/viakaorm_khmer_newyear/assets/images/photos/ណារ៉េត.png",
+      "image": "./assets/images/photos/ណារ៉េត.png",
       "id": "b4f468fb-31cd-441d-a2b5-f19fa5202e59"
     },
     {
       "name": "ថាវរ៉ា",
-      "image": "/Users/pn/Documents/khmer_new_year_game/viakaorm_khmer_newyear/assets/images/photos/ថាវរ៉ា.png",
+      "image": "./assets/images/photos/ថាវរ៉ា.png",
       "id": "489e48dd-6ee9-4ed1-b25e-02fe4c8fcc42"
     },
     {
       "name": "ថាវវត្តី",
-      "image": "/Users/pn/Documents/khmer_new_year_game/viakaorm_khmer_newyear/assets/images/photos/ថាវវត្តី.png",
+      "image": "./assets/images/photos/ថាវវត្តី.png",
       "id": "c6789693-fbba-4494-927d-ec033e78418e"
     },
     {
       "name": "ទី",
-      "image": "/Users/pn/Documents/khmer_new_year_game/viakaorm_khmer_newyear/assets/images/photos/ទី.png",
+      "image": "./assets/images/photos/ទី.png",
       "id": "867cecd3-718b-46fb-906c-44bb09847eb4"
     },
     {
       "name": "បានហូ",
-      "image": "/Users/pn/Documents/khmer_new_year_game/viakaorm_khmer_newyear/assets/images/photos/បានហូ.png",
+      "image": "./assets/images/photos/បានហូ.png",
       "id": "d229f373-ba6a-4f9e-86c7-45c463a15303"
     },
     {
       "name": "បុនហេ",
-      "image": "/Users/pn/Documents/khmer_new_year_game/viakaorm_khmer_newyear/assets/images/photos/បុនហេ.jpg",
+      "image": "./assets/images/photos/បុនហេ.jpg",
       "id": "6b3a6355-ee4b-4004-a7bb-93e555ca0786"
     },
     {
       "name": "ប្រិច",
-      "image": "/Users/pn/Documents/khmer_new_year_game/viakaorm_khmer_newyear/assets/images/photos/ប្រិច.png",
+      "image": "./assets/images/photos/ប្រិច.png",
       "id": "aa507a12-da91-4233-89e6-4ee4723a1f90"
     },
     {
       "name": "ពង្ស",
-      "image": "/Users/pn/Documents/khmer_new_year_game/viakaorm_khmer_newyear/assets/images/photos/ពង្ស.png",
+      "image": "./assets/images/photos/ពង្ស.png",
       "id": "ffb806aa-d268-4286-893d-a714dff2b6e7"
     },
     {
       "name": "ពិសិដ្ឋ",
-      "image": "/Users/pn/Documents/khmer_new_year_game/viakaorm_khmer_newyear/assets/images/photos/ពិសិដ្ឋ.png",
+      "image": "./assets/images/photos/ពិសិដ្ឋ.png",
       "id": "bc8187e7-a891-46c0-9d85-1101ee50a805"
     },
     {
       "name": "ពិសី",
-      "image": "/Users/pn/Documents/khmer_new_year_game/viakaorm_khmer_newyear/assets/images/photos/ពិសី.png",
+      "image": "./assets/images/photos/ពិសី.png",
       "id": "057b92d5-1bc1-40b0-a07e-1552efe2a503"
     },
     {
       "name": "ម៉ម សុជាតិ",
-      "image": "/Users/pn/Documents/khmer_new_year_game/viakaorm_khmer_newyear/assets/images/photos/ម៉ម សុជាតិ​.png",
+      "image": "./assets/images/photos/ម៉ម សុជាតិ​.png",
       "id": "a231c54c-b1db-4c17-ae82-30d575505138"
     },
     {
       "name": "មរកត",
-      "image": "/Users/pn/Documents/khmer_new_year_game/viakaorm_khmer_newyear/assets/images/photos/មរកត.png",
+      "image": "./assets/images/photos/មរកត.png",
       "id": "d340c9c0-b082-4bc2-a932-646488c93620"
     },
     {
       "name": "ម៉ាក់",
-      "image": "/Users/pn/Documents/khmer_new_year_game/viakaorm_khmer_newyear/assets/images/photos/ម៉ាក់.png",
+      "image": "./assets/images/photos/ម៉ាក់.png",
       "id": "ee86d4e3-6146-4a5a-9a0a-0874b283b753"
     },
     {
       "name": "ម៉ារ៉ាឌី",
-      "image": "/Users/pn/Documents/khmer_new_year_game/viakaorm_khmer_newyear/assets/images/photos/ម៉ារ៉ាឌី.png",
+      "image": "./assets/images/photos/ម៉ារ៉ាឌី.png",
       "id": "8745a52d-559d-4c80-bd10-a8248b9bfe49"
     },
     {
       "name": "មុនី",
-      "image": "/Users/pn/Documents/khmer_new_year_game/viakaorm_khmer_newyear/assets/images/photos/មុនី.png",
+      "image": "./assets/images/photos/មុនី.png",
       "id": "28f4026c-b089-416f-ab9e-5ba6a653caf4"
     },
     {
       "name": "មុនី្ននាថ",
-      "image": "/Users/pn/Documents/khmer_new_year_game/viakaorm_khmer_newyear/assets/images/photos/មុនី្ននាថ.png",
+      "image": "./assets/images/photos/មុនី្ននាថ.png",
       "id": "15a1c43b-0844-4edb-975f-30cc22b563b5"
     },
     {
       "name": "មេខា",
-      "image": "/Users/pn/Documents/khmer_new_year_game/viakaorm_khmer_newyear/assets/images/photos/មេខា.png",
+      "image": "./assets/images/photos/មេខា.png",
       "id": "e4ad27bf-4b69-4de0-bcda-ffd6dc517bc9"
     },
     {
       "name": "ម៉េត សាម៉ៃ",
-      "image": "/Users/pn/Documents/khmer_new_year_game/viakaorm_khmer_newyear/assets/images/photos/ម៉េត សាម៉ៃ.png",
+      "image": "./assets/images/photos/ម៉េត សាម៉ៃ.png",
       "id": "09df98a4-884f-461b-8963-ec936eb9649c"
     },
     {
       "name": "រឿន សុធារី",
-      "image": "/Users/pn/Documents/khmer_new_year_game/viakaorm_khmer_newyear/assets/images/photos/រឿន សុធារី.png",
+      "image": "./assets/images/photos/រឿន សុធារី.png",
       "id": "299a90bf-d8cb-4052-95d9-35a6696076b5"
     },
     {
       "name": "ល័ក្ខខេណ្ណា",
-      "image": "/Users/pn/Documents/khmer_new_year_game/viakaorm_khmer_newyear/assets/images/photos/ល័ក្ខខេណ្ណា.png",
+      "image": "./assets/images/photos/ល័ក្ខខេណ្ណា.png",
       "id": "47ac8016-79e6-4651-b3cd-f68a469232f1"
     },
     {
       "name": "លីហ៊ាង",
-      "image": "/Users/pn/Documents/khmer_new_year_game/viakaorm_khmer_newyear/assets/images/photos/លីហ៊ាង.png",
+      "image": "./assets/images/photos/លីហ៊ាង.png",
       "id": "f2671ff2-cbf4-4f08-895a-4abcd54e2f24"
     },
     {
       "name": "លីហ៊ុយ",
-      "image": "/Users/pn/Documents/khmer_new_year_game/viakaorm_khmer_newyear/assets/images/photos/លីហ៊ុយ.png",
+      "image": "./assets/images/photos/លីហ៊ុយ.png",
       "id": "b2d2c180-7f8b-4792-9c3b-fe3fc0cf846c"
     },
     {
       "name": "វណ្ណា",
-      "image": "/Users/pn/Documents/khmer_new_year_game/viakaorm_khmer_newyear/assets/images/photos/វណ្ណា.jpg",
+      "image": "./assets/images/photos/វណ្ណា.jpg",
       "id": "af856bb0-935c-4627-b493-327f8a2950b0"
     },
     {
       "name": "វួចនា",
-      "image": "/Users/pn/Documents/khmer_new_year_game/viakaorm_khmer_newyear/assets/images/photos/វួចនា.png",
+      "image": "./assets/images/photos/វួចនា.png",
       "id": "7b8beb99-1190-44c8-b1b6-71062f84e902"
     },
     {
       "name": "ស័ក្កដា",
-      "image": "/Users/pn/Documents/khmer_new_year_game/viakaorm_khmer_newyear/assets/images/photos/ស័ក្កដា.png",
+      "image": "./assets/images/photos/ស័ក្កដា.png",
       "id": "148e785f-abaa-4126-852d-e6d24aae5fcf"
     },
     {
       "name": "សំរិត",
-      "image": "/Users/pn/Documents/khmer_new_year_game/viakaorm_khmer_newyear/assets/images/photos/សំរិត.png",
+      "image": "./assets/images/photos/សំរិត.png",
       "id": "241b6fa5-7024-4f60-af8a-cfbf2bfea3fb"
     },
     {
       "name": "សានស្រីនាង",
-      "image": "/Users/pn/Documents/khmer_new_year_game/viakaorm_khmer_newyear/assets/images/photos/សានស្រីនាង.png",
+      "image": "./assets/images/photos/សានស្រីនាង.png",
       "id": "c3f35423-23e8-4f63-838d-cd0000b11882"
     },
     {
       "name": "សារ៉ាត់",
-      "image": "/Users/pn/Documents/khmer_new_year_game/viakaorm_khmer_newyear/assets/images/photos/សារ៉ាត់.png",
+      "image": "./assets/images/photos/សារ៉ាត់.png",
       "id": "5510139d-03d1-4e0b-b451-b82c63d7ff99"
     },
     {
       "name": "សាវីន",
-      "image": "/Users/pn/Documents/khmer_new_year_game/viakaorm_khmer_newyear/assets/images/photos/សាវីន.png",
+      "image": "./assets/images/photos/សាវីន.png",
       "id": "88d8078e-e2c5-4378-83fd-3ee12815cb5f"
     },
     {
       "name": "សុ ផានិ",
-      "image": "/Users/pn/Documents/khmer_new_year_game/viakaorm_khmer_newyear/assets/images/photos/សុ ផានិ.png",
+      "image": "./assets/images/photos/សុ ផានិ.png",
       "id": "9ecf026f-9811-4da9-8f9d-9e53857e7dfd"
     },
     {
       "name": "សុខ គីន",
-      "image": "/Users/pn/Documents/khmer_new_year_game/viakaorm_khmer_newyear/assets/images/photos/សុខ គីន.png",
+      "image": "./assets/images/photos/សុខ គីន.png",
       "id": "61262539-cb0f-4ed5-ba58-f8d974a2846d"
     },
     {
       "name": "សុខ សូត្រ",
-      "image": "/Users/pn/Documents/khmer_new_year_game/viakaorm_khmer_newyear/assets/images/photos/សុខ សូត្រ.png",
+      "image": "./assets/images/photos/សុខ សូត្រ.png",
       "id": "50d8cae3-0207-49e3-b62d-f130e179d284"
     },
     {
       "name": "សុខ",
-      "image": "/Users/pn/Documents/khmer_new_year_game/viakaorm_khmer_newyear/assets/images/photos/សុខ.png",
+      "image": "./assets/images/photos/សុខ.png",
       "id": "0ffafe8d-21fa-4f5a-abd9-6fdb1d714465"
     },
     {
       "name": "សុខសំណាង",
-      "image": "/Users/pn/Documents/khmer_new_year_game/viakaorm_khmer_newyear/assets/images/photos/សុខសំណាង.png",
+      "image": "./assets/images/photos/សុខសំណាង.png",
       "id": "cf11b257-c761-4410-b1ba-050eed306dfb"
     },
     {
       "name": "សុខហ៊ាង",
-      "image": "/Users/pn/Documents/khmer_new_year_game/viakaorm_khmer_newyear/assets/images/photos/សុខហ៊ាង.png",
+      "image": "./assets/images/photos/សុខហ៊ាង.png",
       "id": "c604d94e-77b1-46c3-b7a8-5510ac7fc3c5"
     },
     {
       "name": "សុខាន",
-      "image": "/Users/pn/Documents/khmer_new_year_game/viakaorm_khmer_newyear/assets/images/photos/សុខាន.png",
+      "image": "./assets/images/photos/សុខាន.png",
       "id": "1513b8a7-822d-46cc-b765-73519c20528c"
     },
     {
       "name": "សុធី",
-      "image": "/Users/pn/Documents/khmer_new_year_game/viakaorm_khmer_newyear/assets/images/photos/សុធី.png",
+      "image": "./assets/images/photos/សុធី.png",
       "id": "877cd841-2219-4cfc-b176-d0b207e6f1f4"
     },
     {
       "name": "ស៊ុនទី",
-      "image": "/Users/pn/Documents/khmer_new_year_game/viakaorm_khmer_newyear/assets/images/photos/ស៊ុនទី.png",
+      "image": "./assets/images/photos/ស៊ុនទី.png",
       "id": "fdac8404-39b0-4132-8ca7-40b91ecb631b"
     },
     {
       "name": "សុនាវត្តី",
-      "image": "/Users/pn/Documents/khmer_new_year_game/viakaorm_khmer_newyear/assets/images/photos/សុនាវត្តី.png",
+      "image": "./assets/images/photos/សុនាវត្តី.png",
       "id": "5eee484f-781a-4497-9f86-b8d5eadca360"
     },
     {
       "name": "សុផែន",
-      "image": "/Users/pn/Documents/khmer_new_year_game/viakaorm_khmer_newyear/assets/images/photos/សុផែន.png",
+      "image": "./assets/images/photos/សុផែន.png",
       "id": "942addc9-f9c9-4572-a9a8-5be333b144df"
     },
     {
       "name": "សុភាន់",
-      "image": "/Users/pn/Documents/khmer_new_year_game/viakaorm_khmer_newyear/assets/images/photos/សុភាន់.png",
+      "image": "./assets/images/photos/សុភាន់.png",
       "id": "a909a239-17de-4dcf-83df-4cc3db4f9e4d"
     },
     {
       "name": "សុវណ្ណ",
-      "image": "/Users/pn/Documents/khmer_new_year_game/viakaorm_khmer_newyear/assets/images/photos/សុវណ្ណ.png",
+      "image": "./assets/images/photos/សុវណ្ណ.png",
       "id": "ecaee9b4-fe16-4eea-bcea-1777eb96b3e1"
     },
     {
       "name": "សៀលីម",
-      "image": "/Users/pn/Documents/khmer_new_year_game/viakaorm_khmer_newyear/assets/images/photos/សៀលីម.png",
+      "image": "./assets/images/photos/សៀលីម.png",
       "id": "c8f7461f-4bf6-40f0-8e72-5daa49409aa1"
     },
     {
       "name": "សេក សុផា",
-      "image": "/Users/pn/Documents/khmer_new_year_game/viakaorm_khmer_newyear/assets/images/photos/សេក សុផា.png",
+      "image": "./assets/images/photos/សេក សុផា.png",
       "id": "2e9afc4d-7bcd-44d1-ba4d-467db535192f"
     },
     {
       "name": "សេម ស្រីនាង",
-      "image": "/Users/pn/Documents/khmer_new_year_game/viakaorm_khmer_newyear/assets/images/photos/សេម ស្រីនាង.png",
+      "image": "./assets/images/photos/សេម ស្រីនាង.png",
       "id": "c14eac11-2703-485b-9735-5979503a98de"
     },
     {
       "name": "សោភា",
-      "image": "/Users/pn/Documents/khmer_new_year_game/viakaorm_khmer_newyear/assets/images/photos/សោភា.png",
+      "image": "./assets/images/photos/សោភា.png",
       "id": "dbdef4a1-19be-428e-bbe1-c06a4bb86cca"
     },
     {
       "name": "ស្រីណេន",
-      "image": "/Users/pn/Documents/khmer_new_year_game/viakaorm_khmer_newyear/assets/images/photos/ស្រីណេន.png",
+      "image": "./assets/images/photos/ស្រីណេន.png",
       "id": "177f737a-136a-493f-8735-42ae5eda21ff"
     },
     {
       "name": "ស្រីនាង",
-      "image": "/Users/pn/Documents/khmer_new_year_game/viakaorm_khmer_newyear/assets/images/photos/ស្រីនាង.png",
+      "image": "./assets/images/photos/ស្រីនាង.png",
       "id": "2ef006e5-f458-4eab-ab56-0bbe7a7f784a"
     },
     {
       "name": "ស្រីនីត",
-      "image": "/Users/pn/Documents/khmer_new_year_game/viakaorm_khmer_newyear/assets/images/photos/ស្រីនីត.png",
+      "image": "./assets/images/photos/ស្រីនីត.png",
       "id": "3282e973-d643-4e37-8260-e3744ad20c1a"
     },
     {
       "name": "ស្រីនីន",
-      "image": "/Users/pn/Documents/khmer_new_year_game/viakaorm_khmer_newyear/assets/images/photos/ស្រីនីន.png",
+      "image": "./assets/images/photos/ស្រីនីន.png",
       "id": "36f88bdf-e3b2-40d6-8659-5dba8ec42528"
     },
     {
       "name": "ស្រីនោ",
-      "image": "/Users/pn/Documents/khmer_new_year_game/viakaorm_khmer_newyear/assets/images/photos/ស្រីនោ.png",
+      "image": "./assets/images/photos/ស្រីនោ.png",
       "id": "0a635528-5fe8-4b66-b1d4-f2eff70b7ae3"
     },
     {
       "name": "ស្រីមុំ",
-      "image": "/Users/pn/Documents/khmer_new_year_game/viakaorm_khmer_newyear/assets/images/photos/ស្រីមុំ.png",
+      "image": "./assets/images/photos/ស្រីមុំ.png",
       "id": "9c912e70-d81e-4c58-8864-9a9a7b9d7273"
     },
     {
       "name": "ស្រីស្រស់",
-      "image": "/Users/pn/Documents/khmer_new_year_game/viakaorm_khmer_newyear/assets/images/photos/ស្រីស្រស់.png",
+      "image": "./assets/images/photos/ស្រីស្រស់.png",
       "id": "a47bc5c4-a45a-4234-bafd-aad0cfb532c2"
     },
     {
       "name": "ហ៊ុយ សុជាតា",
-      "image": "/Users/pn/Documents/khmer_new_year_game/viakaorm_khmer_newyear/assets/images/photos/ហ៊ុយ សុជាតា.png",
+      "image": "./assets/images/photos/ហ៊ុយ សុជាតា.png",
       "id": "68b9ea32-4110-43af-965b-329b4beab83f"
     },
     {
       "name": "ហឿន សុជាតិ",
-      "image": "/Users/pn/Documents/khmer_new_year_game/viakaorm_khmer_newyear/assets/images/photos/ហឿន សុជាតិ.png",
+      "image": "./assets/images/photos/ហឿន សុជាតិ.png",
       "id": "9be06d52-ca76-449c-8bb2-411c1162801c"
     },
     {
       "name": "ឡាឌីន",
-      "image": "/Users/pn/Documents/khmer_new_year_game/viakaorm_khmer_newyear/assets/images/photos/ឡាឌីន.png",
+      "image": "./assets/images/photos/ឡាឌីន.png",
       "id": "21677460-5337-425a-9424-e5719dbf67a2"
     },
     {
       "name": "ឡេង​ង៉ិច",
-      "image": "/Users/pn/Documents/khmer_new_year_game/viakaorm_khmer_newyear/assets/images/photos/ឡេង​ង៉ិច.png",
+      "image": "./assets/images/photos/ឡេង​ង៉ិច.png",
       "id": "f7c99506-dc92-41d7-8370-71f47f123ef8"
     },
     {
       "name": "អប់ សំ",
-      "image": "/Users/pn/Documents/khmer_new_year_game/viakaorm_khmer_newyear/assets/images/photos/អប់ សំ.png",
+      "image": "./assets/images/photos/អប់ សំ.png",
       "id": "0f8a822a-7f5c-4df8-a9a7-ae5763c54f45"
     },
     {
       "name": "អ៊ីវ វិច្ឆិកា",
-      "image": "/Users/pn/Documents/khmer_new_year_game/viakaorm_khmer_newyear/assets/images/photos/អ៊ីវ វិច្ឆិកា.png",
+      "image": "./assets/images/photos/អ៊ីវ វិច្ឆិកា.png",
       "id": "52258796-3585-4321-b321-b967135ee38c"
     }
   ],
