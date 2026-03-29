@@ -487,9 +487,13 @@ const EXPENSIVE_POT_SLOT_CHANCE = 0.38;
 const state = { staffPool: [], giftsPool: [], currentStaff: null, canPlayPot: false, spinning: false, winHistory: [], historyCursor: 0, historyTicker: null, potAssignments: [], winningPotElement: null };
 
 const $ = (id) => document.getElementById(id);
+
+function isPhoneLayout() {
+  return typeof window.matchMedia === "function" && window.matchMedia("(max-width: 520px)").matches;
+}
 const staffInput = $("staffInput");
 const giftInput = $("giftInput");
-const saveDataBtn = $("saveDataBtn");
+const reloadFromStorageBtn = $("reloadFromStorageBtn");
 const resetFullDataBtn = $("resetFullDataBtn");
 const closeSettingsBtn = $("closeSettingsBtn");
 const configMessage = $("configMessage");
@@ -502,6 +506,22 @@ const musicToggleBtn = $("musicToggleBtn");
 const historyList = $("historyList");
 const staffReel = $("staffReel");
 const currentStaff = $("currentStaff");
+
+/** Single-line reel row; optional horizontal centering when wider than the slot */
+function setStaffReelMessage(text, scrollMode = "start") {
+  if (!staffReel) return;
+  staffReel.innerHTML = "";
+  const row = document.createElement("div");
+  row.textContent = text;
+  staffReel.appendChild(row);
+  const slotInner = staffReel.parentElement;
+  if (!(slotInner instanceof HTMLElement)) return;
+  if (scrollMode === "center" && slotInner.scrollWidth > slotInner.clientWidth) {
+    slotInner.scrollLeft = Math.max(0, (slotInner.scrollWidth - slotInner.clientWidth) / 2);
+  } else {
+    slotInner.scrollLeft = 0;
+  }
+}
 const potsContainer = $("potsContainer");
 const previewNextBtn = $("previewNextBtn");
 const winFlyPopup = $("winFlyPopup");
@@ -604,6 +624,8 @@ const BOY_HIT_TOLERANCE = 70;
 const BOY_STRIKE_CENTER_RATIO = 0.5;
 const POT_SUSPENSE_MS = 2800;
 const OTHER_REVEAL_MS = 5000;
+/** Stick wind-up + swing toward pot (ms); impact synced in onPotClick */
+const STICK_STRIKE_MS = 560;
 
 function getOtherRevealMs() {
   if (typeof window.matchMedia === "function" && window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
@@ -840,15 +862,18 @@ function applyStickStrikeTowardPot(targetPot) {
   const delta = potCenter - boyCenter;
   const stageW = Math.max(1, boyStage.clientWidth);
   const aim = clamp(delta / (stageW * 0.14), -1, 1);
-  const hitDeg = STICK_REST_DEG + aim * 28;
+  const hitDeg = STICK_REST_DEG + aim * 34;
+  const lungePx = aim * 16;
   khmerBoy.style.setProperty("--stick-rest", `${STICK_REST_DEG}deg`);
   khmerBoy.style.setProperty("--stick-hit", `${hitDeg}deg`);
+  khmerBoy.style.setProperty("--strike-lunge", `${lungePx}px`);
 }
 
 function clearStickStrikeVars() {
   if (!khmerBoy) return;
   khmerBoy.style.removeProperty("--stick-rest");
   khmerBoy.style.removeProperty("--stick-hit");
+  khmerBoy.style.removeProperty("--strike-lunge");
 }
 
 const boyPatrol = {
@@ -1099,7 +1124,8 @@ function placeNextButtonUnderWinningPot() {
   const blockRect = kaormBlock.getBoundingClientRect();
   const potRect = state.winningPotElement.getBoundingClientRect();
   const centerX = (potRect.left - blockRect.left) + (potRect.width / 2);
-  previewNextBtn.style.left = `${Math.max(8, centerX - 92)}px`;
+  const halfBtn = Math.max(72, (previewNextBtn.offsetWidth || 184) / 2);
+  previewNextBtn.style.left = `${Math.max(8, centerX - halfBtn)}px`;
   previewNextBtn.style.right = "auto";
   previewNextBtn.style.bottom = "10px";
 }
@@ -1203,11 +1229,17 @@ function normalizeGifts(rawGifts) {
 function updateBoyProfile(staff) {
   if (!staff) {
     if (boyName) boyName.textContent = "រង់ចាំអ្នកលេង";
-    if (boyStaffImage) boyStaffImage.src = "./assets/images/twitter.png";
+    if (boyStaffImage) {
+      boyStaffImage.src = "./assets/images/twitter.png";
+      boyStaffImage.alt = "";
+    }
     return;
   }
   if (boyName) boyName.textContent = staff.name;
-  if (boyStaffImage) boyStaffImage.src = staff.image || "./assets/images/twitter.png";
+  if (boyStaffImage) {
+    boyStaffImage.src = staff.image || "./assets/images/twitter.png";
+    boyStaffImage.alt = staff.name ? `រូប ${staff.name}` : "";
+  }
 }
 function renderHistoryPage() {
   if (!historyList) return;
@@ -1255,13 +1287,14 @@ function loadData() {
   state.staffPool = normalizeStaff(state.staffPool);
   state.giftsPool = normalizeGifts(state.giftsPool);
   persistHistory();
-  staffInput.value = JSON.stringify(state.staffPool, null, 2);
-  giftInput.value = JSON.stringify(state.giftsPool, null, 2);
+  if (staffInput) staffInput.value = JSON.stringify(state.staffPool, null, 2);
+  if (giftInput) giftInput.value = JSON.stringify(state.giftsPool, null, 2);
   updateCounts();
   startHistoryTicker();
 }
 
 function saveData() {
+  if (!staffInput || !giftInput) return;
   let staff;
   let gifts;
   try {
@@ -1351,8 +1384,24 @@ function enablePots(enabled) {
 
 async function spinStaffReel() {
   if (state.spinning) return;
-  if (!state.staffPool.length) { configMessage.textContent = "គ្មានបុគ្គលិកនៅសល់"; openOverlay(settingsOverlay); return; }
-  if (!state.giftsPool.length) { configMessage.textContent = "គ្មានរង្វាន់នៅសល់"; openOverlay(settingsOverlay); return; }
+  if (!state.staffPool.length) {
+    configMessage.textContent = "គ្មានបុគ្គលិកនៅសល់";
+    if (isPhoneLayout()) {
+      window.alert("គ្មានបុគ្គលិកនៅសល់។ សូមកំណត់ទិន្នន័យលើកុំព្យុទ្យធំ ឬផ្ទាំងគ្រប់គ្រង (dashboard)។");
+    } else {
+      openOverlay(settingsOverlay);
+    }
+    return;
+  }
+  if (!state.giftsPool.length) {
+    configMessage.textContent = "គ្មានរង្វាន់នៅសល់";
+    if (isPhoneLayout()) {
+      window.alert("គ្មានរង្វាន់នៅសល់។ សូមកំណត់ទិន្នន័យលើកុំព្យុទ្យធំ ឬផ្ទាំងគ្រប់គ្រង (dashboard)។");
+    } else {
+      openOverlay(settingsOverlay);
+    }
+    return;
+  }
 
   playSfx(clickSfx);
   state.spinning = true;
@@ -1398,6 +1447,12 @@ async function spinStaffReel() {
       row.style.minHeight = `${rowHeight}px`;
     }
   }
+  requestAnimationFrame(() => {
+    const slotInner = staffReel.parentElement;
+    if (slotInner instanceof HTMLElement && slotInner.scrollWidth > slotInner.clientWidth) {
+      slotInner.scrollLeft = Math.max(0, (slotInner.scrollWidth - slotInner.clientWidth) / 2);
+    }
+  });
   const travelY = (reelNames.length - 1) * rowHeight;
   const reelAnimation = staffReel.animate(
     [{ transform: "translateY(0)" }, { transform: `translateY(-${travelY}px)` }],
@@ -1417,7 +1472,7 @@ async function spinStaffReel() {
     }
   }
   reelAnimation.cancel();
-  staffReel.innerHTML = `<div>${state.currentStaff.name}</div>`;
+  setStaffReelMessage(state.currentStaff.name, "center");
   currentStaff.textContent = state.currentStaff.name;
   updateBoyProfile(state.currentStaff);
   spinSfx.pause();
@@ -1536,7 +1591,15 @@ async function onPotClick(target) {
 
   target.classList.remove("pot-suspense", "pot-boom", "pot-boom-suspense");
   void target.offsetWidth;
-  target.classList.add("pot-suspense");
+
+  const reducedStick =
+    typeof window.matchMedia === "function" &&
+    window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  const stickStrikeMs = reducedStick ? 200 : STICK_STRIKE_MS;
+  const stickImpactDelayMs = reducedStick ? 80 : Math.round(stickStrikeMs * 0.43);
+
+  stopBoyPotPatrol();
+  snapBoyToPot(target);
 
   if (khmerBoy) {
     applyStickStrikeTowardPot(target);
@@ -1544,6 +1607,29 @@ async function onPotClick(target) {
     void khmerBoy.offsetWidth;
     khmerBoy.classList.add("strike");
   }
+
+  await new Promise((resolve) => {
+    window.setTimeout(() => {
+      target.classList.remove("pot-impact");
+      void target.offsetWidth;
+      target.classList.add("pot-impact");
+      playSfx(clickSfx);
+    }, stickImpactDelayMs);
+    window.setTimeout(() => {
+      target.classList.remove("pot-impact");
+    }, stickImpactDelayMs + 400);
+    window.setTimeout(() => {
+      if (khmerBoy) {
+        khmerBoy.classList.remove("strike");
+        clearStickStrikeVars();
+      }
+      target.classList.remove("pot-impact");
+      resolve();
+    }, stickStrikeMs);
+  });
+
+  void target.offsetWidth;
+  target.classList.add("pot-suspense");
 
   const suspenseMs = getPotSuspenseMs();
   playDuckedSfx(potWaitBoomSfx, suspenseMs + 800);
@@ -1596,7 +1682,7 @@ function prepareNextRound() {
   sunburst.classList.remove("show");
   state.currentStaff = null;
   currentStaff.textContent = "មិនទាន់មាន";
-  staffReel.innerHTML = "<div>រង់ចាំចាប់ឈ្មោះ...</div>";
+  setStaffReelMessage("រង់ចាំចាប់ឈ្មោះ...", "start");
   updateBoyProfile(null);
   drawStaffBtn.disabled = false;
   enablePots(false);
@@ -1622,10 +1708,15 @@ function prepareNextRound() {
   }
 }
 
-saveDataBtn.addEventListener("click", () => {
-  playSfx(clickSfx);
-  saveData();
-});
+if (reloadFromStorageBtn) {
+  reloadFromStorageBtn.addEventListener("click", () => {
+    playSfx(clickSfx);
+    loadData();
+    if (configMessage) {
+      configMessage.textContent = "បានផ្ទុកទិន្នន័យឡើងវិញពីម៉ាស៊ីន (ពីផ្ទាំងគ្រប់គ្រង ឬ localStorage)។";
+    }
+  });
+}
 if (resetFullDataBtn) {
   resetFullDataBtn.addEventListener("click", () => {
     void resetAllDataToFullSeed();
@@ -1633,6 +1724,7 @@ if (resetFullDataBtn) {
 }
 settingsBtn.addEventListener("click", () => {
   playSfx(clickSfx);
+  if (isPhoneLayout()) return;
   openOverlay(settingsOverlay);
 });
 closeSettingsBtn.addEventListener("click", () => {
@@ -1675,7 +1767,9 @@ potsContainer.addEventListener("click", (event) => {
 
 (function boot() {
   loadData();
-  openOverlay(settingsOverlay);
+  if (!isPhoneLayout()) {
+    openOverlay(settingsOverlay);
+  }
   prepareNextRound();
   setActiveStep(1);
   updateMusicBtn();
@@ -1687,5 +1781,8 @@ window.addEventListener("resize", () => {
     startBoyPotPatrol();
   }
   syncGuideTargetRings();
+  if (previewNextBtn && previewNextBtn.classList.contains("show")) {
+    placeNextButtonUnderWinningPot();
+  }
 });
 window.addEventListener("click", startBackgroundMusic, { once: true });

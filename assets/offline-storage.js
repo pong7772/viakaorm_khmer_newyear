@@ -1,7 +1,4 @@
-/**
- * Offline persistence: localStorage only (no network).
- * Same keys as the main game — dashboard and app share this bundle.
- */
+
 (function () {
   const KEYS = {
     staff: "foed_staff_pool",

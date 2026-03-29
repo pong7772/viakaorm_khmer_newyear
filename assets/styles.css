@@ -3,6 +3,7 @@
 body {
   margin: 0;
   height: 100vh;
+  height: 100dvh;
   overflow: hidden;
   background-color: #1c0b08;
   font-family: "Noto Sans Khmer", sans-serif;
@@ -482,7 +483,7 @@ body::before {
 }
 
 .slot__outer {
-  width: min(800px, 100%);
+  width: min(920px, 100%);
   max-width: 100%;
   height: clamp(108px, 14vw, 140px);
   margin: 0 auto;
@@ -492,17 +493,34 @@ body::before {
   box-shadow: none;
   position: relative;
   z-index: 12;
-  contain: layout paint style;
+  contain: layout;
 }
 
 .slot__inner {
   height: 100%;
   border-radius: 12px;
   background: linear-gradient(180deg, #1b1b1b 0%, #101010 100%);
-  padding: 8px;
-  overflow: hidden;
+  padding: 8px 10px;
+  overflow-x: auto;
+  overflow-y: hidden;
   position: relative;
   border: none;
+  scrollbar-width: thin;
+  scrollbar-color: rgba(255, 200, 120, 0.4) rgba(0, 0, 0, 0.2);
+}
+
+.slot__inner::-webkit-scrollbar {
+  height: 6px;
+}
+
+.slot__inner::-webkit-scrollbar-thumb {
+  background: rgba(255, 210, 140, 0.4);
+  border-radius: 4px;
+}
+
+.slot__inner::-webkit-scrollbar-track {
+  background: rgba(0, 0, 0, 0.15);
+  border-radius: 4px;
 }
 
 .slot__shadow {
@@ -519,23 +537,33 @@ body::before {
   will-change: transform;
   transform: translateZ(0);
   backface-visibility: hidden;
+  min-width: 100%;
+  width: max-content;
+  margin-left: auto;
+  margin-right: auto;
+  box-sizing: border-box;
 }
 
+/* One row per name; horizontal scroll on .slot__inner if longer than the window */
 .reel > div {
-  min-height: clamp(72px, 11vw, 120px);
+  min-height: clamp(52px, 8vw, 96px);
   height: auto;
-  line-height: 1.35;
-  font-size: clamp(18px, 2.8vw, 36px);
+  line-height: 1.3;
+  font-size: clamp(14px, 2.2vw, 34px);
   font-weight: 700;
-  white-space: normal;
-  word-break: break-word;
-  overflow-wrap: anywhere;
+  white-space: nowrap;
+  word-break: keep-all;
+  overflow-wrap: normal;
   overflow: visible;
   display: flex;
   align-items: center;
   justify-content: center;
   text-align: center;
-  padding: 6px 10px;
+  padding: 6px 14px;
+  min-width: 100%;
+  width: max-content;
+  max-width: none;
+  box-sizing: border-box;
   color: #fef5d6;
   text-shadow: 0 2px 12px rgba(255, 189, 71, 0.25);
 }
@@ -979,7 +1007,10 @@ body::before {
 }
 
 .kaorm.pot-impact {
-  animation: potImpact 320ms cubic-bezier(0.25, 0.9, 0.35, 1);
+  animation: potImpact 380ms cubic-bezier(0.22, 0.95, 0.32, 1);
+  filter:
+    drop-shadow(0 0 18px rgba(255, 210, 100, 0.75))
+    drop-shadow(0 8px 12px rgba(0, 0, 0, 0.35));
 }
 
 .kaorm.pot-boom {
@@ -1082,6 +1113,42 @@ body::before {
   box-shadow: none;
 }
 
+.khmer-boy-visual {
+  position: relative;
+  width: fit-content;
+  max-width: 100%;
+  margin: 0 auto;
+}
+
+.khmer-boy-figure {
+  position: relative;
+  display: block;
+  width: fit-content;
+  max-width: 100%;
+  margin: 0 auto;
+}
+
+/* Centered on the boy sprite (bounding box of .khmer-boy-figure) */
+.khmer-boy-figure .boy-player-photo {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: var(--boy-photo-size, 46px);
+  height: var(--boy-photo-size, 46px);
+  margin: 0;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 2px solid rgba(255, 220, 160, 0.95);
+  box-shadow:
+    0 2px 8px rgba(0, 0, 0, 0.4),
+    0 0 0 1px rgba(40, 12, 8, 0.35);
+  transform: translate(-50%, -50%);
+  z-index: 6;
+  pointer-events: none;
+  user-select: none;
+  -webkit-user-drag: none;
+}
+
 .khmer-boy {
   position: absolute;
   left: 0;
@@ -1095,6 +1162,7 @@ body::before {
   --boy-scale: 0.88;
   --stick-rest: 0deg;
   --stick-hit: -22deg;
+  --strike-lunge: 0px;
   z-index: 2;
   transform-origin: bottom center;
   animation: none;
@@ -1118,17 +1186,20 @@ body::before {
 }
 
 .khmer-boy.strike {
-  animation: boyStrikeFlash 480ms ease-out 0s 1 normal both;
+  animation: boyStrikeFlash 560ms ease-out 0s 1 normal both;
 }
 
 .khmer-boy.boy-ready-pots:not(.boy-spinning).strike {
-  animation: boyStrikeFlash 480ms ease-out 0s 1 normal both;
+  z-index: 18;
+  animation:
+    boyStrikeLunge 560ms cubic-bezier(0.34, 0.02, 0.22, 1) 1 both,
+    boyStrikeFlash 560ms ease-out 1 both;
 }
 
 .khmer-boy.boy-spinning.strike {
   animation:
     boySpinSubtle 0.52s ease-in-out infinite,
-    boyStrikeFlash 480ms ease-out 0s 1 normal both;
+    boyStrikeFlash 560ms ease-out 0s 1 normal both;
 }
 
 .khmer-boy.dragging {
@@ -1153,16 +1224,16 @@ body::before {
 }
 
 
-/* Stick balanced on the head (sprite draws in front; anchor at bottom of stick). */
+/* Stick: bottom anchored at head; extends above sprite. Default = desktop / tablet (not phone). */
 .boy-break-stick {
   position: absolute;
   pointer-events: none;
   z-index: 0;
-  width: clamp(7px, 1vw, 11px);
-  height: clamp(72px, 22vh, 140px);
+  width: clamp(7px, 0.58vw, 11px);
+  height: clamp(108px, min(15vh, 13vw), 205px);
   left: 50%;
-  top: 2%;
-  bottom: auto;
+  top: auto;
+  bottom: var(--stick-anchor-bottom, 87%);
   margin-left: clamp(-5px, -0.45vw, -3px);
   border-radius: 4px;
   background:
@@ -1194,7 +1265,8 @@ body::before {
 }
 
 .khmer-boy.strike .boy-break-stick {
-  animation: stickSwingStrike 480ms cubic-bezier(0.34, 0.02, 0.22, 1) 1 both;
+  z-index: 5;
+  animation: stickSwingStrike 560ms cubic-bezier(0.34, 0.02, 0.22, 1) 1 both;
 }
 
 .khmer-boy-sprite {
@@ -1210,23 +1282,6 @@ body::before {
   pointer-events: none;
   user-select: none;
   -webkit-user-drag: none;
-}
-
-#boyStaffImage.boy-staff-badge {
-  position: absolute;
-  right: -4px;
-  bottom: 40px;
-  top: auto;
-  left: auto;
-  width: 48px;
-  height: 48px;
-  margin: 0;
-  border-radius: 50%;
-  object-fit: cover;
-  border: 2px solid rgba(255, 220, 160, 0.9);
-  z-index: 3;
-  box-shadow: none;
-  transform-origin: center center;
 }
 
 .boy-name {
@@ -1262,10 +1317,11 @@ body::before {
 }
 
 @keyframes potImpact {
-  0% { transform: translateY(0) scale(1); }
-  25% { transform: translateY(4px) scale(1.1); }
-  55% { transform: translateY(-2px) scale(1.05); }
-  100% { transform: translateY(0) scale(1); }
+  0% { transform: translateY(0) scale(1) rotate(0deg); }
+  22% { transform: translateY(5px) scale(1.12) rotate(-5deg); }
+  42% { transform: translateY(-4px) scale(1.08) rotate(4deg); }
+  65% { transform: translateY(2px) scale(1.03) rotate(-2deg); }
+  100% { transform: translateY(0) scale(1) rotate(0deg); }
 }
 
 @keyframes potBoom {
@@ -1392,17 +1448,43 @@ body::before {
 
 @keyframes boyStrikeFlash {
   0% { filter: brightness(1); }
-  35% { filter: brightness(1.14) drop-shadow(0 0 12px rgba(255, 220, 140, 0.45)); }
+  38% { filter: brightness(1.16) drop-shadow(0 0 14px rgba(255, 220, 140, 0.5)); }
   100% { filter: brightness(1); }
 }
 
+@keyframes boyStrikeLunge {
+  0% {
+    transform: translateZ(0) scale(var(--boy-scale)) translateX(0);
+  }
+  22% {
+    transform: translateZ(0) scale(var(--boy-scale)) translateX(calc(var(--strike-lunge, 0px) * -0.35));
+  }
+  43% {
+    transform: translateZ(0) scale(calc(var(--boy-scale) * 1.045)) translateX(var(--strike-lunge, 0px));
+  }
+  72% {
+    transform: translateZ(0) scale(var(--boy-scale)) translateX(calc(var(--strike-lunge, 0px) * 0.12));
+  }
+  100% {
+    transform: translateZ(0) scale(var(--boy-scale)) translateX(0);
+  }
+}
+
 @keyframes stickSwingStrike {
-  0%,
+  0% {
+    transform: rotate(calc(var(--stick-rest, 0deg) - 36deg)) translateY(5px) scaleY(0.94);
+  }
+  20% {
+    transform: rotate(calc(var(--stick-rest, 0deg) - 44deg)) translateY(8px) scaleY(0.92);
+  }
+  43% {
+    transform: rotate(var(--stick-hit, -22deg)) translateY(-16px) scaleY(1.1);
+  }
+  58% {
+    transform: rotate(calc(var(--stick-hit, -22deg) + 10deg)) translateY(-7px) scaleY(1.03);
+  }
   100% {
     transform: rotate(var(--stick-rest, 0deg)) translateY(0) scaleY(1);
-  }
-  42% {
-    transform: rotate(var(--stick-hit, -22deg)) translateY(-10px) scaleY(1.05);
   }
 }
 
@@ -1620,6 +1702,61 @@ textarea {
   font-family: "Noto Sans Khmer", sans-serif;
 }
 
+.overlay-card.settings-card {
+  position: relative;
+}
+
+.settings-dashboard-panel {
+  margin-bottom: 14px;
+  text-align: center;
+}
+
+.settings-dash-lead {
+  margin: 0 0 12px;
+  font-size: 14px;
+  line-height: 1.55;
+  color: #e8ddd4;
+}
+
+.settings-dash-open {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  text-decoration: none;
+  margin-bottom: 12px;
+}
+
+.settings-dash-hint {
+  margin: 0;
+  text-align: left;
+}
+
+.settings-json-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+  opacity: 0;
+  pointer-events: none;
+}
+
+.visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
 .settings-actions {
   display: flex;
   flex-wrap: wrap;
@@ -1723,13 +1860,17 @@ textarea {
   }
 
   .boy-break-stick {
-    height: clamp(48px, 16vh, 100px);
-    width: clamp(5px, 1.8vw, 8px);
+    height: clamp(96px, min(18vh, 14vw), 178px);
+    width: clamp(6px, 0.75vw, 10px);
     left: 50%;
-    top: 1%;
-    bottom: auto;
+    top: auto;
+    bottom: var(--stick-anchor-bottom, 86%);
     margin-left: clamp(-4px, -0.5vw, -2px);
     transform: rotate(var(--stick-rest, 0deg)) translateY(0) scaleY(1);
+  }
+
+  .khmer-boy-figure .boy-player-photo {
+    --boy-photo-size: 44px;
   }
 
   .khmer-boy-sprite {
@@ -1963,6 +2104,440 @@ textarea {
   }
 }
 
+/* Tablets & phones — hide history + step guidance; fluid images & main column */
+@media (max-width: 768px) {
+  .history-box,
+  .game-guide-dock,
+  .break-stage-label,
+  .drag-hint,
+  .pot-guide-bubble {
+    display: none !important;
+  }
+
+  #lucky-draw {
+    top: calc(env(safe-area-inset-top, 0px) + 76px);
+    width: min(100vw - env(safe-area-inset-left, 0px) - env(safe-area-inset-right, 0px) - 8px, 1280px);
+    max-height: calc(100dvh - env(safe-area-inset-top, 0px) - env(safe-area-inset-bottom, 0px) - 52px);
+    padding-left: max(6px, env(safe-area-inset-left, 0px));
+    padding-right: max(6px, env(safe-area-inset-right, 0px));
+    padding-bottom: max(12px, env(safe-area-inset-bottom, 0px));
+  }
+
+  .khmer-subtitle {
+    font-size: clamp(11px, 3.2vw, 14px);
+    padding: 0 4px;
+  }
+
+  .now-playing,
+  .pool-count {
+    font-size: clamp(12px, 3.4vw, 16px);
+    padding: 0 6px;
+  }
+
+  .winner-grid {
+    gap: clamp(10px, 3vw, 18px);
+  }
+
+  #winnerStaffImage,
+  #winnerGiftImage {
+    width: min(88vw, 300px) !important;
+    max-width: 100% !important;
+    height: auto !important;
+    max-height: min(42vh, 300px);
+    margin-left: auto;
+    margin-right: auto;
+    aspect-ratio: 1;
+  }
+
+  #winnerStaffImage {
+    object-fit: cover;
+  }
+
+  #winnerGiftImage {
+    object-fit: contain;
+  }
+
+  .win-fly-popup {
+    width: min(92vw, 320px);
+    min-height: min(240px, 48vh);
+  }
+
+  .win-fly-popup img,
+  #winFlyImage {
+    width: min(70vw, 200px) !important;
+    max-width: 100% !important;
+    height: auto !important;
+    max-height: min(38vh, 200px);
+    object-fit: contain;
+  }
+
+  .win-fly-popup.win-fly-popup--boom {
+    width: min(94vw, 380px);
+    min-height: min(300px, 58vh);
+  }
+
+  .win-fly-popup.win-fly-popup--boom img {
+    width: min(76vw, 240px) !important;
+    max-height: min(46vh, 260px);
+  }
+
+  .khmer-boy-sprite {
+    width: auto !important;
+    height: auto !important;
+    max-width: min(70vw, 220px) !important;
+    max-height: min(36vh, 260px) !important;
+  }
+
+  .khmer-boy-figure .boy-player-photo {
+    --boy-photo-size: clamp(48px, 10vw, 52px);
+  }
+
+  .boy-break-stick {
+    height: clamp(100px, min(20vh, 15vw), 195px);
+    width: clamp(7px, 0.85vw, 11px);
+    top: auto;
+    bottom: var(--stick-anchor-bottom, 86%);
+  }
+
+  .pot-gift-on-pot img {
+    width: clamp(26px, 8vw, 44px) !important;
+    height: clamp(26px, 8vw, 44px) !important;
+    max-width: 100%;
+    object-fit: contain;
+  }
+
+  .pot-gift-on-pot.winning img {
+    width: clamp(34px, 10vw, 56px) !important;
+    height: clamp(34px, 10vw, 56px) !important;
+  }
+
+  .pot-gift-on-pot.pot-gift-other-big img {
+    width: min(72px, 20vw) !important;
+    height: min(72px, 20vw) !important;
+  }
+
+  .overlay-card label {
+    max-width: 100%;
+  }
+
+  .overlay-card textarea {
+    max-width: 100%;
+    font-size: 14px;
+  }
+}
+
+@media (max-width: 768px) and (orientation: landscape) {
+  #lucky-draw {
+    top: calc(env(safe-area-inset-top, 0px) + 54px);
+    max-height: calc(100dvh - env(safe-area-inset-top, 0px) - env(safe-area-inset-bottom, 0px) - 14px);
+  }
+}
+
+/* Phones — safe areas, touch targets */
+@media (max-width: 520px) {
+  /* Data/settings UI hidden on phone (overlay also skipped on load in app.js) */
+  #settingsOverlay {
+    display: none !important;
+    visibility: hidden !important;
+    pointer-events: none !important;
+    opacity: 0 !important;
+  }
+
+  .control-group #settingsBtn,
+  .control-group a[href*="dashboard"],
+  .control-group #startBtn,
+  .control-group #musicToggleBtn {
+    display: none !important;
+  }
+
+  .control-group {
+    display: none !important;
+  }
+
+  .banner {
+    width: min(340px, calc(100vw - env(safe-area-inset-left, 0px) - env(safe-area-inset-right, 0px) - 12px));
+    top: max(4px, env(safe-area-inset-top, 0px));
+  }
+
+  .banner h3 {
+    font-size: clamp(16px, 4.4vw, 24px);
+    padding: 8px 10px;
+    line-height: 1.28;
+  }
+
+  #lucky-draw {
+    top: calc(env(safe-area-inset-top, 0px) + 54px);
+  }
+
+  .btn,
+  .btn-small {
+    touch-action: manipulation;
+    -webkit-tap-highlight-color: transparent;
+  }
+
+  .btn-small {
+    min-height: 40px;
+    padding: 8px 10px;
+    font-size: 11px;
+  }
+
+  .title {
+    font-size: clamp(16px, 4.2vw, 20px);
+  }
+
+  .slot__outer {
+    height: clamp(96px, 22vw, 128px);
+  }
+
+  .reel > div {
+    min-height: clamp(64px, 18vw, 100px);
+    font-size: clamp(16px, 4.2vw, 28px);
+    padding: 5px 8px;
+  }
+
+  .btn-draw {
+    margin-top: 12px;
+    min-height: 44px;
+    padding: 10px 16px;
+  }
+
+  .overlay {
+    padding: max(10px, env(safe-area-inset-top, 0px)) max(10px, env(safe-area-inset-right, 0px)) max(10px, env(safe-area-inset-bottom, 0px)) max(10px, env(safe-area-inset-left, 0px));
+    align-items: center;
+  }
+
+  .overlay-card,
+  .overlay-card.winner-card {
+    width: min(560px, calc(100vw - env(safe-area-inset-left, 0px) - env(safe-area-inset-right, 0px) - 12px));
+    max-height: calc(100dvh - env(safe-area-inset-top, 0px) - env(safe-area-inset-bottom, 0px) - 20px);
+    padding: 14px;
+  }
+
+  .winner-card h2 {
+    font-size: clamp(17px, 4.5vw, 24px);
+  }
+
+  .preview-next-btn {
+    min-width: min(184px, calc(100% - 20px));
+    max-width: calc(100% - 16px);
+    padding: 9px 12px;
+    min-height: 44px;
+  }
+
+  .kaorm {
+    -webkit-tap-highlight-color: transparent;
+    touch-action: manipulation;
+  }
+
+  .boy-break-stick {
+    height: clamp(220px, 18vh, 280px);
+    width: clamp(8px, 1.5vw, 14px);
+    top: auto;
+    bottom: var(--stick-anchor-bottom, 62%);
+  }
+
+  .khmer-boy-figure .boy-player-photo {
+    --boy-photo-size: clamp(34px, 9.5vw, 48px);
+  }
+
+  .pot-gift-on-pot {
+    width: min(78px, 23vw);
+    min-height: min(78px, 23vw);
+    max-width: calc(100% - 2px);
+    padding: 3px;
+  }
+
+  .pot-gift-on-pot.winning {
+    width: min(100px, 28vw);
+    min-height: min(104px, 30vw);
+  }
+
+  .pot-gift-on-pot img {
+    width: min(38px, 11vw) !important;
+    height: min(38px, 11vw) !important;
+    max-width: 100%;
+    object-fit: contain;
+  }
+
+  .pot-gift-on-pot.winning img {
+    width: min(50px, 14vw) !important;
+    height: min(50px, 14vw) !important;
+  }
+
+  .pot-gift-name {
+    font-size: clamp(7px, 2.5vw, 11px);
+    max-width: 100%;
+  }
+
+  .pot-gift-on-pot.winning .pot-gift-name {
+    font-size: clamp(8px, 2.7vw, 12px);
+  }
+
+  .pot-gift-win-badge {
+    font-size: clamp(6px, 2vw, 10px);
+    padding: 2px 5px;
+  }
+
+  .pot-gift-on-pot.pot-gift-other-big {
+    width: min(108px, 29vw);
+    min-height: min(106px, 31vw);
+  }
+
+  .pot-gift-on-pot.pot-gift-other-big img {
+    width: min(58px, 16vw) !important;
+    height: min(58px, 16vw) !important;
+  }
+
+  .pot-gift-on-pot.pot-gift-other-big .pot-gift-name {
+    font-size: clamp(9px, 2.8vw, 13px);
+  }
+
+  #winnerStaffImage,
+  #winnerGiftImage {
+    width: min(92vw, 300px) !important;
+    max-width: 100% !important;
+    height: auto !important;
+    max-height: min(40vh, 280px) !important;
+  }
+
+  .winner-card h2 {
+    font-size: clamp(15px, 4.2vw, 22px);
+    line-height: 1.32;
+    margin-bottom: 8px;
+  }
+
+  .winner-person p,
+  .winner-gift p {
+    font-size: clamp(11px, 2.9vw, 14px);
+  }
+
+  .winner-person strong,
+  .winner-gift strong {
+    font-size: clamp(14px, 3.7vw, 19px);
+  }
+
+  .winner-card #resultMessage {
+    font-size: clamp(12px, 3.3vw, 16px);
+    margin: 10px 0 10px;
+  }
+
+  .winner-card .btn {
+    width: 100%;
+    max-width: 100%;
+    min-height: 46px;
+  }
+
+  .win-fly-popup {
+    width: min(94vw, 300px);
+    min-height: min(220px, 44vh);
+    padding: 10px 12px;
+  }
+
+  .win-fly-popup img,
+  #winFlyImage {
+    width: min(78vw, 190px) !important;
+    max-height: min(36vh, 190px) !important;
+  }
+
+  .win-fly-name {
+    font-size: clamp(12px, 3.6vw, 16px);
+  }
+
+  .win-fly-popup.win-fly-popup--boom {
+    width: min(96vw, 340px);
+    min-height: min(280px, 52vh);
+    padding: 12px 14px;
+  }
+
+  .win-fly-popup.win-fly-popup--boom img {
+    width: min(82vw, 230px) !important;
+    max-height: min(42vh, 240px) !important;
+  }
+
+  .win-fly-popup.win-fly-popup--boom .win-fly-name {
+    font-size: clamp(14px, 4vw, 21px);
+  }
+}
+
+@media (max-width: 380px) {
+  .game-step {
+    font-size: 9px;
+    padding: 4px 8px 4px 7px;
+  }
+
+  .kaorm {
+    max-width: min(80px, calc((100vw - 28px) / 5.1));
+  }
+
+  .kaorm-container {
+    gap: 2px;
+    padding: 4px 2px 0;
+  }
+
+  .pot-gift-on-pot {
+    width: min(54px, 21vw);
+    min-height: min(54px, 21vw);
+  }
+
+  .pot-gift-on-pot.winning {
+    width: min(70px, 26vw);
+    min-height: min(76px, 28vw);
+  }
+
+  .pot-gift-on-pot img {
+    width: min(24px, 7.5vw) !important;
+    height: min(24px, 7.5vw) !important;
+  }
+
+  .pot-gift-on-pot.winning img {
+    width: min(32px, 9.5vw) !important;
+    height: min(32px, 9.5vw) !important;
+  }
+
+  #winnerStaffImage,
+  #winnerGiftImage {
+    max-height: min(36vh, 240px) !important;
+  }
+
+  .win-fly-popup img,
+  #winFlyImage {
+    width: min(72vw, 160px) !important;
+    max-height: min(32vh, 160px) !important;
+  }
+}
+
+@media (max-width: 520px) and (orientation: landscape) {
+  .banner h3 {
+    font-size: 20px;
+    padding: 6px 10px;
+  }
+
+  #lucky-draw {
+    top: calc(env(safe-area-inset-top, 0px) + 52px);
+    max-height: calc(100dvh - env(safe-area-inset-top, 0px) - env(safe-area-inset-bottom, 0px) - 12px);
+  }
+
+  .boy-stage {
+    height: clamp(100px, 28vh, 140px);
+    min-height: 96px;
+  }
+
+  .khmer-boy {
+    --boy-scale: 0.42;
+  }
+
+  .boy-break-stick {
+    height: clamp(108px, 36vh, 170px);
+    width: clamp(7px, 1.2vw, 11px);
+    top: auto;
+    bottom: var(--stick-anchor-bottom, 81%);
+  }
+
+  .khmer-boy-figure .boy-player-photo {
+    --boy-photo-size: 32px;
+  }
+}
+
 @media (prefers-reduced-motion: reduce) {
   .kaorm.pot-suspense {
     animation-duration: 0.55s !important;
@@ -2096,6 +2671,35 @@ textarea {
 .kaorm:not(:disabled):focus-visible {
   outline: 2px solid rgba(255, 228, 160, 0.5) !important;
   outline-offset: 3px;
+}
+
+/* Laptop / desktop: longer stick, slightly thicker; pots read bigger when breaking */
+@media (min-width: 1024px) {
+  .boy-break-stick {
+    height: clamp(148px, min(19vh, 13vw), 275px);
+    width: clamp(8px, 0.52vw, 13px);
+    top: auto;
+    bottom: var(--stick-anchor-bottom, 89%);
+    border-radius: 5px;
+  }
+
+  .kaorm {
+    max-width: min(152px, 13.5vw);
+  }
+
+  .kaorm.pot-impact {
+    animation-duration: 420ms;
+  }
+
+  .kaorm.pot-boom::after,
+  .kaorm.pot-boom-suspense::after {
+    width: 34px;
+    height: 34px;
+    box-shadow:
+      0 0 0 0 rgba(255, 235, 160, 0.82),
+      0 0 0 18px rgba(255, 174, 81, 0.4),
+      0 0 40px rgba(255, 196, 91, 0.75);
+  }
 }
 
 /* ─── Large desktop & TV: legibility, spacing, balanced scale ─── */
@@ -2285,7 +2889,7 @@ textarea {
   }
 
   .kaorm {
-    max-width: min(158px, 13vw);
+    max-width: min(168px, 12.5vw);
   }
 
   .pot-number {
@@ -2346,11 +2950,26 @@ textarea {
     bottom: -32px;
   }
 
-  #boyStaffImage.boy-staff-badge {
-    width: 54px;
-    height: 54px;
-    bottom: 46px;
-    right: -2px;
+  .khmer-boy-figure .boy-player-photo {
+    --boy-photo-size: 54px;
+  }
+
+  .boy-break-stick {
+    height: clamp(168px, min(18vh, 12vw), 298px);
+    width: clamp(9px, 0.5vw, 14px);
+    top: auto;
+    bottom: var(--stick-anchor-bottom, 89%);
+    border-radius: 5px;
+  }
+
+  .kaorm.pot-boom::after,
+  .kaorm.pot-boom-suspense::after {
+    width: 38px;
+    height: 38px;
+    box-shadow:
+      0 0 0 0 rgba(255, 235, 160, 0.85),
+      0 0 0 22px rgba(255, 174, 81, 0.42),
+      0 0 48px rgba(255, 196, 91, 0.78);
   }
 
   .preview-next-btn {
@@ -2435,7 +3054,7 @@ textarea {
   }
 
   .kaorm {
-    max-width: min(172px, 11vw);
+    max-width: min(182px, 11.5vw);
   }
 
   .pot-number {
@@ -2470,10 +3089,21 @@ textarea {
   }
 
   .boy-break-stick {
-    height: clamp(88px, 24vh, 160px);
-    width: clamp(8px, 0.85vw, 12px);
-    top: 1%;
-    bottom: auto;
+    height: clamp(188px, min(17vh, 10.5vw), 318px);
+    width: clamp(9px, 0.46vw, 15px);
+    top: auto;
+    bottom: var(--stick-anchor-bottom, 89%);
+    border-radius: 6px;
+  }
+
+  .kaorm.pot-boom::after,
+  .kaorm.pot-boom-suspense::after {
+    width: 42px;
+    height: 42px;
+    box-shadow:
+      0 0 0 0 rgba(255, 235, 160, 0.88),
+      0 0 0 26px rgba(255, 174, 81, 0.44),
+      0 0 54px rgba(255, 196, 91, 0.8);
   }
 
   .overlay-card {
@@ -2519,7 +3149,7 @@ textarea {
   }
 
   .kaorm {
-    max-width: min(188px, 9.5vw);
+    max-width: min(198px, 10vw);
   }
 
   .control-group .btn-small {
@@ -2556,5 +3186,12 @@ textarea {
 
   .win-fly-name {
     font-size: clamp(15px, 1.2vw, 19px);
+  }
+
+  .boy-break-stick {
+    height: clamp(118px, min(7.5vh, 6vw), 215px);
+    width: clamp(8px, 0.36vw, 13px);
+    top: auto;
+    bottom: var(--stick-anchor-bottom, 88%);
   }
 }

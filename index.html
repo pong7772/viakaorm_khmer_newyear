@@ -2,7 +2,7 @@
 <html lang="km">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
   <title>មហាវិទ្យាល័យអប់រំចូលឆ្នាំថ្មី (FoED NewYears)</title>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -19,9 +19,8 @@
   <div class="khmer-corner corner-bl" aria-hidden="true">❖</div>
   <div class="khmer-corner corner-br" aria-hidden="true">❖</div>
   <canvas id="confetti-canvas" class="confetti"></canvas>
-
   <div class="banner">
-    <h3>សង្គ្រាន្ត<br/> មហាវិទ្យាល័យអប់រំ</h3>
+    <h3>សង្ក្រាន្ត<br/> មហាវិទ្យាល័យអប់រំ</h3>
   </div>
 
   <div class="control-group">
@@ -141,16 +140,28 @@
       <div class="boy-stage" id="boyStage">
         <div class="boy-ground" aria-hidden="true"></div>
         <div id="khmerBoy" class="khmer-boy" aria-hidden="true">
-          <img
-            class="khmer-boy-sprite"
-            src="./assets/images/khmer-boy-character.png"
-            alt=""
-            width="220"
-            height="308"
-            decoding="async"
-          />
-          <span class="boy-break-stick" aria-hidden="true"></span>
-          <img id="boyStaffImage" class="boy-staff-badge" src="./assets/images/twitter.png" alt="staff avatar" />
+          <div class="khmer-boy-visual">
+            <div class="khmer-boy-figure">
+              <span class="boy-break-stick" aria-hidden="true"></span>
+              <img
+                class="khmer-boy-sprite"
+                src="./assets/images/khmer-boy-character.png"
+                alt=""
+                width="220"
+                height="308"
+                decoding="async"
+              />
+              <img
+                id="boyStaffImage"
+                class="boy-player-photo"
+                src="./assets/images/twitter.png"
+                alt=""
+                width="64"
+                height="64"
+                decoding="async"
+              />
+            </div>
+          </div>
           <div class="boy-name" id="boyName">សុខ សូត្រ</div>
         </div>
       </div>
@@ -185,17 +196,30 @@
   <div id="settingsOverlay" class="overlay">
     <div class="overlay-card settings-card">
       <h2>កំណត់បញ្ជី</h2>
-      <label for="staffInput">បញ្ជីបុគ្គលិក JSON (ឈ្មោះ + រូបភាព)</label>
-      <textarea id="staffInput" rows="8"></textarea>
-      <label for="giftInput">បញ្ជីរង្វាន់ JSON</label>
-      <textarea id="giftInput" rows="8"></textarea>
-      <p class="hint">រត់ក្រៅបណ្ដាញ — ទិន្នន័យរក្សាទុកនៅក្នុងកម្មវិធីរុករក (localStorage)។ Staff / Gift JSON ខាងលើ។ ផ្ទាំងគ្រប់គ្រង៖ <a href="./dashboard.html" style="color:#ffe4a8">dashboard</a> — ទាញចេញ/នាំចូលឯកសារ រួចរក្សាទុកក្នុងថត <code style="color:#ffe4a8">data/</code> បាន។</p>
+      <div class="settings-dashboard-panel">
+        <p class="settings-dash-lead">
+          កែបុគ្គលិក រង្វាន់ និងរូបភាពដោយប្រើ<strong>ផ្ទាំងគ្រប់គ្រង</strong> (ទម្រង់បញ្ចូល — មិនមែន JSON ផ្ទាល់)។ ទិន្នន័យរក្សាទុកក្នុងកម្មវិធីរុករកលើម៉ាស៊ីននេះ (localStorage)។
+        </p>
+        <a
+          href="./dashboard.html"
+          class="btn settings-dash-open"
+          target="_blank"
+          rel="noopener noreferrer"
+        >បើកផ្ទាំងគ្រប់គ្រង</a>
+        <p class="hint settings-dash-hint">
+          បន្ទាប់ពីរក្សាទុកនៅផ្ទាំងគ្រប់គ្រង ចុច <strong>ផ្ទុកឡើងវិញ</strong> ខាងក្រោមដើម្បីអាប់ដេតល្បែងនៅទំព័រនេះ។ ទាញចេញ/នាំចូលឯកសារ JSON និងថត <code style="color:#ffe4a8">data/</code> — មាននៅផ្ទាំងគ្រប់គ្រង។
+        </p>
+      </div>
+      <label for="staffInput" class="visually-hidden">Staff data (internal)</label>
+      <textarea id="staffInput" class="settings-json-hidden" rows="2" aria-hidden="true" tabindex="-1"></textarea>
+      <label for="giftInput" class="visually-hidden">Gift data (internal)</label>
+      <textarea id="giftInput" class="settings-json-hidden" rows="2" aria-hidden="true" tabindex="-1"></textarea>
       <p id="configMessage"></p>
       <div class="settings-actions">
         <button type="button" id="resetFullDataBtn" class="btn btn-reset-full">
           ស្ដារពេញ ចាប់ផ្តើមឡើងវិញ
         </button>
-        <button id="saveDataBtn" class="btn">រក្សាទុក</button>
+        <button type="button" id="reloadFromStorageBtn" class="btn">ផ្ទុកឡើងវិញ</button>
         <button id="closeSettingsBtn" class="btn btn-danger">បិទ</button>
       </div>
     </div>
