@@ -577,9 +577,13 @@ congratsSfx.volume = 0.5;
 spinSfx.volume = 0.38;
 winPopupSfx.volume = 0.58;
 revealOtherGiftSfx.volume = 0.56;
+potWaitBoomSfx.volume = 0.72;
 
 const BG_MUSIC_NORMAL = 0.22;
+/** Default duck while most SFX play */
 const BG_MUSIC_DUCKED = 0.04;
+/** Extra-quiet BGM while the suspense / “waiting to boom” soundtrack plays */
+const BG_MUSIC_SUSPENSE_DUCK = 0.008;
 if (bgMusic) {
   bgMusic.volume = BG_MUSIC_NORMAL;
 }
@@ -600,12 +604,12 @@ function releaseBackgroundDuck() {
 }
 
 /** Lower background music while a “main” SFX plays; extends if several fire in a row. */
-function extendBackgroundDuck(durationMs) {
+function extendBackgroundDuck(durationMs, duckedVolume = BG_MUSIC_DUCKED) {
   if (!musicEnabled || !bgMusic || bgMusic.paused) return;
   const ms = Math.max(400, durationMs);
   const now = Date.now();
   bgMusicDuckUntil = Math.max(bgMusicDuckUntil, now + ms);
-  bgMusic.volume = BG_MUSIC_DUCKED;
+  bgMusic.volume = duckedVolume;
   if (bgMusicDuckTimer) {
     clearTimeout(bgMusicDuckTimer);
   }
@@ -706,8 +710,8 @@ function playSfx(audio) {
   audio.play().catch(() => {});
 }
 
-function playDuckedSfx(audio, duckMs) {
-  extendBackgroundDuck(duckMs);
+function playDuckedSfx(audio, duckMs, duckedVolume = BG_MUSIC_DUCKED) {
+  extendBackgroundDuck(duckMs, duckedVolume);
   playSfx(audio);
 }
 
@@ -1632,7 +1636,7 @@ async function onPotClick(target) {
   target.classList.add("pot-suspense");
 
   const suspenseMs = getPotSuspenseMs();
-  playDuckedSfx(potWaitBoomSfx, suspenseMs + 800);
+  playDuckedSfx(potWaitBoomSfx, suspenseMs + 800, BG_MUSIC_SUSPENSE_DUCK);
   await waitForPotSuspense(target);
   stopSfx(potWaitBoomSfx);
 
