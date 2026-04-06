@@ -42,7 +42,7 @@
       "id": "885acaac-7ee3-4b54-a88f-43622ba9949f"
     },
     {
-      "name": "បង ហេង ណារ៉េត",
+      "name": "ណារ៉េត",
       "image": "./assets/images/photos/ណារ៉េត.png",
       "id": "b4f468fb-31cd-441d-a2b5-f19fa5202e59"
     },
@@ -57,7 +57,7 @@
       "id": "c6789693-fbba-4494-927d-ec033e78418e"
     },
     {
-      "name": "វ៉ា ទី",
+      "name": "ទី",
       "image": "./assets/images/photos/ទី.png",
       "id": "867cecd3-718b-46fb-906c-44bb09847eb4"
     },
@@ -67,7 +67,7 @@
       "id": "d229f373-ba6a-4f9e-86c7-45c463a15303"
     },
     {
-      "name": "លោកគ្រូ​ ហាត់ ប៊ុនហេ",
+      "name": "បុនហេ",
       "image": "./assets/images/photos/បុនហេ.jpg",
       "id": "6b3a6355-ee4b-4004-a7bb-93e555ca0786"
     },
@@ -82,12 +82,12 @@
       "id": "ffb806aa-d268-4286-893d-a714dff2b6e7"
     },
     {
-      "name": "នាក់ ពិសិដ្ឋ",
+      "name": "ពិសិដ្ឋ",
       "image": "./assets/images/photos/ពិសិដ្ឋ.png",
       "id": "bc8187e7-a891-46c0-9d85-1101ee50a805"
     },
     {
-      "name": "សុខ ពិសី",
+      "name": "ពិសី",
       "image": "./assets/images/photos/ពិសី.png",
       "id": "057b92d5-1bc1-40b0-a07e-1552efe2a503"
     },
@@ -97,12 +97,12 @@
       "id": "a231c54c-b1db-4c17-ae82-30d575505138"
     },
     {
-      "name": "លោកគ្រូ ព្រីង មរកត",
+      "name": "មរកត",
       "image": "./assets/images/photos/មរកត.png",
       "id": "d340c9c0-b082-4bc2-a932-646488c93620"
     },
     {
-      "name": "អ្នក ម៉ាក់",
+      "name": "ម៉ាក់",
       "image": "./assets/images/photos/ម៉ាក់.png",
       "id": "ee86d4e3-6146-4a5a-9a0a-0874b283b753"
     },
@@ -177,7 +177,7 @@
       "id": "c3f35423-23e8-4f63-838d-cd0000b11882"
     },
     {
-      "name": "លោកគ្រូ កែវ សារ៉ាត់",
+      "name": "សារ៉ាត់",
       "image": "./assets/images/photos/សារ៉ាត់.png",
       "id": "5510139d-03d1-4e0b-b451-b82c63d7ff99"
     },
@@ -200,11 +200,6 @@
       "name": "សុខ សូត្រ",
       "image": "./assets/images/photos/សុខ សូត្រ.png",
       "id": "50d8cae3-0207-49e3-b62d-f130e179d284"
-    },
-    {
-      "name": "សុខ",
-      "image": "./assets/images/photos/សុខ.png",
-      "id": "0ffafe8d-21fa-4f5a-abd9-6fdb1d714465"
     },
     {
       "name": "សុខសំណាង",
@@ -302,11 +297,6 @@
       "id": "9c912e70-d81e-4c58-8864-9a9a7b9d7273"
     },
     {
-      "name": "ស្រីស្រស់",
-      "image": "./assets/images/photos/ស្រីស្រស់.png",
-      "id": "a47bc5c4-a45a-4234-bafd-aad0cfb532c2"
-    },
-    {
       "name": "ហ៊ុយ សុជាតា",
       "image": "./assets/images/photos/ហ៊ុយ សុជាតា.png",
       "id": "68b9ea32-4110-43af-965b-329b4beab83f"
@@ -322,7 +312,7 @@
       "id": "21677460-5337-425a-9424-e5719dbf67a2"
     },
     {
-      "name": "លាង ឡេង​ង៉ិច",
+      "name": "ឡេង​ង៉ិច",
       "image": "./assets/images/photos/ឡេង​ង៉ិច.png",
       "id": "f7c99506-dc92-41d7-8370-71f47f123ef8"
     },
@@ -337,74 +327,9 @@
       "id": "52258796-3585-4321-b321-b967135ee38c"
     },
     {
-      "name": "អុឹម លីដា",
-      "image": "./assets/images/photos/ លីដា.png",
-      "id": "bb5f2009-a616-4d89-ac7b-73d52c989766"
-    },
-    {
-      "name": "ចរិយា",
-      "image": "./assets/images/photos/ចរិយា.png",
-      "id": "43346d5a-bb6f-4a6c-a28e-605a37d95986"
-    },
-    {
-      "name": "កយ ហ៊ា",
-      "image": "./assets/images/photos/កូវហ៊ា.jpg",
-      "id": "33d73962-1a0f-4f10-aee8-3ab02f7a1609"
-    },
-    {
-      "name": "ចាន់ណា គីមឡេង",
-      "image": "./assets/images/photos/គីមឡេង.png",
-      "id": "4aba0007-e366-45fe-9c01-09eae375bbcf"
-    },
-    {
-      "name": "ចាន់ថា",
-      "image": "./assets/images/photos/ចាន់ថា.jpg",
-      "id": "59fc4011-3507-4726-98af-62612b1a2c6e"
-    },
-    {
-      "name": "ចែ​​អៀង",
-      "image": "./assets/images/photos/ចែអៀង.jpg",
-      "id": "0760f9b1-8c49-448f-9c82-f5d7a63d768a"
-    },
-    {
-      "name": "ដារា",
-      "image": "./assets/images/photos/ដារា.jpg",
-      "id": "34c8f767-cb8b-4f1a-a1f4-7f0ecf2be2bc"
-    },
-    {
-      "name": "សុធារី",
-      "image": "./assets/images/photos/ធារី.jpg",
-      "id": "6146f958-d327-4914-bd02-8d391d94f351"
-    },
-    {
-      "name": "ផាណាត់",
-      "image": "./assets/images/photos/ផាណាត់.jpg",
-      "id": "e24c2b35-8c7c-4078-8537-16fc06b366b6"
-    },
-    {
-      "name": "វិសាល",
-      "image": "./assets/images/photos/វិសាល.jpg",
-      "id": "1240216f-b8d9-475f-ba20-9d52d8e5fd1a"
-    },
-    {
-      "name": "សាលីន",
-      "image": "./assets/images/photos/សាលីន.jpg",
-      "id": "f9c40c06-6d7b-47c0-9125-8fa5b4ea2a5b"
-    },
-    {
-      "name": "សុធា",
-      "image": "./assets/images/photos/សុធា.jpg",
-      "id": "672238bd-ff59-4ee8-89cd-3652c33fdf52"
-    },
-    {
-      "name": "សុម៉ាឡែន",
-      "image": "./assets/images/photos/សុម៉ាឡែន.jpg",
-      "id": "f1e766c1-95e3-4619-867d-7a07d0468be2"
-    },
-    {
-      "name": "អ៊ាត​ ស្រីតី",
-      "image": "./assets/images/photos/ស្រីតី.jpg",
-      "id": "ebf67bf2-9a3a-4756-aa60-c075fe41937b"
+      "id": "f0c92a3d-e2eb-4d4f-b1e3-cd0fc4d449d7",
+      "name": "ស្រីតី",
+      "image": "./assets/images/photos/ស្រីតី.png"
     }
   ],
   "gifts": [
@@ -532,7 +457,7 @@
       "name": "ម៉ាស៊ីនផ្លុំសក់",
       "type": "cheap",
       "image": "https://www.menglyhome.com/assets/images/1752129885_3820.jpg",
-      "quantity": 5,
+      "quantity": 4,
       "price": null,
       "id": "c93f589c-dead-460c-9543-ba7199fbed71"
     },
@@ -540,11 +465,42 @@
       "name": "ឆ្នាំងស៊ុប អគ្គិសនី",
       "type": "cheap",
       "image": "https://homefixcambodia.com/cdn/shop/products/PPMC708-02_new_900x.jpg?v=1748016453",
-      "quantity": 5,
+      "quantity": 4,
       "price": null,
       "id": "4cb98cb1-e615-46b7-bd15-125ed7967ddb"
     }
   ],
-  "history": [],
-  "exportedAt": "2026-04-06T07:42:44.515Z"
+  "history": [
+    {
+      "staff": "ស្រីស្រស់",
+      "gift": "ម៉ាស៊ីនផ្លុំសក់",
+      "at": "2026-04-06T07:17:08.238Z"
+    },
+    {
+      "staff": "សុខ",
+      "gift": "ឆ្នាំងស៊ុប អគ្គិសនី",
+      "at": "2026-03-28T10:41:48.961Z"
+    },
+    {
+      "staff": "លោក សុខ វណ្ណា",
+      "gift": "Coca ១កំប៉ុង (cheap)"
+    },
+    {
+      "staff": "កញ្ញា ចាន់ ដាវី",
+      "gift": "ក្រមា ១ (medium)"
+    },
+    {
+      "staff": "លោក ជា ដារ៉ា",
+      "gift": "Amazon ១កែវ (expensive)"
+    },
+    {
+      "staff": "លោក គង់ វិសាល",
+      "gift": "ទឹក Freshy ១កំប៉ុង (cheap)"
+    },
+    {
+      "staff": "កញ្ញា ពេជ្រ រស្មី",
+      "gift": "Tiger ១កំប៉ុង (expensive)"
+    }
+  ],
+  "exportedAt": "2026-04-06T07:23:23.630Z"
 }
