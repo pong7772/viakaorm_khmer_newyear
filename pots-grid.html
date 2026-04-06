@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="km">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+  <title>ក្អមគ្រប់រង្វាន់ — FoED NewYears</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Fasthand&family=Kdam+Thmor+Pro&family=Noto+Sans+Khmer:wght@400;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="./assets/styles.css" />
+</head>
+<body class="pots-grid-page">
+  <div class="bg-blur"></div>
+  <div class="texture-overlay"></div>
+  <div class="khmer-motif motif-top"></div>
+  <div class="khmer-motif motif-bottom"></div>
+  <div class="khmer-corner corner-tl" aria-hidden="true">❖</div>
+  <div class="khmer-corner corner-tr" aria-hidden="true">❖</div>
+  <div class="khmer-corner corner-bl" aria-hidden="true">❖</div>
+  <div class="khmer-corner corner-br" aria-hidden="true">❖</div>
+  <canvas id="confetti-canvas" class="confetti"></canvas>
+
+  <div class="pots-grid-viewport">
+  <div class="pots-grid-shell">
+    <aside class="pots-grid-sidebar" aria-label="រង្វាន់នៅសល់ និងប្រវត្តិ">
+      <div class="remaining-gifts-panel" id="remainingGiftsPanel">
+        <h4 class="remaining-gifts-title">រង្វាន់នៅសល់</h4>
+        <p class="remaining-gifts-caption">រូប និងចំនួននៅសល់</p>
+        <div id="remainingGiftsList" class="remaining-gifts-list" role="list"></div>
+      </div>
+      <aside class="history-box pots-grid-history" id="historyBox">
+        <h4>ប្រវត្តិអ្នកឈ្នះ</h4>
+        <div id="historyList" class="history-list"></div>
+      </aside>
+    </aside>
+
+    <div class="pots-grid-main">
+      <header class="pots-grid-header">
+        <div class="pots-grid-header-top">
+          <div class="pots-grid-brand" role="banner">
+            <span class="pots-grid-brand-frame" aria-hidden="true"></span>
+            <div class="pots-grid-brand-inner">
+              <span class="pots-grid-brand-line1">សង្ក្រាន្ត</span>
+              <span class="pots-grid-brand-line2">មហាវិទ្យាល័យអប់រំ</span>
+            </div>
+          </div>
+          <nav class="pots-grid-actions" aria-label="ម៉ឺនុយល្បែង">
+            <a href="./index.html" class="btn btn-small pots-grid-action">ល្បែងធម្មតា</a>
+            <a href="./dashboard.html" class="btn btn-small pots-grid-action">ផ្ទាំងគ្រប់គ្រង</a>
+            <button type="button" id="reloadFromStorageBtn" class="btn btn-small pots-grid-action">ផ្ទុកឡើងវិញ</button>
+            <button type="button" id="shuffleGridBtn" class="btn btn-small pots-grid-action">ច្របល់ក្អម (ដៃ)</button>
+            <button type="button" id="startBtn" class="btn btn-small pots-grid-action pots-grid-action--primary">ចាប់ផ្ដើម</button>
+            <button type="button" id="musicToggleBtn" class="btn btn-small pots-grid-action">តន្ត្រី: បើក</button>
+          </nav>
+        </div>
+        <div class="pots-grid-header-body">
+          <h1 class="pots-grid-page-title">ល្បែងវាយក្អម ផ្សងសំណាង មាស៥ហ៊ុន</h1>
+          <div class="pots-grid-stats" role="status" aria-live="polite">
+            <div class="pots-grid-stat">
+              <span class="pots-grid-stat-label">បុគ្គលិកនៅសល់</span>
+              <span class="pots-grid-stat-value" id="staffCount">0</span>
+            </div>
+            <div class="pots-grid-stat">
+              <span class="pots-grid-stat-label">រង្វាន់សរុប</span>
+              <span class="pots-grid-stat-value" id="giftCount">0</span>
+            </div>
+            <div class="pots-grid-stat">
+              <span class="pots-grid-stat-label">ក្អម</span>
+              <span class="pots-grid-stat-value" id="potTotalLabel">0</span>
+            </div>
+          </div>
+        </div>
+      </header>
+
+      <section id="lucky-draw" class="pots-grid-section">
+        <div id="spinGuideTarget" class="spin-guide-target pots-grid-spin">
+          <div class="slot">
+            <div class="slot__outer">
+              <div class="slot__inner">
+                <div class="slot__shadow"></div>
+                <div id="staffReel" class="reel">
+                  <div>រង់ចាំចាប់ឈ្មោះ...</div>
+                </div>
+              </div>
+            </div>
+            <div id="sunburst" class="sunburst"><div class="sun-core"></div></div>
+          </div>
+          <button type="button" id="drawStaffBtn" class="btn btn-draw">ចាប់ឈ្មោះបុគ្គលិក</button>
+        </div>
+        <p class="now-playing pots-grid-now-playing">អ្នកកំពុងលេង: <span id="currentStaff">មិនទាន់មាន</span></p>
+
+        <div class="kaorm-block pots-grid-block">
+          <div class="break-stage-label">ក្អមទាំងអស់</div>
+          <div id="potsGridScroll" class="pots-grid-scroll">
+            <div class="kaorm-container pots-grid-container" id="potsContainer" role="list"></div>
+          </div>
+          <p id="emptyGridMessage" class="pots-grid-empty" hidden>គ្មានរង្វាន់សម្រាប់បង្កើតក្អម។ សូមកំណត់ទិន្នន័យនៅផ្ទាំងគ្រប់គ្រង។</p>
+        </div>
+      </section>
+    </div>
+  </div>
+  </div>
+
+  <div id="winFlyPopup" class="win-fly-popup">
+    <img id="winFlyImage" alt="winning gift preview" />
+    <div id="winFlyName" class="win-fly-name">រង្វាន់</div>
+  </div>
+
+  <div id="resultOverlay" class="overlay">
+    <div class="overlay-card winner-card">
+      <h2>អបអរសាទរ អ្នកឈ្នះរង្វាន់</h2>
+      <div class="winner-grid">
+        <div class="winner-person">
+          <img id="winnerStaffImage" alt="winner staff image" />
+          <p>បុគ្គលិកឈ្នះ</p>
+          <strong id="winnerStaff">-</strong>
+        </div>
+        <div class="winner-gift">
+          <img id="winnerGiftImage" alt="gift image" />
+          <p>រង្វាន់ដែលទទួលបាន</p>
+          <strong id="winnerGift">-</strong>
+        </div>
+      </div>
+      <p id="resultMessage">រង់ចាំលទ្ធផល...</p>
+      <p class="pots-grid-auto-hint" id="nextRoundHint">ចុច <strong>ជុំបន្ទាប់</strong> ដើម្បីបិទ និងច្របល់ក្អមឡើងវិញ។</p>
+      <button type="button" id="nextRoundBtn" class="btn">ជុំបន្ទាប់</button>
+    </div>
+  </div>
+
+  <audio id="bgMusic" src="./assets/audio/ToyToy.mp3" loop preload="auto"></audio>
+  <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.9.3/dist/confetti.browser.min.js"></script>
+  <script src="./assets/offline-storage.js"></script>
+  <script src="./assets/pots-grid.js"></script>
+</body>
+</html>

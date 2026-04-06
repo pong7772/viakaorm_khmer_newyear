@@ -3206,3 +3206,787 @@ textarea {
     bottom: var(--stick-anchor-bottom, 88%);
   }
 }
+
+/* --- Full gift grid mode (pots-grid.html): one pot per gift quantity --- */
+@media (min-width: 900px) {
+  html:has(body.pots-grid-page) {
+    height: 100%;
+  }
+
+  body.pots-grid-page {
+    height: 100%;
+    max-height: 100dvh;
+    overflow: hidden;
+  }
+}
+
+.pots-grid-page {
+  min-height: 100dvh;
+  box-sizing: border-box;
+}
+
+@media (max-width: 899px) {
+  body.pots-grid-page {
+    display: flex;
+    flex-direction: column;
+    min-height: 100dvh;
+  }
+}
+
+.pots-grid-viewport {
+  position: relative;
+  z-index: 22;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  flex: 1 1 auto;
+  min-height: 0;
+  box-sizing: border-box;
+}
+
+@media (min-width: 900px) {
+  .pots-grid-viewport {
+    flex: 1 1 auto;
+    height: 100dvh;
+    max-height: 100dvh;
+    min-height: 0;
+    overflow: hidden;
+  }
+}
+
+.pots-grid-page #lucky-draw {
+  position: relative;
+  top: auto;
+  left: auto;
+  transform: none;
+  width: 100%;
+  max-width: 100%;
+  padding: 0;
+  text-align: center;
+  z-index: 20;
+  flex: 1;
+  min-height: 0;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+.pots-grid-shell {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  gap: clamp(12px, 2vw, 24px);
+  width: 100%;
+  max-width: none;
+  margin: 0;
+  padding-top: max(12px, env(safe-area-inset-top, 0px));
+  padding-bottom: max(12px, env(safe-area-inset-bottom, 0px));
+  padding-left: max(clamp(10px, 2.5vw, 28px), env(safe-area-inset-left, 0px));
+  padding-right: max(clamp(10px, 2.5vw, 28px), env(safe-area-inset-right, 0px));
+  box-sizing: border-box;
+  flex: 1 1 auto;
+  min-height: 0;
+}
+
+@media (max-width: 899px) {
+  .pots-grid-shell {
+    min-height: 0;
+  }
+}
+
+@media (min-width: 900px) {
+  .pots-grid-shell {
+    display: grid;
+    grid-template-columns: minmax(240px, min(22vw, 340px)) minmax(0, 1fr);
+    grid-template-rows: 1fr;
+    align-items: stretch;
+    gap: clamp(14px, 2vw, 28px);
+    height: 100%;
+    max-height: 100%;
+    min-height: 0;
+    overflow: hidden;
+    flex: 1;
+    padding-bottom: max(12px, env(safe-area-inset-bottom, 0px));
+  }
+}
+
+@media (min-width: 1100px) {
+  .pots-grid-shell {
+    grid-template-columns: minmax(260px, min(20vw, 360px)) minmax(0, 1fr);
+  }
+}
+
+.pots-grid-sidebar {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  min-width: 0;
+  min-height: 0;
+}
+
+@media (min-width: 900px) {
+  .pots-grid-sidebar {
+    position: relative;
+    top: auto;
+    min-height: 0;
+    height: 100%;
+    max-height: 100%;
+    align-self: stretch;
+    overflow-x: hidden;
+    overflow-y: auto;
+    scrollbar-width: thin;
+    padding-right: 2px;
+  }
+}
+
+@media (max-width: 899px) {
+  .pots-grid-sidebar {
+    order: 1;
+    flex-shrink: 0;
+  }
+
+  .pots-grid-main {
+    order: 0;
+    flex: 1;
+    min-height: 0;
+    overflow: hidden;
+  }
+}
+
+.pots-grid-main {
+  min-width: 0;
+  min-height: 0;
+  display: flex;
+  flex-direction: column;
+  gap: clamp(8px, 1.5vw, 14px);
+  overflow: hidden;
+}
+
+@media (min-width: 900px) {
+  .pots-grid-main {
+    height: 100%;
+    max-height: 100%;
+  }
+}
+
+.pots-grid-header {
+  flex-shrink: 0;
+  background: linear-gradient(165deg, rgba(120, 28, 22, 0.55) 0%, rgba(45, 12, 10, 0.5) 100%);
+  border: 1px solid rgba(255, 210, 140, 0.22);
+  border-radius: 16px;
+  padding: clamp(12px, 2.5vw, 18px) clamp(12px, 2.5vw, 20px);
+  box-shadow: 0 10px 32px rgba(0, 0, 0, 0.25);
+}
+
+.pots-grid-header-top {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  margin-bottom: clamp(12px, 2vw, 16px);
+}
+
+@media (min-width: 720px) {
+  .pots-grid-header-top {
+    flex-direction: row;
+    flex-wrap: wrap;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 14px 20px;
+  }
+}
+
+.pots-grid-brand {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  text-align: center;
+  min-width: min(100%, 280px);
+  max-width: min(100%, 420px);
+  padding: clamp(14px, 2.8vw, 22px) clamp(18px, 3.5vw, 32px);
+  border-radius: 18px;
+  background:
+    radial-gradient(ellipse 120% 80% at 50% 0%, rgba(255, 220, 140, 0.22) 0%, transparent 55%),
+    linear-gradient(165deg, rgba(165, 32, 26, 0.95) 0%, rgba(92, 18, 14, 0.92) 45%, rgba(55, 12, 10, 0.94) 100%);
+  border: none;
+  box-shadow:
+    0 0 0 1px rgba(255, 210, 150, 0.35),
+    0 0 40px rgba(255, 160, 60, 0.12),
+    0 14px 36px rgba(0, 0, 0, 0.45),
+    inset 0 1px 0 rgba(255, 255, 255, 0.12);
+  isolation: isolate;
+}
+
+.pots-grid-brand::before {
+  content: "";
+  position: absolute;
+  inset: -2px;
+  border-radius: 20px;
+  padding: 2px;
+  background: linear-gradient(
+    145deg,
+    rgba(255, 236, 180, 0.85) 0%,
+    rgba(255, 200, 100, 0.45) 35%,
+    rgba(200, 120, 50, 0.35) 55%,
+    rgba(255, 220, 160, 0.55) 100%
+  );
+  -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+  pointer-events: none;
+  z-index: 0;
+}
+
+.pots-grid-brand-frame {
+  position: absolute;
+  inset: clamp(6px, 1.2vw, 10px);
+  border-radius: 14px;
+  border: 1px solid rgba(255, 220, 160, 0.18);
+  box-shadow: inset 0 0 24px rgba(0, 0, 0, 0.2);
+  pointer-events: none;
+  z-index: 1;
+}
+
+.pots-grid-brand-inner {
+  position: relative;
+  z-index: 2;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: clamp(4px, 1vw, 8px);
+}
+
+.pots-grid-brand-line1 {
+  font-family: "Fasthand", cursive;
+  font-size: clamp(34px, 7.5vw, 52px);
+  line-height: 1.05;
+  letter-spacing: 0.02em;
+  color: #fff2c8;
+  text-shadow:
+    0 0 28px rgba(255, 200, 100, 0.45),
+    0 2px 0 rgba(120, 20, 12, 0.55),
+    0 4px 14px rgba(0, 0, 0, 0.5);
+}
+
+.pots-grid-brand-line2 {
+  font-family: "Kdam Thmor Pro", "Noto Sans Khmer", sans-serif;
+  font-size: clamp(14px, 2.8vw, 19px);
+  font-weight: 700;
+  color: rgba(255, 244, 220, 0.95);
+  line-height: 1.4;
+  text-shadow: 0 1px 8px rgba(0, 0, 0, 0.4);
+  padding-bottom: 2px;
+  border-bottom: 1px solid rgba(255, 210, 140, 0.25);
+  width: 100%;
+  max-width: 22ch;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .pots-grid-brand {
+    animation: potsGridBrandGlow 6s ease-in-out infinite alternate;
+  }
+}
+
+@keyframes potsGridBrandGlow {
+  from {
+    box-shadow:
+      0 0 0 1px rgba(255, 210, 150, 0.35),
+      0 0 36px rgba(255, 160, 60, 0.1),
+      0 14px 36px rgba(0, 0, 0, 0.45),
+      inset 0 1px 0 rgba(255, 255, 255, 0.12);
+  }
+  to {
+    box-shadow:
+      0 0 0 1px rgba(255, 228, 170, 0.5),
+      0 0 48px rgba(255, 190, 90, 0.18),
+      0 14px 36px rgba(0, 0, 0, 0.45),
+      inset 0 1px 0 rgba(255, 255, 255, 0.16);
+  }
+}
+
+@media (max-width: 719px) {
+  .pots-grid-brand {
+    align-self: center;
+    margin-inline: auto;
+  }
+}
+
+.pots-grid-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  align-items: center;
+  justify-content: flex-start;
+  width: 100%;
+}
+
+@media (min-width: 720px) {
+  .pots-grid-actions {
+    justify-content: flex-end;
+    flex: 1;
+    min-width: min(100%, 280px);
+  }
+}
+
+.pots-grid-page .pots-grid-action {
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 40px;
+  padding: 8px 14px;
+  font-size: clamp(11px, 2.4vw, 13px);
+  border-radius: 10px;
+  box-sizing: border-box;
+}
+
+.pots-grid-action--primary {
+  box-shadow: 0 0 0 2px rgba(255, 220, 140, 0.35);
+}
+
+.pots-grid-header-body {
+  border-top: 1px solid rgba(255, 210, 140, 0.15);
+  padding-top: clamp(12px, 2vw, 16px);
+}
+
+.pots-grid-page-title {
+  margin: 0 0 8px;
+  font-family: "Kdam Thmor Pro", "Noto Sans Khmer", sans-serif;
+  font-size: clamp(17px, 3.6vw, 22px);
+  font-weight: 700;
+  color: #ffe8be;
+  line-height: 1.3;
+  text-align: center;
+}
+
+.pots-grid-lead {
+  margin: 0 auto 14px;
+  max-width: min(58ch, 100%);
+  font-family: "Noto Sans Khmer", "Kdam Thmor Pro", sans-serif;
+  font-size: clamp(12px, 2.6vw, 15px);
+  line-height: 1.5;
+  color: rgba(255, 235, 200, 0.9);
+  text-align: center;
+}
+
+.pots-grid-stats {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 10px;
+  width: 100%;
+  max-width: none;
+  margin: 0 auto;
+}
+
+@media (min-width: 480px) {
+  .pots-grid-stats {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: clamp(10px, 2vw, 20px);
+  }
+}
+
+.pots-grid-stat {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
+  padding: 10px 8px;
+  background: rgba(0, 0, 0, 0.2);
+  border-radius: 12px;
+  border: 1px solid rgba(255, 200, 120, 0.12);
+}
+
+.pots-grid-stat-label {
+  font-family: "Noto Sans Khmer", "Kdam Thmor Pro", sans-serif;
+  font-size: clamp(10px, 2.2vw, 12px);
+  color: rgba(255, 230, 200, 0.78);
+  text-align: center;
+  line-height: 1.35;
+}
+
+.pots-grid-stat-value {
+  font-family: "Kdam Thmor Pro", ui-sans-serif, system-ui, sans-serif;
+  font-size: clamp(20px, 4.5vw, 26px);
+  font-weight: 700;
+  color: #ffd78a;
+  line-height: 1;
+}
+
+.pots-grid-now-playing {
+  margin-top: 4px;
+}
+
+.pots-grid-hint {
+  max-width: 48ch;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.pots-grid-page .pots-grid-history.history-box {
+  position: relative;
+  top: auto;
+  right: auto;
+  left: auto;
+  width: 100%;
+  max-width: none;
+  margin: 0;
+  flex-shrink: 0;
+}
+
+.pots-grid-page .pots-grid-history .history-list {
+  min-height: 64px;
+  max-height: min(200px, 28vh);
+  overflow-y: auto;
+  scrollbar-width: thin;
+}
+
+.pots-grid-page .pots-grid-history h4 {
+  font-size: clamp(12px, 2.6vw, 14px);
+  margin-bottom: 8px;
+}
+
+.pots-grid-page .pots-grid-history .history-item {
+  font-size: clamp(11px, 2.4vw, 12px);
+}
+
+.pots-grid-page .pots-grid-section {
+  width: 100%;
+  margin: 0 auto;
+  padding-bottom: 0;
+  flex: 1;
+  min-height: 0;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+.pots-grid-page .pots-grid-spin {
+  margin-top: 0;
+  flex-shrink: 0;
+}
+
+.pots-grid-page .pots-grid-spin .btn-draw {
+  margin-top: clamp(6px, 1.5vw, 12px);
+}
+
+.pots-grid-page .pots-grid-now-playing,
+.pots-grid-page .pots-grid-hint {
+  flex-shrink: 0;
+}
+
+.pots-grid-block {
+  margin-top: 0;
+  flex: 1;
+  min-height: 0;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+.pots-grid-block .break-stage-label {
+  flex-shrink: 0;
+}
+
+.pots-grid-scroll {
+  flex: 1;
+  min-height: 0;
+  overflow-y: auto;
+  overflow-x: hidden;
+  padding: clamp(10px, 1.8vw, 18px) clamp(8px, 1.5vw, 16px) clamp(12px, 1.8vw, 18px);
+  margin-top: 6px;
+  border-radius: 16px;
+  background:
+    linear-gradient(180deg, rgba(40, 12, 10, 0.35) 0%, rgba(20, 6, 5, 0.2) 100%);
+  border: 1px solid rgba(255, 210, 140, 0.12);
+  -webkit-overflow-scrolling: touch;
+  container-type: size;
+  container-name: potscroll;
+}
+
+@container potscroll (max-height: 380px) {
+  .pots-grid-container {
+    grid-template-columns: repeat(auto-fill, minmax(clamp(64px, 15vw, 88px), 1fr));
+    gap: clamp(6px, 1.5vw, 12px);
+  }
+
+  .pots-grid-page .kaorm.pot-grid {
+    max-width: clamp(64px, 18vw, 96px);
+  }
+
+  .pots-grid-page .kaorm.pot-grid::before {
+    height: 16px;
+    top: -5px;
+  }
+
+  .pot-grid-number {
+    min-width: 22px;
+    height: 22px;
+    font-size: clamp(10px, 2.2vw, 13px);
+  }
+}
+
+@container potscroll (max-height: 260px) {
+  .pots-grid-container {
+    grid-template-columns: repeat(auto-fill, minmax(clamp(52px, 12vw, 72px), 1fr));
+    gap: 6px;
+  }
+
+  .pots-grid-page .kaorm.pot-grid {
+    max-width: clamp(52px, 14vw, 80px);
+  }
+}
+
+.pots-grid-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(clamp(76px, 18vw, 104px), 1fr));
+  gap: clamp(8px, 2vw, 18px);
+  justify-items: center;
+  align-items: start;
+  width: 100%;
+  max-width: 100%;
+}
+
+.pots-grid-page .kaorm.pot-grid {
+  max-width: clamp(76px, 22vw, 118px);
+  width: 100%;
+  flex: initial;
+  filter: drop-shadow(0 5px 10px rgba(0, 0, 0, 0.35));
+}
+
+.pots-grid-page .kaorm.pot-grid::before {
+  height: clamp(20px, 3.5vw, 28px);
+  top: clamp(-8px, -1.2vw, -6px);
+}
+
+.pots-grid-page .kaorm.pot-grid:not(:disabled):not(.pot-grid-broken):hover {
+  transform: translateY(-3px) scale(1.05) translateZ(0);
+}
+
+.pots-grid-page .kaorm.pot-grid.pot-grid-pickable:not(:disabled) {
+  cursor: pointer;
+}
+
+.pot-grid-number {
+  min-width: clamp(26px, 5vw, 34px);
+  height: clamp(26px, 5vw, 34px);
+  padding: 0 6px;
+  font-size: clamp(12px, 2.8vw, 16px);
+  font-family: "Kdam Thmor Pro", ui-sans-serif, system-ui, sans-serif;
+  bottom: 8%;
+}
+
+.pots-grid-page .kaorm.pot-grid-broken {
+  opacity: 0.92;
+  filter: grayscale(0.25) drop-shadow(0 2px 6px rgba(0, 0, 0, 0.28));
+  cursor: default;
+  pointer-events: none;
+}
+
+.pots-grid-page .kaorm.pot-grid-broken::before {
+  opacity: 0.45;
+}
+
+.pot-gift-on-pot--grid {
+  transform: scale(0.92);
+  transform-origin: center bottom;
+}
+
+.pot-gift-on-pot--grid img {
+  width: min(72px, 78%) !important;
+  height: min(72px, 78%) !important;
+}
+
+.pot-gift-on-pot--grid .pot-gift-name {
+  font-size: clamp(9px, 2.2vw, 12px);
+  max-width: 95%;
+  line-height: 1.15;
+}
+
+.pot-gift-on-pot--grid .pot-gift-win-badge {
+  font-size: clamp(8px, 2vw, 10px);
+  padding: 3px 5px;
+}
+
+.pots-grid-empty {
+  flex-shrink: 0;
+  text-align: center;
+  color: rgba(255, 236, 200, 0.85);
+  font-family: "Noto Sans Khmer", "Kdam Thmor Pro", sans-serif;
+  padding: 12px;
+  margin: 0;
+}
+
+@media (min-width: 720px) {
+  .pots-grid-container {
+    grid-template-columns: repeat(auto-fill, minmax(clamp(88px, 14vw, 120px), 1fr));
+    gap: clamp(12px, 2.2vw, 20px);
+  }
+
+  .pots-grid-page .kaorm.pot-grid {
+    max-width: clamp(88px, 16vw, 132px);
+  }
+}
+
+@media (min-width: 1200px) {
+  .pots-grid-container {
+    grid-template-columns: repeat(auto-fill, minmax(clamp(96px, 11vw, 140px), 1fr));
+  }
+
+  .pots-grid-page .kaorm.pot-grid {
+    max-width: clamp(96px, 13vw, 148px);
+  }
+}
+
+.pots-grid-scroll.pots-grid-shuffling {
+  animation: potsGridShuffleGlow 720ms ease-in-out 2 alternate;
+  box-shadow:
+    inset 0 0 0 1px rgba(255, 200, 120, 0.35),
+    0 0 28px rgba(255, 180, 80, 0.12);
+}
+
+@keyframes potsGridShuffleGlow {
+  from {
+    border-color: rgba(255, 210, 140, 0.15);
+  }
+  to {
+    border-color: rgba(255, 220, 160, 0.45);
+  }
+}
+
+.remaining-gifts-panel {
+  margin: 0;
+  padding: clamp(10px, 2vw, 14px);
+  border-radius: 14px;
+  background:
+    linear-gradient(165deg, rgba(90, 28, 22, 0.62) 0%, rgba(40, 10, 8, 0.48) 100%);
+  border: 1px solid rgba(255, 210, 140, 0.22);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.22);
+  flex: 1;
+  min-height: 0;
+  display: flex;
+  flex-direction: column;
+}
+
+.remaining-gifts-panel.remaining-gifts-panel--empty {
+  opacity: 0.9;
+}
+
+.remaining-gifts-title {
+  margin: 0 0 4px;
+  font-family: "Kdam Thmor Pro", "Noto Sans Khmer", sans-serif;
+  font-size: clamp(13px, 2.8vw, 16px);
+  font-weight: 700;
+  color: #ffe8b8;
+  text-align: left;
+  line-height: 1.3;
+}
+
+.remaining-gifts-caption {
+  margin: 0 0 10px;
+  font-family: "Noto Sans Khmer", "Kdam Thmor Pro", sans-serif;
+  font-size: clamp(10px, 2.2vw, 12px);
+  color: rgba(255, 230, 200, 0.72);
+  text-align: left;
+  line-height: 1.35;
+}
+
+.remaining-gifts-list {
+  display: flex;
+  flex-direction: column;
+  flex-wrap: nowrap;
+  gap: 8px;
+  align-items: stretch;
+  flex: 1;
+  min-height: 0;
+  max-height: min(42vh, 360px);
+  overflow-y: auto;
+  overflow-x: hidden;
+  padding-right: 4px;
+  scrollbar-width: thin;
+  -webkit-overflow-scrolling: touch;
+}
+
+@media (min-width: 900px) {
+  .pots-grid-sidebar .remaining-gifts-list {
+    max-height: none;
+  }
+}
+
+.remaining-gifts-empty {
+  width: 100%;
+  text-align: left;
+  font-family: "Noto Sans Khmer", "Kdam Thmor Pro", sans-serif;
+  font-size: clamp(11px, 2.5vw, 13px);
+  color: rgba(255, 230, 200, 0.75);
+  padding: 8px 4px;
+}
+
+.remaining-gift-card {
+  display: flex;
+  align-items: center;
+  gap: clamp(8px, 2vw, 12px);
+  width: 100%;
+  max-width: 100%;
+  padding: clamp(8px, 1.8vw, 10px);
+  border-radius: 12px;
+  background: rgba(20, 6, 5, 0.5);
+  border: 1px solid rgba(255, 200, 140, 0.14);
+  box-sizing: border-box;
+}
+
+.remaining-gift-thumb {
+  flex-shrink: 0;
+  width: clamp(44px, 12vw, 56px);
+  height: clamp(44px, 12vw, 56px);
+  border-radius: 10px;
+  overflow: hidden;
+  background: rgba(0, 0, 0, 0.25);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.remaining-gift-thumb img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+
+.remaining-gift-meta {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  min-width: 0;
+  text-align: left;
+}
+
+.remaining-gift-name {
+  font-family: "Noto Sans Khmer", "Kdam Thmor Pro", sans-serif;
+  font-size: clamp(12px, 2.8vw, 14px);
+  font-weight: 600;
+  color: #fff5e0;
+  line-height: 1.35;
+  word-break: break-word;
+}
+
+.remaining-gift-qty {
+  font-family: "Kdam Thmor Pro", ui-sans-serif, system-ui, sans-serif;
+  font-size: 15px;
+  font-weight: 700;
+  color: #ffd78a;
+}
+
+.pots-grid-auto-hint {
+  margin: 0 0 12px;
+  font-family: "Noto Sans Khmer", "Kdam Thmor Pro", sans-serif;
+  font-size: clamp(12px, 2.8vw, 13px);
+  line-height: 1.45;
+  color: rgba(255, 236, 210, 0.82);
+  text-align: center;
+  max-width: 36em;
+  margin-left: auto;
+  margin-right: auto;
+}
