@@ -7,7 +7,7 @@
       "id": "7a84006b-c447-444d-88c5-8565456c0a8a"
     },
     {
-      "name": " សឿន កិច្ចឡេង",
+      "name": "សឿន កិច្ចឡេង",
       "image": "./assets/images/photos/កិច្ចឡេង.png",
       "id": "d5584229-7521-4243-b88f-10e0791ef813"
     },
@@ -335,309 +335,216 @@
       "name": "អ៊ីវ វិច្ឆិកា",
       "image": "./assets/images/photos/អ៊ីវ វិច្ឆិកា.png",
       "id": "52258796-3585-4321-b321-b967135ee38c"
+    },
+    {
+      "id": "bb5f2009-a616-4d89-ac7b-73d52c989766",
+      "name": "អុឹម លីដា",
+      "image": "./assets/images/photos/ លីដា.png"
+    },
+    {
+      "id": "43346d5a-bb6f-4a6c-a28e-605a37d95986",
+      "name": "ចរិយា",
+      "image": "./assets/images/photos/ចរិយា.png"
+    },
+    {
+      "id": "33d73962-1a0f-4f10-aee8-3ab02f7a1609",
+      "name": "កយ ហ៊ា",
+      "image": "./assets/images/photos/កូវហ៊ា.jpg"
+    },
+    {
+      "id": "4aba0007-e366-45fe-9c01-09eae375bbcf",
+      "name": "ចាន់ណា គីមឡេង",
+      "image": "./assets/images/photos/គីមឡេង.png"
+    },
+    {
+      "id": "59fc4011-3507-4726-98af-62612b1a2c6e",
+      "name": "ចាន់ថា",
+      "image": "./assets/images/photos/ចាន់ថា.jpg"
+    },
+    {
+      "id": "0760f9b1-8c49-448f-9c82-f5d7a63d768a",
+      "name": "ចែ​​អៀង",
+      "image": "./assets/images/photos/ចែអៀង.jpg"
+    },
+    {
+      "id": "34c8f767-cb8b-4f1a-a1f4-7f0ecf2be2bc",
+      "name": "ដារា",
+      "image": "./assets/images/photos/ដារា.jpg"
+    },
+    {
+      "id": "6146f958-d327-4914-bd02-8d391d94f351",
+      "name": "សុធារី",
+      "image": "./assets/images/photos/ធារី.jpg"
+    },
+    {
+      "id": "e24c2b35-8c7c-4078-8537-16fc06b366b6",
+      "name": "ផាណាត់",
+      "image": "./assets/images/photos/ផាណាត់.jpg"
+    },
+    {
+      "id": "1240216f-b8d9-475f-ba20-9d52d8e5fd1a",
+      "name": "វិសាល",
+      "image": "./assets/images/photos/វិសាល.jpg"
+    },
+    {
+      "id": "f9c40c06-6d7b-47c0-9125-8fa5b4ea2a5b",
+      "name": "សាលីន",
+      "image": "./assets/images/photos/សាលីន.jpg"
+    },
+    {
+      "id": "672238bd-ff59-4ee8-89cd-3652c33fdf52",
+      "name": "សុធា",
+      "image": "./assets/images/photos/សុធា.jpg"
+    },
+    {
+      "id": "f1e766c1-95e3-4619-867d-7a07d0468be2",
+      "name": "សុម៉ាឡែន",
+      "image": "./assets/images/photos/សុម៉ាឡែន.jpg"
+    },
+    {
+      "id": "ebf67bf2-9a3a-4756-aa60-c075fe41937b",
+      "name": "អ៊ាត​ ស្រីតី",
+      "image": "./assets/images/photos/ស្រីតី.jpg"
     }
   ],
   "gifts": [
     {
-      "id": "0ccbe693-6779-40ab-b02f-f9a0db530e84",
       "name": "មាស៥ហ៊ុន",
+      "type": "expensive",
       "image": "https://cdn.cambonomist.com/media/images/msg1430809818-61447_lq50Jxd.2e16d0ba.fill-960x540.jpg",
       "quantity": 1,
       "price": null,
-      "type": "expensive"
+      "id": "0ccbe693-6779-40ab-b02f-f9a0db530e84"
     },
     {
-      "id": "21878b48-f3ae-4c85-b243-7a30e59d35a2",
       "name": "មាស២ហ៊ុន",
+      "type": "expensive",
       "image": "https://cambodiapropertyreport.com//storage/posts/November2020/218.jpg",
       "quantity": 1,
       "price": null,
-      "type": "expensive"
+      "id": "21878b48-f3ae-4c85-b243-7a30e59d35a2"
     },
     {
-      "id": "80eff3dc-7090-4d28-900b-8922efa25ca7",
       "name": "មាស១ហ៊ុន",
+      "type": "expensive",
       "image": "https://static.information.gov.kh/rails/active_storage/representations/eyJfcmFpbHMiOnsibWVzc2FnZSI6IkJBaHBBKy92Qmc9PSIsImV4cCI6bnVsbCwicHVyIjoiYmxvYl9pZCJ9fQ==--6cf735a7d8f4e8c5218dc02d9eae759e88768f42/eyJfcmFpbHMiOnsibWVzc2FnZSI6IkJBaDdCam9MY21WemFYcGxTU0lNT1RBd2VEWXdNQVk2QmtWVSIsImV4cCI6bnVsbCwicHVyIjoidmFyaWF0aW9uIn19--70cbddbba2e46c7ca8ac0c1f8b8316d88752e16d/photo_2024-12-11_10-48-09.jpg",
       "quantity": 3,
       "price": null,
-      "type": "expensive"
+      "id": "80eff3dc-7090-4d28-900b-8922efa25ca7"
     },
     {
-      "id": "98a63caa-ec2f-4cdd-b016-baad230df777",
       "name": "ចង្រ្កានអគ្គិសនី",
+      "type": "cheap",
       "image": "https://www.midea.com/content/dam/midea-aem/kh/pd/kitchen-appliances/cooking-appliances/induction-cooker/rts2155/pd-rts2155-1-1000x1000.jpg/jcr:content/renditions/pd-rts2155-1-1000x1000.webp",
       "quantity": 5,
       "price": null,
-      "type": "cheap"
+      "id": "98a63caa-ec2f-4cdd-b016-baad230df777"
     },
     {
-      "id": "9def08c0-eb08-4a42-913a-ee484bf9f0ce",
       "name": "Power Bank",
+      "type": "medium",
       "image": "https://cdn.sandberg.world/products/images/lg/420-75_lg.jpg",
       "quantity": 5,
       "price": null,
-      "type": "medium"
+      "id": "9def08c0-eb08-4a42-913a-ee484bf9f0ce"
     },
     {
-      "id": "e39562d9-a5e2-4258-9133-913cbd01bb43",
       "name": "ឆ្នាំងដាំបាយ",
+      "type": "medium",
       "image": "https://homefixcambodia.com/cdn/shop/products/T70016_M_900x.jpg?v=1752078444",
       "quantity": 5,
       "price": null,
-      "type": "medium"
+      "id": "e39562d9-a5e2-4258-9133-913cbd01bb43"
     },
     {
-      "id": "24f3b7c5-d692-4b59-bb17-3c9008464cdb",
       "name": "ឆ្នាំងអ៊ុត",
+      "type": "medium",
       "image": "https://ddhomekh.com/cdn/shop/files/photo_762_15-06-2024_16-17-35_6f0ec3ce-f14d-473b-89db-259314b3b5f5.jpg?v=1743219279&width=1445",
       "quantity": 5,
       "price": null,
-      "type": "medium"
+      "id": "24f3b7c5-d692-4b59-bb17-3c9008464cdb"
     },
     {
-      "id": "d79193da-5550-4821-99bb-6c2ba9c98241",
       "name": "ប្រអប់ដាក់បាយ",
+      "type": "cheap",
       "image": "https://s9.kh1.co/__image/w=600,h=600,fit=cover/ab/ab68e3c7478923d44e3ea7819464888a8286ba5c.jpg",
       "quantity": 10,
       "price": null,
-      "type": "cheap"
+      "id": "d79193da-5550-4821-99bb-6c2ba9c98241"
     },
     {
-      "id": "71a9ff78-660f-4242-94a0-1fe17edaa8c9",
       "name": "មួកសុវត្ថុិភាព",
+      "type": "cheap",
       "image": "https://ecdn6.globalso.com/upload/p/648/image_product/2025-03/kangxing2-1.jpg",
       "quantity": 5,
       "price": null,
-      "type": "cheap"
+      "id": "71a9ff78-660f-4242-94a0-1fe17edaa8c9"
     },
     {
-      "id": "fb17c717-c82a-40f2-b791-000a4baa7b99",
       "name": "កង្ហារធំ",
+      "type": "medium",
       "image": "https://www.image-gbh.com/uploads/thumbnail/gbh_200702_4322007020055_20190405153957.jpg",
       "quantity": 5,
       "price": null,
-      "type": "medium"
+      "id": "fb17c717-c82a-40f2-b791-000a4baa7b99"
     },
     {
-      "id": "8801bd59-ec2c-4c03-b39c-0c16f65c8028",
       "name": "កំសៀវដាំទឹក",
+      "type": "cheap",
       "image": "https://media.makrocambodiaclick.com/PRODUCT_1611652124755.png",
       "quantity": 5,
       "price": null,
-      "type": "cheap"
+      "id": "8801bd59-ec2c-4c03-b39c-0c16f65c8028"
     },
     {
-      "id": "e4ad21bf-9be4-4054-a46e-298bc36dca15",
       "name": "ចង្រ្កានអាំងសាច់ អគ្គិសនី",
+      "type": "medium",
       "image": "https://images.khmer24.co/24-03-03/719945-smokeless-electric-grill-gt-15-1709447458-34904877-c.jpg",
       "quantity": 5,
       "price": null,
-      "type": "medium"
+      "id": "e4ad21bf-9be4-4054-a46e-298bc36dca15"
     },
     {
-      "id": "beda3e6f-65d3-410b-b343-6dc8228b800a",
       "name": "ខ្ទះចៀន ឬឆា",
+      "type": "cheap",
       "image": "https://ddhomekh.com/cdn/shop/files/ef377493d7b855a5c36d62e20beb3a1f161a8c28_843772e6-44bc-4e4d-b4f3-a766b2baab72.jpg?v=1772241172",
       "quantity": 5,
       "price": null,
-      "type": "cheap"
+      "id": "beda3e6f-65d3-410b-b343-6dc8228b800a"
     },
     {
-      "id": "9b5506e9-1e4f-4753-a96b-8eeb0d518bdf",
       "name": "អំពូលដាក់លើតុ សម្រាប់រៀន",
+      "type": "cheap",
       "image": "https://www.image-gbh.com/uploads/thumbnail/GBH_8859548101135_20200522133604.jpg",
       "quantity": 5,
       "price": null,
-      "type": "cheap"
+      "id": "9b5506e9-1e4f-4753-a96b-8eeb0d518bdf"
     },
     {
-      "id": "669e84c9-1a5c-43eb-9eb9-d0e89c110f75",
       "name": "កង្ហារតូច",
+      "type": "cheap",
       "image": "https://s9.kh1.co/__image/w=600,h=600,fit=cover/50/503ec7ca1b560366ef5aa0dac0fc1f82a8f267dc.jpg",
       "quantity": 5,
       "price": null,
-      "type": "cheap"
+      "id": "669e84c9-1a5c-43eb-9eb9-d0e89c110f75"
     },
     {
-      "id": "c93f589c-dead-460c-9543-ba7199fbed71",
       "name": "ម៉ាស៊ីនផ្លុំសក់",
+      "type": "cheap",
       "image": "https://www.menglyhome.com/assets/images/1752129885_3820.jpg",
       "quantity": 5,
       "price": null,
-      "type": "cheap"
+      "id": "c93f589c-dead-460c-9543-ba7199fbed71"
     },
     {
-      "id": "4cb98cb1-e615-46b7-bd15-125ed7967ddb",
       "name": "ឆ្នាំងស៊ុប អគ្គិសនី",
+      "type": "cheap",
       "image": "https://homefixcambodia.com/cdn/shop/products/PPMC708-02_new_900x.jpg?v=1748016453",
       "quantity": 5,
       "price": null,
-      "type": "cheap"
+      "id": "4cb98cb1-e615-46b7-bd15-125ed7967ddb"
     }
   ],
-  "history": [
-    {
-      "staff": "ចរិយា",
-      "gift": "មាស (expensive)",
-      "at": "2026-03-28T08:42:17.722Z"
-    },
-    {
-      "staff": "សាលីន",
-      "gift": "មាស (expensive)",
-      "at": "2026-03-28T08:41:55.970Z"
-    },
-    {
-      "staff": "សុម៉ាឡែន",
-      "gift": "ដបទឹក (cheap)",
-      "at": "2026-03-28T08:40:20.329Z"
-    },
-    {
-      "staff": "វិសាល",
-      "gift": "មាស (expensive)",
-      "at": "2026-03-28T08:36:40.579Z"
-    },
-    {
-      "staff": "សុ ធា",
-      "gift": "ដបទឹក (cheap)",
-      "at": "2026-03-28T08:32:57.129Z"
-    },
-    {
-      "staff": "ចាន់ថា",
-      "gift": "ដបទឹក (cheap)",
-      "at": "2026-03-28T08:32:20.843Z"
-    },
-    {
-      "staff": "សុខ សុធារី",
-      "gift": "ដបទឹក (cheap)",
-      "at": "2026-03-28T08:14:01.484Z"
-    },
-    {
-      "staff": "ផានាត់",
-      "gift": "ដបទឹក (cheap)",
-      "at": "2026-03-28T08:02:33.147Z"
-    },
-    {
-      "staff": "ស្រីតី",
-      "gift": "កង់ (medium)",
-      "at": "2026-03-28T07:56:16.735Z"
-    },
-    {
-      "staff": "ចែអ៊ាង",
-      "gift": "មាស (expensive)",
-      "at": "2026-03-28T07:54:21.747Z"
-    },
-    {
-      "staff": "ណាគឹមឡេង",
-      "gift": "កង់ (medium)",
-      "at": "2026-03-28T07:12:30.627Z"
-    },
-    {
-      "staff": "លីដា",
-      "gift": "ដបទឹក (cheap)",
-      "at": "2026-03-28T07:12:14.990Z"
-    },
-    {
-      "staff": "កយ ហ៊ា",
-      "gift": "ដបទឹក (cheap)",
-      "at": "2026-03-28T07:11:50.799Z"
-    },
-    {
-      "staff": "Kaka",
-      "gift": "ដបទឹក (cheap)",
-      "at": "2026-03-28T06:01:00.592Z"
-    },
-    {
-      "staff": "POng",
-      "gift": "កង់ (medium)",
-      "at": "2026-03-28T06:00:39.353Z"
-    },
-    {
-      "staff": "lolo",
-      "gift": "ក្រមា ១ (medium)",
-      "at": "2026-03-28T05:38:45.664Z"
-    },
-    {
-      "staff": "pong",
-      "gift": "ទឹក Freshy ១កំប៉ុង (cheap)",
-      "at": "2026-03-28T05:29:28.172Z"
-    },
-    {
-      "staff": "kaka",
-      "gift": "Coca ១កំប៉ុង (cheap)",
-      "at": "2026-03-28T05:24:54.190Z"
-    },
-    {
-      "staff": "koko",
-      "gift": "Tiger ១កំប៉ុង (expensive)",
-      "at": "2026-03-28T05:23:12.516Z"
-    },
-    {
-      "staff": "pong",
-      "gift": "Amazon ១កែវ (expensive)",
-      "at": "2026-03-28T05:17:14.496Z"
-    },
-    {
-      "staff": "popo",
-      "gift": "Coca ១កំប៉ុង (cheap)",
-      "at": "2026-03-28T05:12:02.620Z"
-    },
-    {
-      "staff": "Visothipong",
-      "gift": "Coca ១កំប៉ុង (cheap)",
-      "at": "2026-03-28T05:08:18.902Z"
-    },
-    {
-      "staff": "លោក សុខ វណ្ណា",
-      "gift": "ត្រីខ ១កំប៉ុង (medium)"
-    },
-    {
-      "staff": "លោក គង់ វិសាល",
-      "gift": "ទឹក Freshy ១កំប៉ុង (cheap)"
-    },
-    {
-      "staff": "កញ្ញា លឹម ស្រីនាង",
-      "gift": "Coca ១កំប៉ុង (cheap)"
-    },
-    {
-      "staff": "កញ្ញា ចាន់ ដាវី",
-      "gift": "ក្រមា ១ (medium)"
-    },
-    {
-      "staff": "លោក ជា ដារ៉ា",
-      "gift": "ក្រមា ១ (medium)"
-    },
-    {
-      "staff": "កញ្ញា ពេជ្រ រស្មី",
-      "gift": "Coca ១កំប៉ុង (cheap)"
-    },
-    {
-      "staff": "កញ្ញា ឈឹម ដាលីន",
-      "gift": "Tiger ១កំប៉ុង (expensive)"
-    },
-    {
-      "staff": "លោក សេង រ៉ាវុធ",
-      "gift": "ត្រីខ ១កំប៉ុង (medium)"
-    },
-    {
-      "staff": "លោក សុខ វណ្ណា",
-      "gift": "Coca ១កំប៉ុង (cheap)"
-    },
-    {
-      "staff": "កញ្ញា ចាន់ ដាវី",
-      "gift": "ក្រមា ១ (medium)"
-    },
-    {
-      "staff": "លោក ជា ដារ៉ា",
-      "gift": "Amazon ១កែវ (expensive)"
-    },
-    {
-      "staff": "លោក គង់ វិសាល",
-      "gift": "ទឹក Freshy ១កំប៉ុង (cheap)"
-    },
-    {
-      "staff": "កញ្ញា ពេជ្រ រស្មី",
-      "gift": "Tiger ១កំប៉ុង (expensive)"
-    }
-  ],
-  "exportedAt": "2026-03-28T08:57:09.473Z"
+  "history": [],
+  "exportedAt": "2026-04-06T05:51:19.041Z"
 }
