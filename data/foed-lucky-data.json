@@ -409,7 +409,7 @@
   ],
   "gifts": [
     {
-      "name": "មាស៥ហ៊ុន",
+      "name": "មាស ៥ ហ៊ុន",
       "type": "expensive",
       "image": "https://cdn.cambonomist.com/media/images/msg1430809818-61447_lq50Jxd.2e16d0ba.fill-960x540.jpg",
       "quantity": 1,
@@ -417,7 +417,7 @@
       "id": "0ccbe693-6779-40ab-b02f-f9a0db530e84"
     },
     {
-      "name": "មាស២ហ៊ុន",
+      "name": "មាស ២ ហ៊ុន",
       "type": "expensive",
       "image": "https://cambodiapropertyreport.com//storage/posts/November2020/218.jpg",
       "quantity": 1,
@@ -425,7 +425,7 @@
       "id": "21878b48-f3ae-4c85-b243-7a30e59d35a2"
     },
     {
-      "name": "មាស១ហ៊ុន",
+      "name": "មាស ១ ហ៊ុន",
       "type": "expensive",
       "image": "https://static.information.gov.kh/rails/active_storage/representations/eyJfcmFpbHMiOnsibWVzc2FnZSI6IkJBaHBBKy92Qmc9PSIsImV4cCI6bnVsbCwicHVyIjoiYmxvYl9pZCJ9fQ==--6cf735a7d8f4e8c5218dc02d9eae759e88768f42/eyJfcmFpbHMiOnsibWVzc2FnZSI6IkJBaDdCam9MY21WemFYcGxTU0lNT1RBd2VEWXdNQVk2QmtWVSIsImV4cCI6bnVsbCwicHVyIjoidmFyaWF0aW9uIn19--70cbddbba2e46c7ca8ac0c1f8b8316d88752e16d/photo_2024-12-11_10-48-09.jpg",
       "quantity": 3,
@@ -434,7 +434,7 @@
     },
     {
       "name": "ចង្រ្កានអគ្គិសនី",
-      "type": "cheap",
+      "type": "medium",
       "image": "https://www.midea.com/content/dam/midea-aem/kh/pd/kitchen-appliances/cooking-appliances/induction-cooker/rts2155/pd-rts2155-1-1000x1000.jpg/jcr:content/renditions/pd-rts2155-1-1000x1000.webp",
       "quantity": 5,
       "price": null,
@@ -449,14 +449,6 @@
       "id": "9def08c0-eb08-4a42-913a-ee484bf9f0ce"
     },
     {
-      "name": "ឆ្នាំងដាំបាយ",
-      "type": "medium",
-      "image": "https://homefixcambodia.com/cdn/shop/products/T70016_M_900x.jpg?v=1752078444",
-      "quantity": 5,
-      "price": null,
-      "id": "e39562d9-a5e2-4258-9133-913cbd01bb43"
-    },
-    {
       "name": "ឆ្នាំងអ៊ុត",
       "type": "medium",
       "image": "https://ddhomekh.com/cdn/shop/files/photo_762_15-06-2024_16-17-35_6f0ec3ce-f14d-473b-89db-259314b3b5f5.jpg?v=1743219279&width=1445",
@@ -468,7 +460,7 @@
       "name": "ប្រអប់ដាក់បាយ",
       "type": "cheap",
       "image": "https://s9.kh1.co/__image/w=600,h=600,fit=cover/ab/ab68e3c7478923d44e3ea7819464888a8286ba5c.jpg",
-      "quantity": 10,
+      "quantity": 5,
       "price": null,
       "id": "d79193da-5550-4821-99bb-6c2ba9c98241"
     },
@@ -492,7 +484,7 @@
       "name": "កំសៀវដាំទឹក",
       "type": "cheap",
       "image": "https://media.makrocambodiaclick.com/PRODUCT_1611652124755.png",
-      "quantity": 5,
+      "quantity": 10,
       "price": null,
       "id": "8801bd59-ec2c-4c03-b39c-0c16f65c8028"
     },
@@ -532,7 +524,7 @@
       "name": "ម៉ាស៊ីនផ្លុំសក់",
       "type": "cheap",
       "image": "https://www.menglyhome.com/assets/images/1752129885_3820.jpg",
-      "quantity": 5,
+      "quantity": 2,
       "price": null,
       "id": "c93f589c-dead-460c-9543-ba7199fbed71"
     },
@@ -543,8 +535,24 @@
       "quantity": 5,
       "price": null,
       "id": "4cb98cb1-e615-46b7-bd15-125ed7967ddb"
+    },
+    {
+      "id": "aa8d30a5-4fc9-42dc-9cec-17b08fefbbd4",
+      "name": "ប្រដាប់ជូតផ្ទះ",
+      "image": "https://s9.kh1.co/__image/w=600,h=600,fit=cover/a5/a51459b2f2ec9ba9671191ac26fa5f066ff4b2a8.jpg",
+      "quantity": 5,
+      "price": null,
+      "type": "medium"
+    },
+    {
+      "id": "efd9ab70-331d-4200-b3ea-e28507a9bcb1",
+      "name": "កាសខ្សែ apple",
+      "image": "https://storage.tamneak.com/user/storenavy1653365322680/store/product/VWhP7OdczaYp0mWsDzmnSrmFptRQG4LYGDJHTgzN_512x512.jpg",
+      "quantity": 3,
+      "price": null,
+      "type": "cheap"
     }
   ],
   "history": [],
-  "exportedAt": "2026-04-06T07:42:44.515Z"
+  "exportedAt": "2026-04-07T03:25:05.588Z"
 }
