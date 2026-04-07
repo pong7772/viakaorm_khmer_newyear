@@ -3933,7 +3933,22 @@ textarea {
   font-size: clamp(10px, 2.4vmin + 0.35dvh, 16px);
   font-family: "Kdam Thmor Pro", ui-sans-serif, system-ui, sans-serif;
   bottom: 8%;
+  color: var(--pot-number-fg, #fff8e8);
+  background: var(--pot-number-bg, rgba(62, 14, 12, 0.9));
+  border: 1px solid var(--pot-number-ring, rgba(255, 230, 178, 0.55));
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.24),
+    0 2px 6px rgba(0, 0, 0, 0.28);
 }
+
+.pot-grid-number[data-tone="0"] { --pot-number-bg: linear-gradient(135deg, #8c2f00, #c15000); --pot-number-ring: rgba(255, 205, 132, 0.7); }
+.pot-grid-number[data-tone="1"] { --pot-number-bg: linear-gradient(135deg, #7a001f, #b4003b); --pot-number-ring: rgba(255, 176, 201, 0.72); }
+.pot-grid-number[data-tone="2"] { --pot-number-bg: linear-gradient(135deg, #3a1f9a, #6b3df0); --pot-number-ring: rgba(217, 203, 255, 0.72); }
+.pot-grid-number[data-tone="3"] { --pot-number-bg: linear-gradient(135deg, #005a6a, #008fa6); --pot-number-ring: rgba(172, 244, 255, 0.72); }
+.pot-grid-number[data-tone="4"] { --pot-number-bg: linear-gradient(135deg, #0d6f3e, #18a861); --pot-number-ring: rgba(183, 255, 211, 0.72); }
+.pot-grid-number[data-tone="5"] { --pot-number-bg: linear-gradient(135deg, #7b5a00, #b78a00); --pot-number-ring: rgba(255, 236, 165, 0.78); --pot-number-fg: #fffbe8; }
+.pot-grid-number[data-tone="6"] { --pot-number-bg: linear-gradient(135deg, #4c2a1a, #8b4d2b); --pot-number-ring: rgba(247, 208, 182, 0.72); }
+.pot-grid-number[data-tone="7"] { --pot-number-bg: linear-gradient(135deg, #823500, #d65b00); --pot-number-ring: rgba(255, 217, 166, 0.76); }
 
 .pots-grid-page .kaorm.pot-grid-broken {
   opacity: 0.92;

@@ -52,6 +52,8 @@ const winFlyName = $("winFlyName");
 const REEL_MAX_ITEMS = 36;
 const POT_SUSPENSE_MS = 2800;
 const STICK_STRIKE_MS = 560;
+const KHMER_DIGITS = ["០", "១", "២", "៣", "៤", "៥", "៦", "៧", "៨", "៩"];
+const POT_NUMBER_THEME_COUNT = 8;
 
 const confettiFx = window.confetti ? window.confetti.create(confettiCanvas, { resize: true, useWorker: true }) : null;
 
@@ -117,6 +119,10 @@ function closeOverlay(el) {
 }
 function randomInt(max) {
   return Math.floor(Math.random() * max);
+}
+
+function toKhmerDigits(value) {
+  return String(value).replace(/\d/g, (digit) => KHMER_DIGITS[Number(digit)] || digit);
 }
 function shuffleList(list) {
   const arr = [...list];
@@ -560,7 +566,8 @@ function renderPots() {
 
     const num = document.createElement("span");
     num.className = "pot-number pot-grid-number";
-    num.textContent = String(i + 1);
+    num.textContent = toKhmerDigits(i + 1);
+    num.dataset.tone = String(i % POT_NUMBER_THEME_COUNT);
     num.setAttribute("aria-hidden", "true");
     btn.appendChild(num);
 
